@@ -35,10 +35,9 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        float hInput = 1.0f;
         bool jump = Input.GetAxis("Jump") > 0 /*|| Input.GetKeyDown(KeyCode.Space)*/;
 
-        Vector3 moveVect = hInput * transform.forward * m_TranslationSpeed * Time.deltaTime;
+        Vector3 moveVect = transform.forward * m_TranslationSpeed * Time.deltaTime / 6.0f;
         m_Rb.MovePosition(m_Rb.position + moveVect);
 
         if (jump && m_GroundContacts > 0)
@@ -89,7 +88,7 @@ public class Player : MonoBehaviour
         if (m_camera != null)
         {
             Vector3 camPos = m_camera.position;
-            camPos.x = m_Rb.position.x;
+            camPos.x = m_Rb.position.x + 5.0f;
             m_camera.position = camPos;
         }
     }

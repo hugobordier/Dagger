@@ -12,7 +12,7 @@ public class GroundManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        for (int i = -1; i <= 1; i++)
+        for (int i = -1; i <= 2; i++)
         {
             GameObject g = Instantiate(groundPrefab, new Vector3(i * groundWidth, -1.74f, 0), Quaternion.identity);
             grounds.Add(g);
@@ -26,7 +26,7 @@ public class GroundManager : MonoBehaviour
         GameObject leftMost = grounds[0];
         GameObject rightMost = grounds[grounds.Count - 1];
 
-        if (playerX > rightMost.transform.position.x - groundWidth / 2)
+        if (playerX > rightMost.transform.position.x - groundWidth)
         {
             // Spawn nouveau à droite
             GameObject g = Instantiate(groundPrefab, rightMost.transform.position + Vector3.right * groundWidth, Quaternion.identity);
