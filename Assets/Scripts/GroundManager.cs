@@ -18,7 +18,7 @@ public class GroundManager : MonoBehaviour
             grounds.Add(g);
         }
     }
-
+    
     // Update is called once per frame
     void Update()
     {
