@@ -7,8 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float m_JumpImpulsionMagnitude;
 
-    [SerializeField]
-    private Transform m_camera;
+//    [SerializeField] private Transform m_camera;
 
     Rigidbody m_Rb;
 
@@ -85,11 +84,11 @@ public class Player : MonoBehaviour
 
     void LateUpdate()
     {
-        if (m_camera != null)
-        {
-            Vector3 camPos = m_camera.position;
-            camPos.x = m_Rb.position.x + 5.0f;
-            m_camera.position = camPos;
-        }
+//        if (m_camera != null)
+//        {
+//            Vector3 camPos = m_camera.position;
+//            camPos.x = m_Rb.position.x + 5.0f;
+//            m_camera.position = camPos;
+//        }
     }
 }

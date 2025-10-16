@@ -8,12 +8,15 @@ public class GroundManager : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private GameObject rythmPrefab; // prefab pour le rythme
     [SerializeField] private GroundLibrary groundLibrary; // prefab library
-    public float groundWidth = 20f; // largeur du prefab
+    public float groundWidth = 10f; // largeur du prefab
+    public float baseHeight = -1.74f; // hauteur de base pour le ground
+    public float heightStep = 3f; // hauteur ajouter pour chaque Ground UP 
     private List<GameObject> rythmgrounds = new List<GameObject>(); // liste des prefabs de rythm infini
     private List<GameObject> grounds = new List<GameObject>(); // liste des prefabs de ground
     private Dictionary<int, GameObject> groundPrefabs = new(); // dictionnaire des prefabs de Ground
-    private List<int> levelLayout = new(); // liste des indices de prefabs pour le niveau
-    private int nextGroundIndex = 0;
+    private List<int> levelLayout = new List<int>(); // liste des indices de prefabs pour le niveau
+    private int currentGroundIndex = 0;
+    public float currentHeightOffset = 0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,17 +25,14 @@ public class GroundManager : MonoBehaviour
         for (int i = 0; i < groundLibrary.groundPrefabs.Length; i++)
             groundPrefabs[i] = groundLibrary.groundPrefabs[i];
 
-        // Initialiser le layout du niveau (exemple simple)
+        // Initialiser le layout du niveau
         LoadLevelLayout("leveltest");
 
         // Initialiser les grounds initiaux
         for (int i = -1; i <= 2; i++)
         {
-            Vector3 position = new Vector3(i * groundWidth, -1.74f, 0);
-            SpawnNextGround(position);
-            GameObject g = Instantiate(rythmPrefab, position, Quaternion.identity);
-            rythmgrounds.Add(g);
-
+            SpawnNextGround(i, i);
+            currentGroundIndex++;
         }
     }
 
@@ -65,10 +65,8 @@ public class GroundManager : MonoBehaviour
         if (playerX > rightMost.transform.position.x - groundWidth)
         {
             // Spawn nouveau à droite
-            SpawnNextGround(rightMost.transform.position + Vector3.right * groundWidth);
-            GameObject g = Instantiate(rythmPrefab, rightMost.transform.position + Vector3.right * groundWidth, Quaternion.identity);
-            rythmgrounds.Add(g);
-
+            currentGroundIndex++;
+            SpawnNextGround(currentGroundIndex, rightMost.transform.position.x / groundWidth + 1);
             // Supprime celui de gauche
             Destroy(leftMost);
             grounds.RemoveAt(0);
@@ -85,13 +83,20 @@ public class GroundManager : MonoBehaviour
         //     grounds.RemoveAt(grounds.Count - 1);
         // }
     }
-    
-    void SpawnNextGround(Vector3 position, bool toLeft = false)
-    {
-        if (nextGroundIndex >= levelLayout.Count)
-            nextGroundIndex = 0;
 
-        int prefabIndex = levelLayout[nextGroundIndex];
+    void SpawnNextGround(int layoutIndex, float positionIndex)
+    {
+        if (layoutIndex < 0 || layoutIndex >= levelLayout.Count) return;
+
+        int prefabIndex = levelLayout[layoutIndex];
+
+        //        if (prefabIndex >= 5) // UP
+        //            currentHeightOffset += 1f;
+
+        float yPos = baseHeight + (currentHeightOffset * heightStep);
+        Vector3 position = new Vector3(positionIndex * groundWidth, yPos, 0);
+
+
         if (!groundPrefabs.TryGetValue(prefabIndex, out GameObject prefab))
         {
             Debug.LogWarning($"Prefab Ground index {prefabIndex} introuvable, utilisation du rythmPrefab.");
@@ -99,11 +104,15 @@ public class GroundManager : MonoBehaviour
         }
 
         GameObject g = Instantiate(prefab, position, Quaternion.identity);
-        if (toLeft)
-            grounds.Insert(0, g);
-        else
-            grounds.Add(g);
+        grounds.Add(g);
 
-        nextGroundIndex++;
+        GameObject rythm = Instantiate(rythmPrefab, position, Quaternion.identity);
+        rythmgrounds.Add(rythm);
+
+        if (prefabIndex >= 5) // UP
+        {
+            currentHeightOffset += 1f;
+        }
     }
+
 }
