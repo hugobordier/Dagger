@@ -8,16 +8,14 @@ public class Player : MonoBehaviour
     private float m_JumpImpulsionMagnitude;
 
 //    [SerializeField] private Transform m_camera;
-
-    Rigidbody m_Rb;
+    Rigidbody2D m_Rb;
 
     //private bool m_IsGrounded;
-
     private int m_GroundContacts = 0;
 
     void Awake()
     {
-        m_Rb = GetComponent<Rigidbody>();
+        m_Rb = GetComponent<Rigidbody2D>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -29,37 +27,39 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetAxis("Jump") > 0)
+        {
+            Debug.Log("Touche Saut pressée");
+        }
+        Debug.Log("m_GroundContacts = " + m_GroundContacts);
     }
 
     void FixedUpdate()
     {
         bool jump = Input.GetAxis("Jump") > 0 /*|| Input.GetKeyDown(KeyCode.Space)*/;
 
-        Vector3 moveVect = transform.forward * m_TranslationSpeed * Time.deltaTime / 6.0f;
-        m_Rb.MovePosition(m_Rb.position + moveVect);
+        // Vector2 moveVect = (Vector2)transform.right * m_TranslationSpeed * Time.deltaTime / 6.0f;
+        // m_Rb.MovePosition(m_Rb.position + moveVect);
+        m_Rb.linearVelocity = new Vector2(m_TranslationSpeed / 6.0f, m_Rb.linearVelocity.y);
 
         if (jump && m_GroundContacts > 0)
         {
-            Vector3 jumpForce = Vector3.up * m_JumpImpulsionMagnitude;
-            m_Rb.AddForce(jumpForce, ForceMode.Impulse);
-        }
-
-        if (jump)
-        {
-            Debug.Log("saut");
+            Vector2 jumpForce = Vector2.up * m_JumpImpulsionMagnitude;
+            Debug.Log("Jump ! Force = " + jumpForce);
+            m_Rb.AddForce(jumpForce, ForceMode2D.Impulse);
         }
 
         if (m_GroundContacts > 0)
         {
-            m_Rb.linearVelocity = Vector3.zero;
+            //m_Rb.linearVelocity = Vector2.zero;
+            // m_Rb.linearVelocity = new Vector2(m_Rb.linearVelocity.x, 0);
             Debug.Log("aux sol");
         }
 
-        m_Rb.angularVelocity = Vector3.zero;
+        m_Rb.angularVelocity = 0f;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("touché");
         if (collision.gameObject.CompareTag("Ground"))
@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
 
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
         Debug.Log("quitter");
         if (collision.gameObject.CompareTag("Ground"))

@@ -26,7 +26,7 @@ public class GroundManager : MonoBehaviour
             groundPrefabs[i] = groundLibrary.groundPrefabs[i];
 
         // Initialiser le layout du niveau
-        LoadLevelLayout("leveltest");
+        LoadLevelLayout("leveltest1");
 
         // Initialiser les grounds initiaux
         for (int i = -1; i <= 2; i++)
