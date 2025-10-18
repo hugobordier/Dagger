@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 1421422987}
   - component: {fileID: 1421422986}
   - component: {fileID: 1421422991}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Player2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,7 +389,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TranslationSpeed: 60
-  m_JumpImpulsionMagnitude: 8
+  m_JumpHeight: 5
+  m_HoverTime: 1
 --- !u!50 &1421422987
 Rigidbody2D:
   serializedVersion: 5
