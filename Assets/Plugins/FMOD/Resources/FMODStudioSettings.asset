@@ -526,8 +526,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../Dagger-audio/Dagger.fspro
-  sourceBankPath: ../Dagger-audio/Build
+  sourceProjectPath: Dagger-audio/Dagger.fspro
+  sourceBankPath: Dagger-audio/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
