@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
 
     //private bool m_IsGrounded;
     private int m_GroundContacts = 0;
+    private bool k_pressed;
 
     void Awake()
     {
@@ -61,6 +62,11 @@ public class Player : MonoBehaviour
         {
             SpawnColorZone(Color.blue);
         }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            k_pressed = true;
+        }
     }
 
     void FixedUpdate()
@@ -85,11 +91,10 @@ public class Player : MonoBehaviour
             // m_Rb.linearVelocity = new Vector2(m_Rb.linearVelocity.x, 0);
             Debug.Log("aux sol");
         }
-
-        Debug.Log("jumpCoroutine = " + jumpCoroutine);
-        Debug.Log("bouton K pressé = " + Input.GetKeyDown(KeyCode.K));
-        if (Input.GetKeyDown(KeyCode.K))
+        
+        if (k_pressed)
         {
+            k_pressed = false;
             Debug.Log("jumpCoroutine = " + jumpCoroutine);
             if (jumpCoroutine != null)
             {
