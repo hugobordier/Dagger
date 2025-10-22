@@ -16,8 +16,9 @@ public class Player : MonoBehaviour
     private GameObject m_ColorZonePrefab;
     [SerializeField] 
     private float m_ZoneDistance = 1f; // distance devant le perso
-    [SerializeField] 
+    [SerializeField]
     private float m_ZoneLifetime = 0.5f; // durée d’affichage
+    Coroutine jumpCoroutine;
 
 
     // [SerializeField] private Transform m_camera;
@@ -75,7 +76,7 @@ public class Player : MonoBehaviour
             // Vector2 jumpForce = Vector2.up * m_JumpImpulsionMagnitude;
             // Debug.Log("Jump ! Force = " + jumpForce);
             // m_Rb.AddForce(jumpForce, ForceMode2D.Impulse);
-            StartCoroutine(TimedJump());
+            jumpCoroutine = StartCoroutine(TimedJump());
         }
 
         if (m_GroundContacts > 0)
@@ -83,6 +84,27 @@ public class Player : MonoBehaviour
             //m_Rb.linearVelocity = Vector2.zero;
             // m_Rb.linearVelocity = new Vector2(m_Rb.linearVelocity.x, 0);
             Debug.Log("aux sol");
+        }
+
+        Debug.Log("jumpCoroutine = " + jumpCoroutine);
+        Debug.Log("bouton K pressé = " + Input.GetKeyDown(KeyCode.K));
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Debug.Log("jumpCoroutine = " + jumpCoroutine);
+            if (jumpCoroutine != null)
+            {
+                StopCoroutine(jumpCoroutine);
+                jumpCoroutine = null;
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity);
+                Debug.Log("Raycast hit distance = " + hit.distance);
+                if (hit.collider != null)
+                {
+                    // On se place sur le point trouvé
+                    transform.position = new Vector2(transform.position.x, hit.point.y);
+                }
+                m_IsJumping = false;
+                m_Rb.gravityScale = 1f;
+            }
         }
 
         m_Rb.angularVelocity = 0f;
