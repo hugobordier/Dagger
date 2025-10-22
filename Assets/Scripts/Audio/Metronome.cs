@@ -3,24 +3,25 @@ using UnityEngine;
 public class Metronome : MonoBehaviour
 {
     [SerializeField]
-    private float m_Bpm = 120f;
+    private float bpm = 120f;
 
-    private float m_SecondsPerBeat;
-    private float m_Timer = 0f;
+    private float secondsPerBeat;
+    private float timer = 0f;
+    private float nbBeats = 0f;
 
     void Start()
     {
-        m_SecondsPerBeat = 60f / m_Bpm;
+        secondsPerBeat = 60f / bpm;
     }
 
     void Update()
     {
-        m_Timer += Time.deltaTime;
-
-        if (m_Timer >= m_SecondsPerBeat)
+        timer += Time.deltaTime;
+        if (timer >= secondsPerBeat)
         {
-            Debug.Log("Beat");
-            m_Timer -= m_SecondsPerBeat;
+            nbBeats += 1f;
+            Debug.Log(nbBeats);
+            timer -= secondsPerBeat;
         }
     }
 }
