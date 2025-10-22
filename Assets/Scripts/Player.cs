@@ -12,6 +12,14 @@ public class Player : MonoBehaviour
     private float m_HoverTime = 1f; // La durée en secondes passée en l'air
     private bool m_IsJumping = false; // Pour savoir si on est déjà en train de sauter
 
+    [SerializeField] 
+    private GameObject m_ColorZonePrefab;
+    [SerializeField] 
+    private float m_ZoneDistance = 1f; // distance devant le perso
+    [SerializeField] 
+    private float m_ZoneLifetime = 0.5f; // durée d’affichage
+
+
     // [SerializeField] private Transform m_camera;
     Rigidbody2D m_Rb;
 
@@ -37,6 +45,21 @@ public class Player : MonoBehaviour
             Debug.Log("Touche Saut pressée");
         }
         Debug.Log("m_GroundContacts = " + m_GroundContacts);
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            SpawnColorZone(Color.red);
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            SpawnColorZone(Color.green);
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            SpawnColorZone(Color.blue);
+        }
     }
 
     void FixedUpdate()
@@ -101,7 +124,7 @@ public class Player : MonoBehaviour
     IEnumerator TimedJump()
     {
         m_IsJumping = true;
-        m_GroundContacts = 0; 
+        m_GroundContacts = 0;
         m_Rb.gravityScale = 0f;
         m_Rb.linearVelocity = new Vector2(m_Rb.linearVelocity.x, 0);
 
@@ -122,5 +145,23 @@ public class Player : MonoBehaviour
         m_Rb.gravityScale = 1f;
         m_IsJumping = false;
     }
+
+    void SpawnColorZone(Color color)
+    {
+        if (m_ColorZonePrefab == null) return;
+
+        Vector2 spawnPosition = new Vector2(transform.position.x + m_ZoneDistance, transform.position.y);
+        GameObject colorZone = Instantiate(m_ColorZonePrefab, spawnPosition, Quaternion.identity);
+
+        colorZone.transform.SetParent(transform);
+
+        SpriteRenderer sr = colorZone.GetComponent<SpriteRenderer>();
+        if (sr != null)
+        {
+            color.a = 0.5f;
+            sr.color = color;
+        }
+        Destroy(colorZone, m_ZoneLifetime);
+    }  
 
 }

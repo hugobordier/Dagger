@@ -391,6 +391,10 @@ MonoBehaviour:
   m_TranslationSpeed: 60
   m_JumpHeight: 5
   m_HoverTime: 1
+  m_ColorZonePrefab: {fileID: 5387757513667314024, guid: 26f742231769c43d3af0b8fd85136798,
+    type: 3}
+  m_ZoneDistance: 1
+  m_ZoneLifetime: 0.1
 --- !u!50 &1421422987
 Rigidbody2D:
   serializedVersion: 5
