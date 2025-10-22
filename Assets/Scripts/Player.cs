@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+ 
     }
 
     // Update is called once per frame
@@ -118,7 +118,7 @@ public class Player : MonoBehaviour
             //Debug.LogError(Time.frameCount+" colLocalPt = " + colLocalPt+ "   colLocalPt.magnitude = "+ colLocalPt.magnitude);
 
             m_GroundContacts++;
-            Debug.Log("Au sol (" + m_GroundContacts + ")");
+            //Debug.Log("Au sol (" + m_GroundContacts + ")");
         }
 
     }
@@ -129,7 +129,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             m_GroundContacts = Mathf.Max(0, m_GroundContacts - 1);
-            Debug.Log("Quitter sol (" + m_GroundContacts + ")");
+            //Debug.Log("Quitter sol (" + m_GroundContacts + ")");
         }
     }
 

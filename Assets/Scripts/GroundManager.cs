@@ -8,6 +8,8 @@ public class GroundManager : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private GameObject rythmPrefab; // prefab pour le rythme
     [SerializeField] private GroundLibrary groundLibrary; // prefab library
+    [SerializeField] private MonsterManager monsterManager;
+
     public float groundWidth = 10f; // largeur du prefab
     public float baseHeight = -1.74f; // hauteur de base pour le ground
     public float heightStep = 3f; // hauteur ajouter pour chaque Ground UP 
@@ -105,6 +107,8 @@ public class GroundManager : MonoBehaviour
 
         GameObject g = Instantiate(prefab, position, Quaternion.identity);
         grounds.Add(g);
+
+        monsterManager?.TrySpawnMonsterOnGround(g, prefabIndex); // add monster in ground
 
         GameObject rythm = Instantiate(rythmPrefab, position, Quaternion.identity);
         rythmgrounds.Add(rythm);
