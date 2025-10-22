@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{17238971-69d3-40e6-b397-37140643d3f2}">
+		<property name="assetPath">
+			<value>Music/Test Funk.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>184.19999999999999</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{2b129584-bd56-436a-9a6f-2c9132400acc}</destination>
+		</relationship>
+	</object>
+</objects>
