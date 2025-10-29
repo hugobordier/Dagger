@@ -4,7 +4,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private float m_TranslationSpeed;
+    public float m_TranslationSpeed;
     [SerializeField]
     // private float m_JumpImpulsionMagnitude;
     private float m_JumpHeight = 5f; // La hauteur du saut
