@@ -26,7 +26,7 @@ public class GroundManager : MonoBehaviour
             groundPrefabs[i] = groundLibrary.groundPrefabs[i];
 
         // Initialiser le layout du niveau
-        LoadLevelLayout("leveltest1");
+        LoadLevelLayout("leveltest");
 
         // Initialiser les grounds initiaux
         for (int i = -1; i <= 2; i++)
@@ -106,13 +106,17 @@ public class GroundManager : MonoBehaviour
         GameObject g = Instantiate(prefab, position, Quaternion.identity);
         grounds.Add(g);
 
-        GameObject rythm = Instantiate(rythmPrefab, position, Quaternion.identity);
-        rythmgrounds.Add(rythm);
-
         if (prefabIndex >= 5) // UP
         {
             currentHeightOffset += 1f;
         }
+
+        // Spawn rythm ground, pas à garder juste pour le visuel
+        float yPos2 = baseHeight + (currentHeightOffset * heightStep);
+        Vector3 position2 = new Vector3(positionIndex * groundWidth, yPos2, 0);
+
+        GameObject rythm = Instantiate(rythmPrefab, position2, Quaternion.identity);
+        rythmgrounds.Add(rythm);
     }
 
 }

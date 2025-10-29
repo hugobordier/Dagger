@@ -4,12 +4,12 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private float m_TranslationSpeed;
+    public float m_TranslationSpeed;
     [SerializeField]
     // private float m_JumpImpulsionMagnitude;
     private float m_JumpHeight = 5f; // La hauteur du saut
     [SerializeField]
-    private float m_HoverTime = 1f; // La durée en secondes passée en l'air
+    private float m_HoverTime; // La durée en secondes passée en l'air
     private bool m_IsJumping = false; // Pour savoir si on est déjà en train de sauter
 
     [SerializeField] 
@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
 
     //private bool m_IsGrounded;
     private int m_GroundContacts = 0;
+    private bool k_pressed;
 
     void Awake()
     {
@@ -61,6 +62,11 @@ public class Player : MonoBehaviour
         {
             SpawnColorZone(Color.blue);
         }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            k_pressed = true;
+        }
     }
 
     void FixedUpdate()
@@ -70,6 +76,7 @@ public class Player : MonoBehaviour
         // Vector2 moveVect = (Vector2)transform.right * m_TranslationSpeed * Time.deltaTime / 6.0f;
         // m_Rb.MovePosition(m_Rb.position + moveVect);
         m_Rb.linearVelocity = new Vector2(m_TranslationSpeed / 6.0f, m_Rb.linearVelocity.y);
+        m_HoverTime = 60.0f / m_TranslationSpeed; // ajuster le temps de vol en fonction de la vitesse
 
         if (jump && m_GroundContacts > 0 && !m_IsJumping)
         {
@@ -85,11 +92,10 @@ public class Player : MonoBehaviour
             // m_Rb.linearVelocity = new Vector2(m_Rb.linearVelocity.x, 0);
             Debug.Log("aux sol");
         }
-
-        Debug.Log("jumpCoroutine = " + jumpCoroutine);
-        Debug.Log("bouton K pressé = " + Input.GetKeyDown(KeyCode.K));
-        if (Input.GetKeyDown(KeyCode.K))
+        
+        if (k_pressed)
         {
+            k_pressed = false;
             Debug.Log("jumpCoroutine = " + jumpCoroutine);
             if (jumpCoroutine != null)
             {
