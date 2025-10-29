@@ -28,7 +28,7 @@ public class CameraManger : MonoBehaviour
             camPos.x = player.position.x + 5.0f;
 
             float heightOffset = 1.74f + groundManager.currentHeightOffset * heightStep;
-            Debug.Log($"Cam offset reçu = {groundManager.currentHeightOffset}");
+            // Debug.Log($"Cam offset reçu = {groundManager.currentHeightOffset}");
             camPos.y = Mathf.Lerp(camPos.y, heightOffset, Time.deltaTime * 6f);;
 
             m_camera.position = camPos;

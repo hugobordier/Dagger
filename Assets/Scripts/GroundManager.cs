@@ -68,6 +68,7 @@ public class GroundManager : MonoBehaviour
         {
             // Spawn nouveau à droite
             currentGroundIndex++;
+            Debug.Log("Spawning new ground at index: " + currentGroundIndex);
             SpawnNextGround(currentGroundIndex, rightMost.transform.position.x / groundWidth + 1);
             // Supprime celui de gauche
             Destroy(leftMost);
@@ -101,19 +102,21 @@ public class GroundManager : MonoBehaviour
 
         if (!groundPrefabs.TryGetValue(prefabIndex, out GameObject prefab))
         {
-            Debug.LogWarning($"Prefab Ground index {prefabIndex} introuvable, utilisation du rythmPrefab.");
             prefab = rythmPrefab;
         }
 
         GameObject g = Instantiate(prefab, position, Quaternion.identity);
         grounds.Add(g);
 
-        monsterManager?.TrySpawnMonsterOnGround(g, prefabIndex); // add monster in ground
+        Debug.Log($"Spawn Ground index {prefabIndex} à la position {position}");
+
+        monsterManager?.TrySpawnMonsterOnGround(g, (int)position.x / 10); // c'est pas super propre mais ça marche 
+        //monsterManager?.TrySpawnMonsterOnGround(g, layoutIndex);
 
         GameObject rythm = Instantiate(rythmPrefab, position, Quaternion.identity);
         rythmgrounds.Add(rythm);
 
-        if (prefabIndex >= 5) // UP
+        if (prefabIndex >= 5) // UPpp
         {
             currentHeightOffset += 1f;
         }

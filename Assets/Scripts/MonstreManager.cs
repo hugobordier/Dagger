@@ -19,6 +19,7 @@ public class MonsterManager : MonoBehaviour
     {
 
         TextAsset textAsset = Resources.Load<TextAsset>("LevelData/" + fileName);
+        Debug.Log("🔄 Chargement du fichier niveau monstres : " + textAsset);
         if (textAsset == null)
         {
             Debug.LogError("❌ Fichier niveau monstres introuvable : " + fileName);
@@ -51,6 +52,7 @@ public class MonsterManager : MonoBehaviour
     public void TrySpawnMonsterOnGround(GameObject ground, int groundLayoutIndex)
     {
         GroundMonsterConfig config = groundMonsterConfigs.Find(c => c.groundIndex == groundLayoutIndex);
+
         if (config == null)
         {
             return;
@@ -81,17 +83,24 @@ public class MonsterManager : MonoBehaviour
 
             GameObject monster = Instantiate(prefab, spawnPos, Quaternion.identity, monsterParent ?? ground.transform);
 
-            if (monster.GetComponent<MonsterIdle>() == null)
-            {
+           if (monster.GetComponent<MonsterIdle>() == null)
                 monster.AddComponent<MonsterIdle>();
+
+            if (!monster.GetComponent<Collider2D>())
+            {
+                BoxCollider2D col = monster.AddComponent<BoxCollider2D>();
+                col.isTrigger = true; // On laisse passer le player
             }
 
-            if (!monster.GetComponent<Collider2D>()) monster.AddComponent<BoxCollider2D>();
             if (!monster.GetComponent<Rigidbody2D>())
             {
                 Rigidbody2D rb = monster.AddComponent<Rigidbody2D>();
                 rb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
             }
+
+            // Ajout du script de “hit” pour le logging et la vie
+            if (!monster.GetComponent<MonsterHitLogger>())
+                monster.AddComponent<MonsterHitLogger>();
         }
     }
 }

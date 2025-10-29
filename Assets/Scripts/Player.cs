@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Touche Saut pressée");
         }
-        Debug.Log("m_GroundContacts = " + m_GroundContacts);
+        // Debug.Log("m_GroundContacts = " + m_GroundContacts);
 
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -83,20 +83,20 @@ public class Player : MonoBehaviour
         {
             //m_Rb.linearVelocity = Vector2.zero;
             // m_Rb.linearVelocity = new Vector2(m_Rb.linearVelocity.x, 0);
-            Debug.Log("aux sol");
+            // Debug.Log("aux sol");
         }
 
-        Debug.Log("jumpCoroutine = " + jumpCoroutine);
-        Debug.Log("bouton K pressé = " + Input.GetKeyDown(KeyCode.K));
+        // Debug.Log("jumpCoroutine = " + jumpCoroutine);
+        // Debug.Log("bouton K pressé = " + Input.GetKeyDown(KeyCode.K));
         if (Input.GetKeyDown(KeyCode.K))
         {
-            Debug.Log("jumpCoroutine = " + jumpCoroutine);
+            // Debug.Log("jumpCoroutine = " + jumpCoroutine);
             if (jumpCoroutine != null)
             {
                 StopCoroutine(jumpCoroutine);
                 jumpCoroutine = null;
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity);
-                Debug.Log("Raycast hit distance = " + hit.distance);
+                // Debug.Log("Raycast hit distance = " + hit.distance);
                 if (hit.collider != null)
                 {
                     // On se place sur le point trouvé
@@ -112,7 +112,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("touché");
+        // Debug.Log("touché");
         if (collision.gameObject.CompareTag("Ground"))
         {
             //Debug.LogError(Time.frameCount+" colLocalPt = " + colLocalPt+ "   colLocalPt.magnitude = "+ colLocalPt.magnitude);
@@ -125,7 +125,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        Debug.Log("quitter");
+        // Debug.Log("quitter");
         if (collision.gameObject.CompareTag("Ground"))
         {
             m_GroundContacts = Mathf.Max(0, m_GroundContacts - 1);
@@ -156,7 +156,7 @@ public class Player : MonoBehaviour
 
         // On cherche le sol directement en dessous
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity);
-        Debug.Log("Raycast hit distance = " + hit.distance);
+        // Debug.Log("Raycast hit distance = " + hit.distance);
 
         if (hit.collider != null)
         {
