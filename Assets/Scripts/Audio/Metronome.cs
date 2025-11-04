@@ -23,10 +23,15 @@ public class Metronome : MonoBehaviour
         if (timer >= secondsPerBeat)
         {
             nbBeats += 1f;
+            
+            // Afficher la position de la musique tous les 4 temps
             if (nbBeats % 4 == 0)
             {
-                Debug.Log(nbBeats);
+                int musicPosition = SoundPlayer.Instance.GetMusicPosition();
+                float musicPositionSeconds = musicPosition / 1000f;
+                Debug.Log($"Beat {nbBeats} | Position musique: {musicPositionSeconds:F2}s ({musicPosition}ms)");
             }
+            
             timer -= secondsPerBeat;
         }
     }

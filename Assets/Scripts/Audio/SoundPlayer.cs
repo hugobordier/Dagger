@@ -1,3 +1,4 @@
+using System.Threading;
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
@@ -40,6 +41,16 @@ public class SoundPlayer : MonoBehaviour
     {
         IsMusicPlaying = false;
         musicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+    }
+
+    public int GetMusicPosition()
+    {
+        if (IsMusicPlaying)
+        {
+            musicInstance.getTimelinePosition(out int position);
+            return position;
+        }
+        return 0;
     }
 
     private void OnDestroy()
