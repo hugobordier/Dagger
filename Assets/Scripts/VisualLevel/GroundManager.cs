@@ -8,6 +8,7 @@ public class GroundManager : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private GameObject rythmPrefab; // prefab pour le rythme
     [SerializeField] private GroundLibrary groundLibrary; // prefab library
+    [SerializeField] private MenuManager menuManager;
     public float groundWidth = 10f; // largeur du prefab
     public float baseHeight = -1.74f; // hauteur de base pour le ground
     public float heightStep = 3f; // hauteur ajouter pour chaque Ground UP 
@@ -26,7 +27,7 @@ public class GroundManager : MonoBehaviour
             groundPrefabs[i] = groundLibrary.groundPrefabs[i];
 
         // Initialiser le layout du niveau
-        LoadLevelLayout("leveltest");
+        LoadLevelLayout(menuManager.selectedLevel);
 
         // Initialiser les grounds initiaux
         for (int i = -1; i <= 2; i++)
@@ -36,7 +37,7 @@ public class GroundManager : MonoBehaviour
         }
     }
 
-    void LoadLevelLayout(string fileName)
+    public void LoadLevelLayout(string fileName)
     {
         TextAsset textAsset = Resources.Load<TextAsset>("LevelData/" + fileName);
         if (textAsset != null)
