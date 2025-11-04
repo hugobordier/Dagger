@@ -4,7 +4,10 @@ public class PlayerHealth : MonoBehaviour
 {
     [Header("Vies")]
     public int maxLives = 3;
-    private int currentLives;
+    public int currentLives;
+
+    [Header("UI")]
+    public PlayerUI playerUI; // glisse ton Canvas PlayerUI ici
 
     void Awake()
     {
@@ -17,6 +20,12 @@ public class PlayerHealth : MonoBehaviour
         currentLives = Mathf.Max(0, currentLives);
 
         Debug.Log($"💔 Player touché ! Vies restantes : {currentLives}");
+
+        // Mise à jour des cœurs
+        if (playerUI != null)
+        {
+            playerUI.UpdateHearts(currentLives);
+        }
 
         if (currentLives <= 0)
         {

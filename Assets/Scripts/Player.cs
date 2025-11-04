@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float m_ZoneLifetime = 0.5f; // durée d’affichage
     Coroutine jumpCoroutine;
+    [SerializeField]
+    private PlayerHealth m_PlayerHealth;
 
 
     // [SerializeField] private Transform m_camera;
@@ -30,6 +32,9 @@ public class Player : MonoBehaviour
     void Awake()
     {
         m_Rb = GetComponent<Rigidbody2D>();
+        // Try to find PlayerHealth on the same gameObject if not set in inspector
+        if (m_PlayerHealth == null)
+            m_PlayerHealth = GetComponent<PlayerHealth>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
