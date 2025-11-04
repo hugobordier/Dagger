@@ -15,13 +15,16 @@ public class InputHandler : MonoBehaviour
 
     void Update()
     {
+        // Lancer le jeu avec la barre d'espace
         if (Input.GetKeyDown(KeyCode.Space) && SoundPlayer.Instance.IsMusicPlaying == false)
         {
-            SoundPlayer.Instance.PlayMusic();
+            Referee.Instance.StartGame();
         }
+        
+        // Arrêter le jeu avec Backspace
         if (Input.GetKeyDown(KeyCode.Backspace) && SoundPlayer.Instance.IsMusicPlaying == true)
         {
-            SoundPlayer.Instance.StopMusic();
+            Referee.Instance.StopGame();
         }
     }
 }

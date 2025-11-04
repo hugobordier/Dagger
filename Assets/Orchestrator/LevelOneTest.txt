@@ -1,0 +1,1 @@
+num du beat;type de l'ennemi
