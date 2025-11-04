@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GroundManager : MonoBehaviour
 {
@@ -8,7 +9,6 @@ public class GroundManager : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private GameObject rythmPrefab; // prefab pour le rythme
     [SerializeField] private GroundLibrary groundLibrary; // prefab library
-    [SerializeField] private MenuManager menuManager;
     public float groundWidth = 10f; // largeur du prefab
     public float baseHeight = -1.74f; // hauteur de base pour le ground
     public float heightStep = 3f; // hauteur ajouter pour chaque Ground UP 
@@ -27,7 +27,8 @@ public class GroundManager : MonoBehaviour
             groundPrefabs[i] = groundLibrary.groundPrefabs[i];
 
         // Initialiser le layout du niveau
-        LoadLevelLayout(menuManager.selectedLevel);
+        string levelName = LevelData.Instance.selectedLevel;
+        LoadLevelLayout(levelName);
 
         // Initialiser les grounds initiaux
         for (int i = -1; i <= 2; i++)
@@ -106,7 +107,10 @@ public class GroundManager : MonoBehaviour
 
         GameObject g = Instantiate(prefab, position, Quaternion.identity);
         grounds.Add(g);
-
+        Scene levelScene = SceneManager.GetSceneByName("LevelScene");
+        if (levelScene.IsValid())
+            SceneManager.MoveGameObjectToScene(g, levelScene);
+        
         if (prefabIndex >= 5) // UP
         {
             currentHeightOffset += 1f;
@@ -118,6 +122,9 @@ public class GroundManager : MonoBehaviour
 
         GameObject rythm = Instantiate(rythmPrefab, position2, Quaternion.identity);
         rythmgrounds.Add(rythm);
+
+        if (levelScene.IsValid())
+            SceneManager.MoveGameObjectToScene(rythm, levelScene);
     }
 
 }

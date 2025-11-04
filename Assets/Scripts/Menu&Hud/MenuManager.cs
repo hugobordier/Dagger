@@ -9,10 +9,6 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] GameObject m_PanelMainMenu;
 	[SerializeField] GameObject m_PanelPauseMenu;
 
-	[Header("Managers")]
-	[SerializeField] GroundManager groundManager;
-	[SerializeField] GameObject player;
-	[SerializeField] GameObject PauseMenuUI;
 
 	GameObject currentPanel;
 	public string selectedLevel;
@@ -56,13 +52,9 @@ public class MenuManager : MonoBehaviour
 	public void LoadLevel(string LevelName)
 	{
 		Debug.Log("LoadLevel: " + LevelName);
-		selectedLevel = LevelName;
+		LevelData.Instance.selectedLevel = LevelName;
 
-		if (!groundManager.gameObject.activeSelf)
-			groundManager.gameObject.SetActive(true);
-		if (!player.activeSelf)
-			player.SetActive(true);
-
+		SceneManager.LoadScene("LevelScene", LoadSceneMode.Additive);
 		m_PanelMainMenu.SetActive(false);
 	}
 
@@ -76,7 +68,8 @@ public class MenuManager : MonoBehaviour
 	
 	public void QuitToMainMenu()
     {
-        Time.timeScale = 1f;
-		SceneManager.LoadScene("LevelScene");
+		Time.timeScale = 1f;
+		SceneManager.UnloadSceneAsync("LevelScene");
+		OpenMainMenu();
     }
 }
