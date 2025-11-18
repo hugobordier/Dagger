@@ -118,7 +118,6 @@ public class GroundManager : MonoBehaviour
         GameObject rythm = Instantiate(rythmPrefab, position, Quaternion.identity);
         rythmgrounds.Add(rythm);
 
-        if (prefabIndex >= 5) // UPpp
         Scene levelScene = SceneManager.GetSceneByName("LevelScene");
         if (levelScene.IsValid())
             SceneManager.MoveGameObjectToScene(g, levelScene);
@@ -132,7 +131,7 @@ public class GroundManager : MonoBehaviour
         float yPos2 = baseHeight + (currentHeightOffset * heightStep);
         Vector3 position2 = new Vector3(positionIndex * groundWidth, yPos2, 0);
 
-        GameObject rythm = Instantiate(rythmPrefab, position2, Quaternion.identity);
+        rythm = Instantiate(rythmPrefab, position2, Quaternion.identity);
         rythmgrounds.Add(rythm);
 
         if (levelScene.IsValid())
