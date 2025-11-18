@@ -113,6 +113,19 @@ public class Player : MonoBehaviour
             }
         }
 
+        if (m_GroundContacts == 0 && !m_IsJumping) 
+        {
+            m_Rb.gravityScale = 10f; 
+        }
+        else if (m_IsJumping)
+        {
+            m_Rb.gravityScale = 0f;
+        }
+        else 
+        {
+            m_Rb.gravityScale = 1f;
+        }
+
         m_Rb.angularVelocity = 0f;
     }
 
