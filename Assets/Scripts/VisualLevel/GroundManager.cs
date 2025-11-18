@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GroundManager : MonoBehaviour
 {
@@ -26,7 +27,8 @@ public class GroundManager : MonoBehaviour
             groundPrefabs[i] = groundLibrary.groundPrefabs[i];
 
         // Initialiser le layout du niveau
-        LoadLevelLayout("leveltest");
+        string levelName = LevelData.Instance.selectedLevel;
+        LoadLevelLayout(levelName);
 
         // Initialiser les grounds initiaux
         for (int i = -1; i <= 2; i++)
@@ -36,7 +38,7 @@ public class GroundManager : MonoBehaviour
         }
     }
 
-    void LoadLevelLayout(string fileName)
+    public void LoadLevelLayout(string fileName)
     {
         TextAsset textAsset = Resources.Load<TextAsset>("LevelData/" + fileName);
         if (textAsset != null)
@@ -105,7 +107,10 @@ public class GroundManager : MonoBehaviour
 
         GameObject g = Instantiate(prefab, position, Quaternion.identity);
         grounds.Add(g);
-
+        Scene levelScene = SceneManager.GetSceneByName("LevelScene");
+        if (levelScene.IsValid())
+            SceneManager.MoveGameObjectToScene(g, levelScene);
+        
         if (prefabIndex >= 5) // UP
         {
             currentHeightOffset += 1f;
@@ -117,6 +122,9 @@ public class GroundManager : MonoBehaviour
 
         GameObject rythm = Instantiate(rythmPrefab, position2, Quaternion.identity);
         rythmgrounds.Add(rythm);
+
+        if (levelScene.IsValid())
+            SceneManager.MoveGameObjectToScene(rythm, levelScene);
     }
 
 }
