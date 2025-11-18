@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1893250273333899260}
   - component: {fileID: 8594279104305371092}
-  - component: {fileID: 2615126604196155021}
   - component: {fileID: 2470546553639049002}
+  - component: {fileID: 2615126604196155021}
   m_Layer: 2
   m_Name: Player2D
   m_TagString: Untagged
@@ -62,25 +62,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2615126604196155021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1354381605420651944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf4836e9309b3463e9e46ea52c1359e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TranslationSpeed: 60
-  m_JumpHeight: 4.5
-  m_HoverTime: 1
-  m_ColorZonePrefab: {fileID: 5387757513667314024, guid: 26f742231769c43d3af0b8fd85136798,
-    type: 3}
-  m_ZoneDistance: 1
-  m_ZoneLifetime: 0.1
 --- !u!70 &2470546553639049002
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -118,6 +99,25 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.5}
   m_Size: {x: 1, y: 1}
   m_Direction: 0
+--- !u!114 &2615126604196155021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354381605420651944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4836e9309b3463e9e46ea52c1359e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TranslationSpeed: 60
+  m_JumpHeight: 4.5
+  m_HoverTime: 1
+  m_ColorZonePrefab: {fileID: 5387757513667314024, guid: 26f742231769c43d3af0b8fd85136798,
+    type: 3}
+  m_ZoneDistance: 1
+  m_ZoneLifetime: 0.1
 --- !u!1 &2842067712088571349
 GameObject:
   m_ObjectHideFlags: 0
