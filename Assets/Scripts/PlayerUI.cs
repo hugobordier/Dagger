@@ -4,8 +4,8 @@ using UnityEngine.UI;
 public class PlayerUI : MonoBehaviour
 {
     [Header("Hearts UI")]
-    public Image[] hearts;      // glisse tes images heart1, heart2, heart3 ici
-    public Sprite emptyHeart;   // glisse heart_empty ici
+    public Image[] hearts;     
+    public Sprite emptyHeart;  
 
     /// <summary>
     /// Met à jour les cœurs selon le nombre de vies restant.

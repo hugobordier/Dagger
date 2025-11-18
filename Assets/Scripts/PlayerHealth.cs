@@ -30,7 +30,6 @@ public class PlayerHealth : MonoBehaviour
         if (currentLives <= 0)
         {
             Debug.Log("☠️ Player est mort ! (log seulement pour l'instant)");
-            // Ici tu pourras gérer la mort plus tard
         }
     }
 }
