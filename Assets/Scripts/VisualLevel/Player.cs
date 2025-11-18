@@ -118,9 +118,20 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("touché");
         if (collision.gameObject.CompareTag("Ground"))
         {
+            foreach (ContactPoint2D contact in collision.contacts)
+            {
+                if (contact.normal.x < -0.5f)
+                {
+                    Debug.Log("Mur détecté ! Grimpe !");
+                    Collider2D wallCollider = collision.collider;
+                    float newY = wallCollider.bounds.max.y + 0.02f;
+                    transform.position = new Vector2(transform.position.x, newY);
+                    return;
+                }
+                
+            }
             //Debug.LogError(Time.frameCount+" colLocalPt = " + colLocalPt+ "   colLocalPt.magnitude = "+ colLocalPt.magnitude);
 
             m_GroundContacts++;
