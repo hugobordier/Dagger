@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float m_ZoneLifetime = 0.5f; // durée d’affichage
     Coroutine jumpCoroutine;
+    [SerializeField]
+    private PlayerHealth m_PlayerHealth;
 
 
     // [SerializeField] private Transform m_camera;
@@ -31,12 +33,15 @@ public class Player : MonoBehaviour
     void Awake()
     {
         m_Rb = GetComponent<Rigidbody2D>();
+        // Try to find PlayerHealth on the same gameObject if not set in inspector
+        if (m_PlayerHealth == null)
+            m_PlayerHealth = GetComponent<PlayerHealth>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+ 
     }
 
     // Update is called once per frame
@@ -46,7 +51,7 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Touche Saut pressée");
         }
-        Debug.Log("m_GroundContacts = " + m_GroundContacts);
+        // Debug.Log("m_GroundContacts = " + m_GroundContacts);
 
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -90,19 +95,22 @@ public class Player : MonoBehaviour
         {
             //m_Rb.linearVelocity = Vector2.zero;
             // m_Rb.linearVelocity = new Vector2(m_Rb.linearVelocity.x, 0);
-            Debug.Log("aux sol");
+            // Debug.Log("aux sol");
         }
+
+        // Debug.Log("jumpCoroutine = " + jumpCoroutine);
+        // Debug.Log("bouton K pressé = " + Input.GetKeyDown(KeyCode.K));
+        if (Input.GetKeyDown(KeyCode.K))
         
         if (k_pressed)
         {
-            k_pressed = false;
             Debug.Log("jumpCoroutine = " + jumpCoroutine);
             if (jumpCoroutine != null)
             {
                 StopCoroutine(jumpCoroutine);
                 jumpCoroutine = null;
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity);
-                Debug.Log("Raycast hit distance = " + hit.distance);
+                // Debug.Log("Raycast hit distance = " + hit.distance);
                 if (hit.collider != null)
                 {
                     // On se place sur le point trouvé
@@ -118,24 +126,24 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("touché");
+        // Debug.Log("touché");
         if (collision.gameObject.CompareTag("Ground"))
         {
             //Debug.LogError(Time.frameCount+" colLocalPt = " + colLocalPt+ "   colLocalPt.magnitude = "+ colLocalPt.magnitude);
 
             m_GroundContacts++;
-            Debug.Log("Au sol (" + m_GroundContacts + ")");
+            //Debug.Log("Au sol (" + m_GroundContacts + ")");
         }
 
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        Debug.Log("quitter");
+        // Debug.Log("quitter");
         if (collision.gameObject.CompareTag("Ground"))
         {
             m_GroundContacts = Mathf.Max(0, m_GroundContacts - 1);
-            Debug.Log("Quitter sol (" + m_GroundContacts + ")");
+            //Debug.Log("Quitter sol (" + m_GroundContacts + ")");
         }
     }
 
@@ -162,7 +170,7 @@ public class Player : MonoBehaviour
 
         // On cherche le sol directement en dessous
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity);
-        Debug.Log("Raycast hit distance = " + hit.distance);
+        // Debug.Log("Raycast hit distance = " + hit.distance);
 
         if (hit.collider != null)
         {

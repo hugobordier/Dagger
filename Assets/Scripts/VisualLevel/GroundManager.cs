@@ -9,6 +9,8 @@ public class GroundManager : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private GameObject rythmPrefab; // prefab pour le rythme
     [SerializeField] private GroundLibrary groundLibrary; // prefab library
+    [SerializeField] private MonsterManager monsterManager;
+
     public float groundWidth = 10f; // largeur du prefab
     public float baseHeight = -1.74f; // hauteur de base pour le ground
     public float heightStep = 3f; // hauteur ajouter pour chaque Ground UP 
@@ -68,6 +70,7 @@ public class GroundManager : MonoBehaviour
         {
             // Spawn nouveau à droite
             currentGroundIndex++;
+            Debug.Log("Spawning new ground at index: " + currentGroundIndex);
             SpawnNextGround(currentGroundIndex, rightMost.transform.position.x / groundWidth + 1);
             // Supprime celui de gauche
             Destroy(leftMost);
@@ -101,12 +104,21 @@ public class GroundManager : MonoBehaviour
 
         if (!groundPrefabs.TryGetValue(prefabIndex, out GameObject prefab))
         {
-            Debug.LogWarning($"Prefab Ground index {prefabIndex} introuvable, utilisation du rythmPrefab.");
             prefab = rythmPrefab;
         }
 
         GameObject g = Instantiate(prefab, position, Quaternion.identity);
         grounds.Add(g);
+
+        Debug.Log($"Spawn Ground index {prefabIndex} à la position {position}");
+
+        monsterManager?.TrySpawnMonsterOnGround(g, (int)position.x / 10); // c'est pas super propre mais ça marche 
+        //monsterManager?.TrySpawnMonsterOnGround(g, layoutIndex);
+
+        GameObject rythm = Instantiate(rythmPrefab, position, Quaternion.identity);
+        rythmgrounds.Add(rythm);
+
+        if (prefabIndex >= 5) // UPpp
         Scene levelScene = SceneManager.GetSceneByName("LevelScene");
         if (levelScene.IsValid())
             SceneManager.MoveGameObjectToScene(g, levelScene);
