@@ -4,17 +4,25 @@ using UnityEngine;
 public class Metronome : MonoBehaviour
 {
     public static Metronome Instance { get; private set; }
-
-    [SerializeField]
-    private float bpm = 89f;
-
-    private float beatDurationMs;
-    private int currentBeat = 0;
-    private float nextBeatPositionMs = 0f;
     private bool isRunning = false;
 
-    public delegate void CurrentBeatEvent(int beat);
-    public event CurrentBeatEvent BeatEvent;
+    [SerializeField]
+    private float bpm = 89;
+
+    [SerializeField]
+    private float marginMs = 100;
+
+    private int currentBeat = 0;
+    private float beatDurationMs;
+    private float nextBeatPositionMs = 0;
+    private float activeBeatStartPositionMs = 0;
+    private float activeBeatEndPositionMs = 0;
+
+    public delegate void OpenWindowEvent(int beat);
+    public event OpenWindowEvent OpenWindow;
+
+    public delegate void CloseWindowEvent(int beat);
+    public event CloseWindowEvent CloseWindow;
 
     void Awake()
     {
@@ -35,11 +43,17 @@ public class Metronome : MonoBehaviour
         if (!isRunning || !SoundPlayer.Instance.IsMusicPlaying)
             return;
         int position = SoundPlayer.Instance.GetMusicPosition();
-        if (position >= nextBeatPositionMs)
+        if (position >= activeBeatStartPositionMs)
         {
-            currentBeat += 1;
+            OpenWindow?.Invoke(currentBeat);
             nextBeatPositionMs += beatDurationMs;
-            BeatEvent?.Invoke(currentBeat);
+            activeBeatStartPositionMs = nextBeatPositionMs - marginMs;
+        }
+        if (position >= activeBeatEndPositionMs)
+        {
+            CloseWindow?.Invoke(currentBeat);
+            activeBeatEndPositionMs = nextBeatPositionMs + marginMs;
+            currentBeat += 1;
         }
     }
 
