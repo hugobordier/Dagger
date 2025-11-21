@@ -1,46 +1,66 @@
+using System;
 using UnityEngine;
 
 public class Metronome : MonoBehaviour
 {
-    [SerializeField]
-    private float bpm = 120f;
-
-    private float secondsPerBeat;
-    private float timer = 0f;
-    private float nbBeats = 0f;
+    public static Metronome Instance { get; private set; }
     private bool isRunning = false;
+
+    [SerializeField]
+    private float bpm = 89;
+
+    [SerializeField]
+    private float marginMs = 100;
+
+    private int currentBeat = 0;
+    private float beatDurationMs;
+    private float nextBeatPositionMs = 0;
+    private float activeBeatStartPositionMs = 0;
+    private float activeBeatEndPositionMs = 0;
+
+    public delegate void OpenWindowEvent(int beat);
+    public event OpenWindowEvent OpenWindow;
+
+    public delegate void CloseWindowEvent(int beat);
+    public event CloseWindowEvent CloseWindow;
+
+    void Awake()
+    {
+        if (Instance)
+        {
+            Debug.LogError("Found more than one Metronome instance in the scene");
+        }
+        Instance = this;
+    }
 
     void Start()
     {
-        secondsPerBeat = 60f / bpm;
+        beatDurationMs = 60f / bpm * 1000f;
     }
 
     void Update()
     {
-        if (!isRunning) return;
-
-        timer += Time.deltaTime;
-        if (timer >= secondsPerBeat)
+        if (!isRunning || !SoundPlayer.Instance.IsMusicPlaying)
+            return;
+        int position = SoundPlayer.Instance.GetMusicPosition();
+        if (position >= activeBeatStartPositionMs)
         {
-            nbBeats += 1f;
-            
-            // Afficher la position de la musique tous les 4 temps
-            if (nbBeats % 4 == 0)
-            {
-                int musicPosition = SoundPlayer.Instance.GetMusicPosition();
-                float musicPositionSeconds = musicPosition / 1000f;
-                Debug.Log($"Beat {nbBeats} | Position musique: {musicPositionSeconds:F2}s ({musicPosition}ms)");
-            }
-            
-            timer -= secondsPerBeat;
+            OpenWindow?.Invoke(currentBeat);
+            nextBeatPositionMs += beatDurationMs;
+            activeBeatStartPositionMs = nextBeatPositionMs - marginMs;
+        }
+        if (position >= activeBeatEndPositionMs)
+        {
+            CloseWindow?.Invoke(currentBeat);
+            activeBeatEndPositionMs = nextBeatPositionMs + marginMs;
+            currentBeat += 1;
         }
     }
 
     public void StartMetronome()
     {
         isRunning = true;
-        timer = 0f;
-        nbBeats = 0f;
+        currentBeat = -1;
     }
 
     public void StopMetronome()

@@ -2,12 +2,6 @@ using UnityEngine;
 
 public class Referee : MonoBehaviour
 {
-    [SerializeField]
-    private SoundPlayer soundPlayer;
-    
-    [SerializeField]
-    private Metronome metronome;
-
     public static Referee Instance { get; private set; }
 
     private void Awake()
@@ -19,29 +13,14 @@ public class Referee : MonoBehaviour
         Instance = this;
     }
 
-    void Start()
-    {
-        // Chercher automatiquement les composants s'ils ne sont pas assignés
-        if (soundPlayer == null)
-        {
-            soundPlayer = FindFirstObjectByType<SoundPlayer>();
-        }
-        
-        if (metronome == null)
-        {
-            metronome = FindFirstObjectByType<Metronome>();
-        }
-    }
+    void Start() { }
 
-    /// synchronise tout ça
     public void StartGame()
     {
-        if (soundPlayer != null && metronome != null)
+        if (SoundPlayer.Instance != null && Metronome.Instance != null)
         {
-            // Démarrer les deux au même moment
-            soundPlayer.PlayMusic();
-            metronome.StartMetronome();
-
+            SoundPlayer.Instance.PlayMusic();
+            Metronome.Instance.StartMetronome();
             Debug.Log("Game started : components synchronized");
         }
         else
@@ -53,11 +32,10 @@ public class Referee : MonoBehaviour
     /// Arrête la musique et le métronome
     public void StopGame()
     {
-        if (soundPlayer != null && metronome != null)
+        if (SoundPlayer.Instance != null && Metronome.Instance != null)
         {
-            soundPlayer.StopMusic();
-            metronome.StopMetronome();
-            
+            SoundPlayer.Instance.StopMusic();
+            Metronome.Instance.StopMetronome();
             Debug.Log("Game stopped");
         }
     }

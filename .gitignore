@@ -116,4 +116,6 @@ InitTestScene*.unity*
 fmod_editor.log
 
 # Ignore the FMOD project Build directory
+./Dagger-audio/.cache
+./Dagger-audio/.unsaved
 ./Dagger-audio/Build

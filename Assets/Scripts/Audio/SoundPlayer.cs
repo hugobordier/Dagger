@@ -1,14 +1,13 @@
-using System.Threading;
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
 
 public class SoundPlayer : MonoBehaviour
 {
+    public static SoundPlayer Instance { get; private set; }
+
     private EventInstance musicInstance;
     public bool IsMusicPlaying { get; private set; }
-
-    public static SoundPlayer Instance { get; private set; }
 
     private void Awake()
     {
@@ -21,14 +20,8 @@ public class SoundPlayer : MonoBehaviour
 
     void Start()
     {
-        // AudioManager.Instance.PlayOneShot(FMODEvents.Instance.MusicLevel1);
         IsMusicPlaying = false;
         musicInstance = RuntimeManager.CreateInstance(FMODEvents.Instance.MusicLevel1);
-    }
-
-    public void PlayOneShot(EventReference sound)
-    {
-        RuntimeManager.PlayOneShot(sound);
     }
 
     public void PlayMusic()

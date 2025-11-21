@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6851859749063229568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/MusicTest
+  m_EditorClassIdentifier: 
+  Path: event:/Music/MusicTest
+  Guid:
+    Data1: -1847451701
+    Data2: 1217666990
+    Data3: -748242007
+    Data4: -1643695253
+  Banks:
+  - {fileID: 4305733815743100761}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 184200
 --- !u!114 &-6473093416476234729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,8 +187,8 @@ MonoBehaviour:
   - {fileID: 496545037985988770}
   EditorEvents:
   - {fileID: -1200965278338412488}
-  - {fileID: 643224890232649535}
   - {fileID: 5270849951433002081}
+  - {fileID: -6851859749063229568}
   EditorParameters: []
   MasterBanks:
   - {fileID: -6473093416476234729}
@@ -172,9 +199,9 @@ MonoBehaviour:
   SerializableEventsDict:
   - key: event:/Music/MusicLevel1
     index: 0
-  - key: event:/Music/MusicTest
-    index: 1
   - key: event:/Music/MusicLevel2
+    index: 1
+  - key: event:/Music/MusicTest
     index: 2
 --- !u!114 &384076062840764820
 MonoBehaviour:
@@ -223,33 +250,6 @@ MonoBehaviour:
   - Name: Desktop
     Value: 506
   Exists: 1
---- !u!114 &643224890232649535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/MusicTest
-  m_EditorClassIdentifier: 
-  Path: event:/Music/MusicTest
-  Guid:
-    Data1: -1847451701
-    Data2: 1217666990
-    Data3: -748242007
-    Data4: -1643695253
-  Banks:
-  - {fileID: 4305733815743100761}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 184200
 --- !u!114 &2385557627412602063
 MonoBehaviour:
   m_ObjectHideFlags: 0
