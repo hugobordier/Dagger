@@ -32,12 +32,12 @@ public class GroundManager : MonoBehaviour
         
         // Hugo si tu veux travailler sur LevelScene sans te casser la tete, 
         // commente les 2 lignes en dessous
-        // string levelName = LevelData.Instance.selectedLevel;
-        // LoadLevelLayout(levelName);
+        string levelName = LevelData.Instance.selectedLevel;
+        LoadLevelLayout(levelName);
 
         // et décommente cet ligne, en ayant la scene LevelScene chargé dans unity
         // si c'est pas bon dis le moi.
-        LoadLevelLayout("leveltest");
+        // LoadLevelLayout("leveltest");
 
 
         // Initialiser les grounds initiaux
