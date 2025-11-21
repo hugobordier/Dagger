@@ -27,8 +27,16 @@ public class GroundManager : MonoBehaviour
             groundPrefabs[i] = groundLibrary.groundPrefabs[i];
 
         // Initialiser le layout du niveau
-        string levelName = LevelData.Instance.selectedLevel;
-        LoadLevelLayout(levelName);
+        
+        // Hugo si tu veux travailler sur LevelScene sans te casser la tete, 
+        // commente les 2 lignes en dessous
+        // string levelName = LevelData.Instance.selectedLevel;
+        // LoadLevelLayout(levelName);
+
+        // et décommente cet ligne, en ayant la scene LevelScene chargé dans unity
+        // si c'est pas bon dis le moi.
+        LoadLevelLayout("leveltest");
+
 
         // Initialiser les grounds initiaux
         for (int i = -1; i <= 2; i++)
@@ -41,6 +49,7 @@ public class GroundManager : MonoBehaviour
     public void LoadLevelLayout(string fileName)
     {
         TextAsset textAsset = Resources.Load<TextAsset>("LevelData/" + fileName);
+
         if (textAsset != null)
         {
             string[] numbers = textAsset.text.Split(';');
