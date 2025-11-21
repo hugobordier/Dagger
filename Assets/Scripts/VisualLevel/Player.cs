@@ -121,14 +121,38 @@ public class Player : MonoBehaviour
             }
         }
 
+        if (m_GroundContacts == 0 && !m_IsJumping) 
+        {
+            m_Rb.gravityScale = 10f; 
+        }
+        else if (m_IsJumping)
+        {
+            m_Rb.gravityScale = 0f;
+        }
+        else 
+        {
+            m_Rb.gravityScale = 1f;
+        }
+
         m_Rb.angularVelocity = 0f;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Debug.Log("touché");
         if (collision.gameObject.CompareTag("Ground"))
         {
+            foreach (ContactPoint2D contact in collision.contacts)
+            {
+                if (contact.normal.x < -0.5f)
+                {
+                    Debug.Log("Mur détecté ! Grimpe !");
+                    Collider2D wallCollider = collision.collider;
+                    float newY = wallCollider.bounds.max.y + 0.02f;
+                    transform.position = new Vector2(transform.position.x, newY);
+                    return;
+                }
+                
+            }
             //Debug.LogError(Time.frameCount+" colLocalPt = " + colLocalPt+ "   colLocalPt.magnitude = "+ colLocalPt.magnitude);
 
             m_GroundContacts++;

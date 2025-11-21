@@ -463,7 +463,7 @@ MonoBehaviour:
   rythmPrefab: {fileID: 2745036585836483256, guid: 6416a771f8638405998d6afc9189e6f4,
     type: 3}
   groundLibrary: {fileID: 11400000, guid: c73c794327cf24960b5d2ae8c28e69e2, type: 2}
-  groundWidth: 10
+  groundWidth: 15
   baseHeight: -1.74
   heightStep: 3
   currentHeightOffset: 0
