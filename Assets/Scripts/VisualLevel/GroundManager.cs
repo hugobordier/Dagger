@@ -124,8 +124,6 @@ public class GroundManager : MonoBehaviour
         monsterManager?.TrySpawnMonsterOnGround(g, (int)position.x / 10); // c'est pas super propre mais ça marche 
         //monsterManager?.TrySpawnMonsterOnGround(g, layoutIndex);
 
-        GameObject rythm = Instantiate(rythmPrefab, position, Quaternion.identity);
-        rythmgrounds.Add(rythm);
 
         Scene levelScene = SceneManager.GetSceneByName("LevelScene");
         if (levelScene.IsValid())
@@ -137,10 +135,10 @@ public class GroundManager : MonoBehaviour
         }
 
         // Spawn rythm ground, pas à garder juste pour le visuel
-        float yPos2 = baseHeight + (currentHeightOffset * heightStep);
-        Vector3 position2 = new Vector3(positionIndex * groundWidth, yPos2, 0);
+        float yPos2 = baseHeight + (currentHeightOffset * heightStep) - 2;
+        Vector3 position2 = new Vector3(positionIndex * groundWidth, yPos2, -1);
 
-        rythm = Instantiate(rythmPrefab, position2, Quaternion.identity);
+        GameObject rythm = Instantiate(rythmPrefab, position2, Quaternion.identity);
         rythmgrounds.Add(rythm);
 
         if (levelScene.IsValid())

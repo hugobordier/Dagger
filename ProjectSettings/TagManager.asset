@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Ground
+  - Hole
   layers:
   - Default
   - TransparentFX
@@ -38,6 +40,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: SkyLayer
+    uniqueID: 3831089955
+    locked: 0
+  - name: TreeLayer
+    uniqueID: 3788099109
+    locked: 0
+  - name: DoorLayer
+    uniqueID: 1461373395
+    locked: 0
+  - name: EntryLayer
+    uniqueID: 3732778041
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
