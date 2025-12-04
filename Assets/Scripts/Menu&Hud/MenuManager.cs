@@ -52,9 +52,8 @@ public class MenuManager : MonoBehaviour
 	public void LoadLevel(string LevelName)
 	{
 		Debug.Log("LoadLevel: " + LevelName);
-		LevelData.Instance.selectedLevel = LevelName;
 
-		SceneManager.LoadScene("LevelScene", LoadSceneMode.Additive);
+		SceneManager.LoadScene(LevelName, LoadSceneMode.Additive);
 		m_PanelMainMenu.SetActive(false);
 	}
 

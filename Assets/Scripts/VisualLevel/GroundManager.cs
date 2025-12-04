@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -20,6 +21,7 @@ public class GroundManager : MonoBehaviour
     private List<int> levelLayout = new List<int>(); // liste des indices de prefabs pour le niveau
     private int currentGroundIndex = 0;
     public float currentHeightOffset = 0f;
+    public String levelName = "";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,12 +34,12 @@ public class GroundManager : MonoBehaviour
         
         // Hugo si tu veux travailler sur LevelScene sans te casser la tete, 
         // commente les 2 lignes en dessous
-        string levelName = LevelData.Instance.selectedLevel;
-        LoadLevelLayout(levelName);
+        // string levelName = LevelData.Instance.selectedLevel;
+        // LoadLevelLayout(levelName);
 
         // et décommente cet ligne, en ayant la scene LevelScene chargé dans unity
         // si c'est pas bon dis le moi.
-        // LoadLevelLayout("leveltest");
+        LoadLevelLayout(levelName);
 
 
         // Initialiser les grounds initiaux
