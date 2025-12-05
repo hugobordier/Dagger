@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     Coroutine jumpCoroutine;
     [SerializeField]
     private PlayerHealth m_PlayerHealth;
+    private float m_CurrentJumpTimer = 0f;
 
 
     // [SerializeField] private Transform m_camera;
@@ -53,20 +54,7 @@ public class Player : MonoBehaviour
         }
         // Debug.Log("m_GroundContacts = " + m_GroundContacts);
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            SpawnColorZone(Color.red);
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            SpawnColorZone(Color.green);
-        }
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            SpawnColorZone(Color.blue);
-        }
+        HandleAttackInput();
 
         if (Input.GetKeyDown(KeyCode.K))
         {
@@ -187,11 +175,16 @@ public class Player : MonoBehaviour
 
         transform.position += Vector3.up * m_JumpHeight;
 
-        yield return new WaitForSeconds(m_HoverTime);
+        m_CurrentJumpTimer = 0f;
+        while (m_CurrentJumpTimer < m_HoverTime)
+        {
+            m_CurrentJumpTimer += Time.deltaTime;            
+            yield return null; 
+        }
 
         // On cherche le sol directement en dessous
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity);
-        Debug.Log("Raycast hit distance = " + hit.distance);
+        // Debug.Log("Raycast hit distance = " + hit.distance);
 
         if (hit.collider != null)
         {
@@ -203,22 +196,72 @@ public class Player : MonoBehaviour
         m_IsJumping = false;
     }
 
-    void SpawnColorZone(Color color)
+    void HandleAttackInput()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            PerformAttack(Color.red);
+        }
+        else if (Input.GetKeyDown(KeyCode.S)) // 'else if' empêche de lancer 2 couleurs en même temps
+        {
+            PerformAttack(Color.green);
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            PerformAttack(Color.blue);
+        }
+    }
+
+    void PerformAttack(Color color)
     {
         if (m_ColorZonePrefab == null) return;
+        ExtendAirTime();
 
-        Vector2 spawnPosition = new Vector2(transform.position.x + m_ZoneDistance, transform.position.y);
-        GameObject colorZone = Instantiate(m_ColorZonePrefab, spawnPosition, Quaternion.identity);
+        // 1. Calcul de la position
+        // Astuce : utiliser transform.right gère automatiquement le fait que le perso soit retourné ou non
+        float spawnX = transform.position.x + m_ZoneDistance + 0.5f; 
+        float spawnY = transform.position.y + 1; // Tu peux ajouter un offset ici genre : + 0.5f;
 
-        colorZone.transform.SetParent(transform);
+        Vector2 spawnPosition = new Vector2(spawnX, spawnY); 
+        
+        // 2. Instantiation
+        GameObject attackObject = Instantiate(m_ColorZonePrefab, spawnPosition, Quaternion.identity);
 
-        SpriteRenderer sr = colorZone.GetComponent<SpriteRenderer>();
+        // 3. Hiérarchie (L'attaque suit le joueur)
+        attackObject.transform.SetParent(transform);
+
+        // 4. Configuration visuelle
+        SpriteRenderer sr = attackObject.GetComponent<SpriteRenderer>();
         if (sr != null)
         {
-            color.a = 0.5f;
-            sr.color = color;
+            Color displayColor = color;
+            displayColor.a = 0.5f; // Transparence
+            sr.color = displayColor;
         }
-        Destroy(colorZone, m_ZoneLifetime);
-    }  
+
+        // 5. Configuration Logique (C'est là qu'on passe l'info à la Hitbox !)
+        AttackZone zoneScript = attackObject.GetComponent<AttackZone>();
+        if (zoneScript != null)
+        {
+            zoneScript.attackColor = color; // On "charge" l'attaque avec la bonne couleur
+        }
+
+        // 6. Nettoyage
+        Destroy(attackObject, m_ZoneLifetime);
+    }
+
+    public void ExtendAirTime()
+    {
+        if (!m_IsJumping) return;
+
+        float halfTime = m_HoverTime / 2f;
+
+        if (m_CurrentJumpTimer > halfTime)
+        {
+            m_CurrentJumpTimer = halfTime;
+            
+            Debug.Log("Saut prolongé !");
+        }
+    }
 
 }

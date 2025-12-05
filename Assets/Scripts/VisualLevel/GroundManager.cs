@@ -41,7 +41,6 @@ public class GroundManager : MonoBehaviour
         // si c'est pas bon dis le moi.
         LoadLevelLayout(levelName);
 
-
         // Initialiser les grounds initiaux
         SpawnNextGround(0, -1);
         for (int i = 0; i <= 2; i++)
