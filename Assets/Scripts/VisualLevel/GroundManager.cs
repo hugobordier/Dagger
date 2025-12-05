@@ -43,9 +43,10 @@ public class GroundManager : MonoBehaviour
 
 
         // Initialiser les grounds initiaux
-        for (int i = -1; i <= 2; i++)
+        SpawnNextGround(0, -1);
+        for (int i = 0; i <= 2; i++)
         {
-            SpawnNextGround(i, i);
+            SpawnNextGround(currentGroundIndex, currentGroundIndex);
             currentGroundIndex++;
         }
     }
@@ -80,9 +81,9 @@ public class GroundManager : MonoBehaviour
         if (playerX > rightMost.transform.position.x - groundWidth)
         {
             // Spawn nouveau à droite
-            currentGroundIndex++;
             Debug.Log("Spawning new ground at index: " + currentGroundIndex);
             SpawnNextGround(currentGroundIndex, rightMost.transform.position.x / groundWidth + 1);
+            currentGroundIndex++;
             // Supprime celui de gauche
             Destroy(leftMost);
             grounds.RemoveAt(0);
@@ -110,7 +111,7 @@ public class GroundManager : MonoBehaviour
         //            currentHeightOffset += 1f;
 
         float yPos = baseHeight + (currentHeightOffset * heightStep);
-        Vector3 position = new Vector3(positionIndex * groundWidth, yPos, 0);
+        Vector3 position = new Vector3(positionIndex * groundWidth + groundWidth * 0.5f, yPos, 0);
 
 
         if (!groundPrefabs.TryGetValue(prefabIndex, out GameObject prefab))
@@ -138,8 +139,7 @@ public class GroundManager : MonoBehaviour
 
         // Spawn rythm ground, pas à garder juste pour le visuel
         float yPos2 = baseHeight + (currentHeightOffset * heightStep) - 2;
-        Vector3 position2 = new Vector3(positionIndex * groundWidth, yPos2, -1);
-
+        Vector3 position2 = new Vector3(positionIndex * groundWidth + 2.5f + groundWidth * 0.5f, yPos2, -1);
         GameObject rythm = Instantiate(rythmPrefab, position2, Quaternion.identity);
         rythmgrounds.Add(rythm);
 
