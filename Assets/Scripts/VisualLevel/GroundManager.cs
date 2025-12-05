@@ -82,7 +82,7 @@ public class GroundManager : MonoBehaviour
         {
             // Spawn nouveau à droite
             Debug.Log("Spawning new ground at index: " + currentGroundIndex);
-            SpawnNextGround(currentGroundIndex, rightMost.transform.position.x / groundWidth + 1);
+            SpawnNextGround(currentGroundIndex, (rightMost.transform.position.x - groundWidth * 0.5f) / groundWidth + 1);
             currentGroundIndex++;
             // Supprime celui de gauche
             Destroy(leftMost);
@@ -124,8 +124,8 @@ public class GroundManager : MonoBehaviour
 
         Debug.Log($"Spawn Ground index {prefabIndex} à la position {position}");
 
-        monsterManager?.TrySpawnMonsterOnGround(g, (int)position.x / 10); // c'est pas super propre mais ça marche 
-        //monsterManager?.TrySpawnMonsterOnGround(g, layoutIndex);
+        // monsterManager?.TrySpawnMonsterOnGround(g, (int)position.x / 10); // c'est pas super propre mais ça marche 
+        // //monsterManager?.TrySpawnMonsterOnGround(g, layoutIndex);
 
 
         Scene levelScene = SceneManager.GetSceneByName("LevelScene");
