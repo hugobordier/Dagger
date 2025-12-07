@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private PlayerHealth m_PlayerHealth;
     private float m_CurrentJumpTimer = 0f;
+    private Animator m_Animator;
 
 
     // [SerializeField] private Transform m_camera;
@@ -34,6 +35,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         m_Rb = GetComponent<Rigidbody2D>();
+        m_Animator = GetComponentInChildren<Animator>();
         // Try to find PlayerHealth on the same gameObject if not set in inspector
         if (m_PlayerHealth == null)
             m_PlayerHealth = GetComponent<PlayerHealth>();
