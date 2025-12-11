@@ -461,7 +461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelMainMenu: {fileID: 480811765}
   m_PanelPauseMenu: {fileID: 1371303784}
-  selectedLevel: 
+  m_PanelGameoverMenu: {fileID: 1675338621}
 --- !u!1 &390657715
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,8 +941,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 272980715}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: LoadLevel
-        m_Mode: 5
+        m_MethodName: RestartLevel
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1926,7 +1926,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1675338622
 RectTransform:
   m_ObjectHideFlags: 0

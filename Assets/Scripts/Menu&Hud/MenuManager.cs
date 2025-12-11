@@ -5,18 +5,33 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+	public static MenuManager Instance;
 	[Header("Panels")]
 	[SerializeField] GameObject m_PanelMainMenu;
 	[SerializeField] GameObject m_PanelPauseMenu;
+	[SerializeField] GameObject m_PanelGameoverMenu;
 
 
 	GameObject currentPanel;
-	public string selectedLevel;
+	private string selectedLevel;
+
 
 	void Start()
 	{
 		Debug.Log("MenuManager Start");
         OpenMainMenu();
+    }
+
+	void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
 	// Update is called once per frame
@@ -42,19 +57,35 @@ public class MenuManager : MonoBehaviour
         currentPanel = null;
         Time.timeScale = 1f; // Reprise du jeu
     }
+	
+	public void OpenGameoverMenu()
+    {
+        m_PanelGameoverMenu.SetActive(true);
+		currentPanel = m_PanelGameoverMenu;
+		Time.timeScale = 0f; // Pause du jeu
+    }
 
 	void CloseAllPanels()
 	{
 		m_PanelMainMenu.SetActive(false);
 		m_PanelPauseMenu.SetActive(false);
+		m_PanelGameoverMenu.SetActive(false);
 	}
 
 	public void LoadLevel(string LevelName)
 	{
 		Debug.Log("LoadLevel: " + LevelName);
+		selectedLevel = LevelName;
 
 		SceneManager.LoadScene(LevelName, LoadSceneMode.Additive);
 		m_PanelMainMenu.SetActive(false);
+	}
+
+	public void RestartLevel()
+	{
+		CloseAllPanels();
+		SceneManager.UnloadSceneAsync(selectedLevel);
+		SceneManager.LoadScene(selectedLevel, LoadSceneMode.Additive);
 	}
 
 	public void QuitGame()

@@ -20,7 +20,9 @@ public class Player : MonoBehaviour
     private float m_ZoneLifetime = 0.5f; // durée d’affichage
     Coroutine jumpCoroutine;
     [SerializeField]
-    private PlayerHealth m_PlayerHealth;
+    private int m_MaxHealth;
+    private int m_CurrentHealth;
+    public int Health => m_CurrentHealth;
     private float m_CurrentJumpTimer = 0f;
     private Animator m_Animator;
 
@@ -36,9 +38,8 @@ public class Player : MonoBehaviour
     {
         m_Rb = GetComponent<Rigidbody2D>();
         m_Animator = GetComponentInChildren<Animator>();
+        m_CurrentHealth = m_MaxHealth;
         // Try to find PlayerHealth on the same gameObject if not set in inspector
-        if (m_PlayerHealth == null)
-            m_PlayerHealth = GetComponent<PlayerHealth>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -133,6 +134,7 @@ public class Player : MonoBehaviour
                 if (contact.normal.x < -0.5f)
                 {
                     Debug.Log("Mur détecté ! Grimpe !");
+                    Damage();
                     Collider2D wallCollider = collision.collider;
                     float newY = wallCollider.bounds.max.y + 0.02f;
                     transform.position = new Vector2(transform.position.x, newY);
@@ -190,7 +192,6 @@ public class Player : MonoBehaviour
 
         if (hit.collider != null)
         {
-            // On se place sur le point trouvé
             transform.position = new Vector2(transform.position.x, hit.point.y);
         }
 
@@ -204,7 +205,7 @@ public class Player : MonoBehaviour
         {
             PerformAttack(Color.red);
         }
-        else if (Input.GetKeyDown(KeyCode.S)) // 'else if' empêche de lancer 2 couleurs en même temps
+        else if (Input.GetKeyDown(KeyCode.S))
         {
             PerformAttack(Color.green);
         }
@@ -219,37 +220,49 @@ public class Player : MonoBehaviour
         if (m_ColorZonePrefab == null) return;
         ExtendAirTime();
 
-        // 1. Calcul de la position
-        // Astuce : utiliser transform.right gère automatiquement le fait que le perso soit retourné ou non
         float spawnX = transform.position.x + m_ZoneDistance + 0.5f; 
-        float spawnY = transform.position.y + 1; // Tu peux ajouter un offset ici genre : + 0.5f;
+        float spawnY = transform.position.y + 1;
 
         Vector2 spawnPosition = new Vector2(spawnX, spawnY); 
         
-        // 2. Instantiation
         GameObject attackObject = Instantiate(m_ColorZonePrefab, spawnPosition, Quaternion.identity);
 
-        // 3. Hiérarchie (L'attaque suit le joueur)
         attackObject.transform.SetParent(transform);
 
-        // 4. Configuration visuelle
         SpriteRenderer sr = attackObject.GetComponent<SpriteRenderer>();
         if (sr != null)
         {
             Color displayColor = color;
-            displayColor.a = 0.5f; // Transparence
+            displayColor.a = 0.5f;
             sr.color = displayColor;
         }
 
-        // 5. Configuration Logique (C'est là qu'on passe l'info à la Hitbox !)
         AttackZone zoneScript = attackObject.GetComponent<AttackZone>();
         if (zoneScript != null)
         {
-            zoneScript.attackColor = color; // On "charge" l'attaque avec la bonne couleur
+            zoneScript.attackColor = color;
         }
 
         // 6. Nettoyage
         Destroy(attackObject, m_ZoneLifetime);
+    }
+
+    public void Damage()
+    {
+        m_CurrentHealth--;
+        Debug.Log("Player damaged! Current health: " + m_CurrentHealth);
+
+        if (m_CurrentHealth <= 0)
+        {
+            Debug.Log("Player is dead!");
+            Die();  
+        }
+    }
+
+    private void Die()
+    {
+        Debug.Log("Player has died. Game Over.");
+        MenuManager.Instance.OpenGameoverMenu();
     }
 
     public void ExtendAirTime()
