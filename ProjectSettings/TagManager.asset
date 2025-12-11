@@ -58,5 +58,8 @@ TagManager:
   - name: PlayerLayer
     uniqueID: 3333473831
     locked: 0
+  - name: BushLayer
+    uniqueID: 547164089
+    locked: 0
   m_RenderingLayers:
   - Default
