@@ -86,6 +86,7 @@ public class MenuManager : MonoBehaviour
 		CloseAllPanels();
 		SceneManager.UnloadSceneAsync(selectedLevel);
 		SceneManager.LoadScene(selectedLevel, LoadSceneMode.Additive);
+		Time.timeScale = 1f;
 	}
 
 	public void QuitGame()
@@ -99,7 +100,7 @@ public class MenuManager : MonoBehaviour
 	public void QuitToMainMenu()
     {
 		Time.timeScale = 1f;
-		SceneManager.UnloadSceneAsync("LevelScene");
+		SceneManager.UnloadSceneAsync(selectedLevel);
 		OpenMainMenu();
     }
 }

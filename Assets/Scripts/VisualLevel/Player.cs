@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     //private bool m_IsGrounded;
     private int m_GroundContacts = 0;
     private bool k_pressed;
+    private bool m_CanControl = true;
 
     void Awake()
     {
@@ -51,9 +52,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!m_CanControl) return;
+
         if (Input.GetAxis("Jump") > 0)
         {
-            Debug.Log("Touche Saut pressée");
+            Debug.Log("Jump input detected");
         }
         // Debug.Log("m_GroundContacts = " + m_GroundContacts);
 
@@ -67,20 +70,10 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        bool jump = Input.GetAxis("Jump") > 0 /*|| Input.GetKeyDown(KeyCode.Space)*/;
-
         // Vector2 moveVect = (Vector2)transform.right * m_TranslationSpeed * Time.deltaTime / 6.0f;
         // m_Rb.MovePosition(m_Rb.position + moveVect);
         m_Rb.linearVelocity = new Vector2(m_TranslationSpeed / 6.0f, m_Rb.linearVelocity.y);
         m_HoverTime = 60.0f / m_TranslationSpeed; // ajuster le temps de vol en fonction de la vitesse
-
-        if (jump && m_GroundContacts > 0 && !m_IsJumping)
-        {
-            // Vector2 jumpForce = Vector2.up * m_JumpImpulsionMagnitude;
-            // Debug.Log("Jump ! Force = " + jumpForce);
-            // m_Rb.AddForce(jumpForce, ForceMode2D.Impulse);
-            jumpCoroutine = StartCoroutine(TimedJump());
-        }
 
         if (m_GroundContacts > 0)
         {
@@ -123,6 +116,18 @@ public class Player : MonoBehaviour
         }
 
         m_Rb.angularVelocity = 0f;
+
+        if (!m_CanControl) return;
+
+        bool jump = Input.GetAxis("Jump") > 0 /*|| Input.GetKeyDown(KeyCode.Space)*/;
+
+        if (jump && m_GroundContacts > 0 && !m_IsJumping)
+        {
+            // Vector2 jumpForce = Vector2.up * m_JumpImpulsionMagnitude;
+            // Debug.Log("Jump ! Force = " + jumpForce);
+            // m_Rb.AddForce(jumpForce, ForceMode2D.Impulse);
+            jumpCoroutine = StartCoroutine(TimedJump());
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -148,6 +153,14 @@ public class Player : MonoBehaviour
             //Debug.Log("Au sol (" + m_GroundContacts + ")");
         }
 
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Hole"))
+        {
+            StartCoroutine(DieSequence());
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -277,6 +290,18 @@ public class Player : MonoBehaviour
             
             Debug.Log("Saut prolongé !");
         }
+    }
+
+    IEnumerator DieSequence()
+    {
+        Debug.Log("Chute en cours...");
+
+        m_CanControl = false;
+
+        yield return new WaitForSeconds(0.3f); 
+
+        // 3. La mort réelle
+        Die();
     }
 
 }
