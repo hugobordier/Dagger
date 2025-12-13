@@ -21,7 +21,7 @@ public class SoundPlayer : MonoBehaviour
     void Start()
     {
         IsMusicPlaying = false;
-        musicInstance = RuntimeManager.CreateInstance(FMODEvents.Instance.MusicLevel1);
+        musicInstance = RuntimeManager.CreateInstance(FMODEvents.Instance.MusicLevel);
     }
 
     public void PlayMusic()

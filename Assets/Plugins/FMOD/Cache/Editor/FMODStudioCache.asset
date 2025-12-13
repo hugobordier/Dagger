@@ -42,7 +42,7 @@ MonoBehaviour:
   Path: Dagger-audio/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638990725746367119
+  lastModified: 638992716524411977
   FileSizes:
   - Name: Desktop
     Value: 1074
@@ -89,7 +89,7 @@ MonoBehaviour:
   Path: Dagger-audio/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638990725746371813
+  lastModified: 638992716524413709
   FileSizes:
   - Name: Desktop
     Value: 962
@@ -195,7 +195,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: -6163749641091443889}
   cacheVersion: 131849
-  cacheTime: 638990725746513849
+  cacheTime: 638992716524491014
   SerializableEventsDict:
   - key: event:/Music/MusicLevel1
     index: 0
@@ -245,7 +245,7 @@ MonoBehaviour:
   Path: Dagger-audio/Build/Desktop/Sfx.bank
   Name: Sfx
   StudioPath: bank:/Sfx
-  lastModified: 638990725746513849
+  lastModified: 638992716524491014
   FileSizes:
   - Name: Desktop
     Value: 506
@@ -325,7 +325,7 @@ MonoBehaviour:
   Path: Dagger-audio/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638990725746497621
+  lastModified: 638992716524489050
   FileSizes:
   - Name: Desktop
     Value: 2566464
