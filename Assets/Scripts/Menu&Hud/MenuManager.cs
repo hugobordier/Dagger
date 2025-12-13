@@ -10,8 +10,7 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] GameObject m_PanelMainMenu;
 	[SerializeField] GameObject m_PanelPauseMenu;
 	[SerializeField] GameObject m_PanelGameoverMenu;
-
-
+	public bool IsEasyMode { get; private set; } = false;
 	GameObject currentPanel;
 	private string selectedLevel;
 
@@ -102,5 +101,11 @@ public class MenuManager : MonoBehaviour
 		Time.timeScale = 1f;
 		SceneManager.UnloadSceneAsync(selectedLevel);
 		OpenMainMenu();
+    }
+
+	public void SetEasyMode(bool isEnabled)
+    {
+        IsEasyMode = isEnabled;
+        Debug.Log("Mode Facile : " + IsEasyMode);
     }
 }

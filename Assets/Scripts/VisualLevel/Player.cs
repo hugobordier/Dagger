@@ -38,6 +38,17 @@ public class Player : MonoBehaviour
     {
         m_Rb = GetComponent<Rigidbody2D>();
         m_Animator = GetComponentInChildren<Animator>();
+        if (MenuManager.Instance != null)
+        {
+            if (MenuManager.Instance.IsEasyMode)
+            {
+                m_MaxHealth = 1000; // Mode God
+            }
+            else
+            {
+                m_MaxHealth = 3; // Mode Normal
+            }
+        }
         m_CurrentHealth = m_MaxHealth;
         // Try to find PlayerHealth on the same gameObject if not set in inspector
     }

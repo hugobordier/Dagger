@@ -131,7 +131,7 @@ public class GroundManager : MonoBehaviour
         if (levelScene.IsValid())
             SceneManager.MoveGameObjectToScene(g, levelScene);
         
-        if (prefabIndex >= 5) // UP
+        if (prefabIndex >= 6) // UP
         {
             currentHeightOffset += 1f;
         }
