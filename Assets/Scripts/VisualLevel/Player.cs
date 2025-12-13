@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float m_ZoneLifetime = 0.5f; // durée d’affichage
     Coroutine jumpCoroutine;
-    [SerializeField]
     private int m_MaxHealth;
     private int m_CurrentHealth;
     public int Health => m_CurrentHealth;
