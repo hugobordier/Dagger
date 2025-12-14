@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     //private bool m_IsGrounded;
     private int m_GroundContacts = 0;
     private bool k_pressed;
+    private bool m_CanControl_hole = true;
     private bool m_CanControl = true;
 
     void Awake()
@@ -62,12 +63,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!m_CanControl_hole) return;
         if (!m_CanControl) return;
 
-        if (Input.GetAxis("Jump") > 0)
-        {
-            Debug.Log("Jump input detected");
-        }
         // Debug.Log("m_GroundContacts = " + m_GroundContacts);
 
         HandleAttackInput();
@@ -80,17 +78,18 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!m_CanControl) return;
         // Vector2 moveVect = (Vector2)transform.right * m_TranslationSpeed * Time.deltaTime / 6.0f;
         // m_Rb.MovePosition(m_Rb.position + moveVect);
         m_Rb.linearVelocity = new Vector2(m_TranslationSpeed / 6.0f, m_Rb.linearVelocity.y);
         m_HoverTime = 60.0f / m_TranslationSpeed; // ajuster le temps de vol en fonction de la vitesse
 
-        if (m_GroundContacts > 0)
-        {
-            //m_Rb.linearVelocity = Vector2.zero;
-            // m_Rb.linearVelocity = new Vector2(m_Rb.linearVelocity.x, 0);
-            // Debug.Log("aux sol");
-        }
+        // if (m_GroundContacts > 0)
+        // {
+        //     //m_Rb.linearVelocity = Vector2.zero;
+        //     // m_Rb.linearVelocity = new Vector2(m_Rb.linearVelocity.x, 0);
+        //     // Debug.Log("aux sol");
+        // }
         
         if (k_pressed)
         {
@@ -100,6 +99,7 @@ public class Player : MonoBehaviour
             {
                 StopCoroutine(jumpCoroutine);
                 jumpCoroutine = null;
+                m_Animator.SetBool("IsJumping", false);
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity);
                 // Debug.Log("Raycast hit distance = " + hit.distance);
                 if (hit.collider != null)
@@ -127,7 +127,7 @@ public class Player : MonoBehaviour
 
         m_Rb.angularVelocity = 0f;
 
-        if (!m_CanControl) return;
+        if (!m_CanControl_hole) return;
 
         bool jump = Input.GetAxis("Jump") > 0 /*|| Input.GetKeyDown(KeyCode.Space)*/;
 
@@ -196,6 +196,7 @@ public class Player : MonoBehaviour
     IEnumerator TimedJump()
     {
         m_IsJumping = true;
+        if(m_Animator) m_Animator.SetBool("IsJumping", true);
         m_GroundContacts = 0;
         m_Rb.gravityScale = 0f;
         m_Rb.linearVelocity = new Vector2(m_Rb.linearVelocity.x, 0);
@@ -220,6 +221,7 @@ public class Player : MonoBehaviour
 
         m_Rb.gravityScale = 1f;
         m_IsJumping = false;
+        if(m_Animator) m_Animator.SetBool("IsJumping", false);
     }
 
     void HandleAttackInput()
@@ -240,6 +242,13 @@ public class Player : MonoBehaviour
 
     void PerformAttack(Color color)
     {
+        if (m_Animator != null)
+        {
+            if (color == Color.red) m_Animator.SetTrigger("TrigAttackR");
+            else if (color == Color.green) m_Animator.SetTrigger("TrigAttackG");
+            else if (color == Color.blue) m_Animator.SetTrigger("TrigAttackB");
+        }
+
         if (m_ColorZonePrefab == null) return;
         ExtendAirTime();
 
@@ -274,6 +283,7 @@ public class Player : MonoBehaviour
     {
         m_CurrentHealth--;
         Debug.Log("Player damaged! Current health: " + m_CurrentHealth);
+        if(m_Animator) m_Animator.SetTrigger("TrigDamage");
 
         if (m_CurrentHealth <= 0)
         {
@@ -285,7 +295,15 @@ public class Player : MonoBehaviour
     private void Die()
     {
         Debug.Log("Player has died. Game Over.");
-        MenuManager.Instance.OpenGameoverMenu();
+        if(m_Animator && m_CanControl_hole) { 
+            m_Rb.linearVelocity = Vector2.zero;
+            m_CanControl = false;
+            m_Animator.SetTrigger("TrigDeath");
+            StartCoroutine(GameOverDelay(1.0f));
+            } else {
+                // Si on ne peut plus contrôler le perso (chute dans trou), on skip l'anim de mort
+                MenuManager.Instance.OpenGameoverMenu();
+        }
     }
 
     public void ExtendAirTime()
@@ -306,12 +324,18 @@ public class Player : MonoBehaviour
     {
         Debug.Log("Chute en cours...");
 
-        m_CanControl = false;
+        m_CanControl_hole = false;
 
         yield return new WaitForSeconds(0.3f); 
 
-        // 3. La mort réelle
         Die();
+    }
+
+    IEnumerator GameOverDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        
+        MenuManager.Instance.OpenGameoverMenu();
     }
 
 }
