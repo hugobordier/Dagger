@@ -25,6 +25,7 @@ public class EnemyManager : MonoBehaviour
     public float spawnAheadDistance = 40f; // Distance ahead of camera to activate enemies
     public float despawnBehindDistance = 15f; // Distance behind camera to deactivate
 
+    private Player player;
     private Transform playerTransform;
     private List<EnemySpawnData> allEnemiesData = new List<EnemySpawnData>();
     private Dictionary<int, Queue<GameObject>> enemyPools =
@@ -53,14 +54,14 @@ public class EnemyManager : MonoBehaviour
     {
         this.bpm = Metronome.Instance.Bpm;
         this.playerSpeed = playerSpeed * 1.5f / 6.0f;
-        Player player = FindObjectOfType<Player>(); // Unity 2023+
-        if (player == null)
+        this.player = FindObjectOfType<Player>(); // Unity 2023+
+        if (this.player == null)
         {
-            player = FindObjectOfType<Player>(); // Fallback
+            this.player = FindObjectOfType<Player>(); // Fallback
         }
-        if (player != null)
+        else if (this.player != null)
         {
-            playerTransform = player.transform;
+            this.playerTransform = this.player.transform;
             // NOTE: Verify if you want to auto-fetch speed:
             // playerSpeed = player.m_TranslationSpeed * 0.25f;
         }

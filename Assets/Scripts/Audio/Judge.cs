@@ -26,6 +26,15 @@ public class Judge : MonoBehaviour
 
     void Update() { }
 
+    void OnDisable()
+    {
+        if (Metronome.Instance != null)
+        {
+            Metronome.Instance.OpenWindow -= OpenWindow;
+            Metronome.Instance.CloseWindow -= CloseWindow;
+        }
+    }
+
     void OnDestroy()
     {
         if (Metronome.Instance != null)
