@@ -5,17 +5,21 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     public float m_TranslationSpeed;
+
     [SerializeField]
     // private float m_JumpImpulsionMagnitude;
     private float m_JumpHeight = 5f; // La hauteur du saut
+
     [SerializeField]
     private float m_HoverTime; // La durée en secondes passée en l'air
     private bool m_IsJumping = false; // Pour savoir si on est déjà en train de sauter
 
-    [SerializeField] 
+    [SerializeField]
     private GameObject m_ColorZonePrefab;
-    [SerializeField] 
+
+    [SerializeField]
     private float m_ZoneDistance = 1f; // distance devant le perso
+
     [SerializeField]
     private float m_ZoneLifetime = 0.5f; // durée d’affichage
     Coroutine jumpCoroutine;
@@ -25,7 +29,6 @@ public class Player : MonoBehaviour
     private float m_CurrentJumpTimer = 0f;
     private Animator m_Animator;
 
-
     // [SerializeField] private Transform m_camera;
     Rigidbody2D m_Rb;
 
@@ -34,6 +37,13 @@ public class Player : MonoBehaviour
     private bool k_pressed;
     private bool m_CanControl_hole = true;
     private bool m_CanControl = true;
+
+    public delegate void RedAttackEvent();
+    public event RedAttackEvent RedAttack;
+    public delegate void BlueAttackEvent();
+    public event BlueAttackEvent BlueAttack;
+    public delegate void GreenAttackEvent();
+    public event GreenAttackEvent GreenAttack;
 
     void Awake()
     {
@@ -55,10 +65,7 @@ public class Player : MonoBehaviour
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
- 
-    }
+    void Start() { }
 
     // Update is called once per frame
     void Update()
@@ -112,15 +119,15 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (m_GroundContacts == 0 && !m_IsJumping) 
+        if (m_GroundContacts == 0 && !m_IsJumping)
         {
-            m_Rb.gravityScale = 10f; 
+            m_Rb.gravityScale = 10f;
         }
         else if (m_IsJumping)
         {
             m_Rb.gravityScale = 0f;
         }
-        else 
+        else
         {
             m_Rb.gravityScale = 1f;
         }
@@ -129,7 +136,10 @@ public class Player : MonoBehaviour
 
         if (!m_CanControl_hole) return;
 
-        bool jump = Input.GetAxis("Jump") > 0 /*|| Input.GetKeyDown(KeyCode.Space)*/;
+        bool jump =
+            Input.GetAxis("Jump")
+            > 0 /*|| Input.GetKeyDown(KeyCode.Space)*/
+        ;
 
         if (jump && m_GroundContacts > 0 && !m_IsJumping)
         {
@@ -155,14 +165,12 @@ public class Player : MonoBehaviour
                     transform.position = new Vector2(transform.position.x, newY);
                     return;
                 }
-                
             }
             //Debug.LogError(Time.frameCount+" colLocalPt = " + colLocalPt+ "   colLocalPt.magnitude = "+ colLocalPt.magnitude);
 
             m_GroundContacts++;
             //Debug.Log("Au sol (" + m_GroundContacts + ")");
         }
-
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -206,8 +214,8 @@ public class Player : MonoBehaviour
         m_CurrentJumpTimer = 0f;
         while (m_CurrentJumpTimer < m_HoverTime)
         {
-            m_CurrentJumpTimer += Time.deltaTime;            
-            yield return null; 
+            m_CurrentJumpTimer += Time.deltaTime;
+            yield return null;
         }
 
         // On cherche le sol directement en dessous
@@ -229,14 +237,17 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             PerformAttack(Color.red);
+            RedAttack?.Invoke();
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
             PerformAttack(Color.green);
+            GreenAttack?.Invoke();
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
             PerformAttack(Color.blue);
+            BlueAttack?.Invoke();
         }
     }
 
@@ -252,12 +263,16 @@ public class Player : MonoBehaviour
         if (m_ColorZonePrefab == null) return;
         ExtendAirTime();
 
-        float spawnX = transform.position.x + m_ZoneDistance + 0.5f; 
+        float spawnX = transform.position.x + m_ZoneDistance + 0.5f;
         float spawnY = transform.position.y + 1;
 
-        Vector2 spawnPosition = new Vector2(spawnX, spawnY); 
-        
-        GameObject attackObject = Instantiate(m_ColorZonePrefab, spawnPosition, Quaternion.identity);
+        Vector2 spawnPosition = new Vector2(spawnX, spawnY);
+
+        GameObject attackObject = Instantiate(
+            m_ColorZonePrefab,
+            spawnPosition,
+            Quaternion.identity
+        );
 
         attackObject.transform.SetParent(transform);
 
@@ -288,7 +303,7 @@ public class Player : MonoBehaviour
         if (m_CurrentHealth <= 0)
         {
             Debug.Log("Player is dead!");
-            Die();  
+            Die();
         }
     }
 
@@ -308,14 +323,15 @@ public class Player : MonoBehaviour
 
     public void ExtendAirTime()
     {
-        if (!m_IsJumping) return;
+        if (!m_IsJumping)
+            return;
 
         float halfTime = m_HoverTime / 2f;
 
         if (m_CurrentJumpTimer > halfTime)
         {
             m_CurrentJumpTimer = halfTime;
-            
+
             Debug.Log("Saut prolongé !");
         }
     }
@@ -326,7 +342,7 @@ public class Player : MonoBehaviour
 
         m_CanControl_hole = false;
 
-        yield return new WaitForSeconds(0.3f); 
+        yield return new WaitForSeconds(0.3f);
 
         Die();
     }

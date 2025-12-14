@@ -72,6 +72,9 @@ public class EnemyManager : MonoBehaviour
         }
         LoadLevelData();
         InitializePools();
+
+        // Player.Instance.OpenWindow += OpenWindow;
+        // Metronome.Instance.CloseWindow += CloseWindow;
     }
 
     void Update()
