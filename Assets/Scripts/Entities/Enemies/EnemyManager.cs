@@ -8,7 +8,7 @@ public class EnemyManager : MonoBehaviour
     public float bpm;
 
     [Header("Configuration")]
-    [Tooltip("Name of the file in Resources/LevelData (without extension)")]
+    [Tooltip("Name of the file in Resources/EntityData (without extension)")]
     public string levelFileName = "enemylevel1";
 
     [Tooltip(
@@ -22,7 +22,7 @@ public class EnemyManager : MonoBehaviour
 
     [Header("Pooling Settings")]
     public int initialPoolSizePerType = 10;
-    public float spawnAheadDistance = 30f; // Distance ahead of camera to activate enemies
+    public float spawnAheadDistance = 40f; // Distance ahead of camera to activate enemies
     public float despawnBehindDistance = 15f; // Distance behind camera to deactivate
 
     private Transform playerTransform;
@@ -111,11 +111,11 @@ public class EnemyManager : MonoBehaviour
     /// </summary>
     void LoadLevelData()
     {
-        TextAsset file = Resources.Load<TextAsset>($"LevelData/{levelFileName}");
+        TextAsset file = Resources.Load<TextAsset>($"EntityData/{levelFileName}");
         if (file == null)
         {
             Debug.LogError(
-                $"EnemyManager: Level file 'LevelData/{levelFileName}' not found in Resources."
+                $"EnemyManager: Level file 'EntityData/{levelFileName}' not found in Resources."
             );
             return;
         }
