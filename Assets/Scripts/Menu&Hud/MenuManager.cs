@@ -10,6 +10,8 @@ public class MenuManager : MonoBehaviour
 	[SerializeField] GameObject m_PanelMainMenu;
 	[SerializeField] GameObject m_PanelPauseMenu;
 	[SerializeField] GameObject m_PanelGameoverMenu;
+	[SerializeField] GameObject m_PanelEndMenu;
+	[SerializeField] GameObject m_PanelCommandMenu;
 	public bool IsEasyMode { get; private set; } = false;
 	GameObject currentPanel;
 	private string selectedLevel;
@@ -64,11 +66,27 @@ public class MenuManager : MonoBehaviour
 		Time.timeScale = 0f; // Pause du jeu
     }
 
+	public void OpenEndMenu()
+	{
+		m_PanelEndMenu.SetActive(true);
+		currentPanel = m_PanelEndMenu;
+		Time.timeScale = 0f; // Pause du jeu
+	}
+
+	public void OpenCommandMenu()
+	{
+		CloseAllPanels();
+		m_PanelCommandMenu.SetActive(true);
+		currentPanel = m_PanelCommandMenu;
+	}
+
 	void CloseAllPanels()
 	{
 		m_PanelMainMenu.SetActive(false);
 		m_PanelPauseMenu.SetActive(false);
 		m_PanelGameoverMenu.SetActive(false);
+		m_PanelEndMenu.SetActive(false);
+		m_PanelCommandMenu.SetActive(false);
 	}
 
 	public void LoadLevel(string LevelName)
