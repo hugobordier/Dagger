@@ -5,17 +5,21 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     public float m_TranslationSpeed;
+
     [SerializeField]
     // private float m_JumpImpulsionMagnitude;
     private float m_JumpHeight = 5f; // La hauteur du saut
+
     [SerializeField]
     private float m_HoverTime; // La durée en secondes passée en l'air
     private bool m_IsJumping = false; // Pour savoir si on est déjà en train de sauter
 
-    [SerializeField] 
+    [SerializeField]
     private GameObject m_ColorZonePrefab;
-    [SerializeField] 
+
+    [SerializeField]
     private float m_ZoneDistance = 1f; // distance devant le perso
+
     [SerializeField]
     private float m_ZoneLifetime = 0.5f; // durée d’affichage
     Coroutine jumpCoroutine;
@@ -24,7 +28,6 @@ public class Player : MonoBehaviour
     public int Health => m_CurrentHealth;
     private float m_CurrentJumpTimer = 0f;
     private Animator m_Animator;
-
 
     // [SerializeField] private Transform m_camera;
     Rigidbody2D m_Rb;
@@ -55,16 +58,15 @@ public class Player : MonoBehaviour
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
- 
-    }
+    void Start() { }
 
     // Update is called once per frame
     void Update()
     {
-        if (!m_CanControl_hole) return;
-        if (!m_CanControl) return;
+        if (!m_CanControl_hole)
+            return;
+        if (!m_CanControl)
+            return;
 
         // Debug.Log("m_GroundContacts = " + m_GroundContacts);
 
@@ -78,7 +80,8 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!m_CanControl) return;
+        if (!m_CanControl)
+            return;
         // Vector2 moveVect = (Vector2)transform.right * m_TranslationSpeed * Time.deltaTime / 6.0f;
         // m_Rb.MovePosition(m_Rb.position + moveVect);
         m_Rb.linearVelocity = new Vector2(m_TranslationSpeed / 6.0f, m_Rb.linearVelocity.y);
@@ -90,7 +93,7 @@ public class Player : MonoBehaviour
         //     // m_Rb.linearVelocity = new Vector2(m_Rb.linearVelocity.x, 0);
         //     // Debug.Log("aux sol");
         // }
-        
+
         if (k_pressed)
         {
             k_pressed = false;
@@ -100,7 +103,11 @@ public class Player : MonoBehaviour
                 StopCoroutine(jumpCoroutine);
                 jumpCoroutine = null;
                 m_Animator.SetBool("IsJumping", false);
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity);
+                RaycastHit2D hit = Physics2D.Raycast(
+                    transform.position,
+                    Vector2.down,
+                    Mathf.Infinity
+                );
                 // Debug.Log("Raycast hit distance = " + hit.distance);
                 if (hit.collider != null)
                 {
@@ -112,24 +119,28 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (m_GroundContacts == 0 && !m_IsJumping) 
+        if (m_GroundContacts == 0 && !m_IsJumping)
         {
-            m_Rb.gravityScale = 10f; 
+            m_Rb.gravityScale = 10f;
         }
         else if (m_IsJumping)
         {
             m_Rb.gravityScale = 0f;
         }
-        else 
+        else
         {
             m_Rb.gravityScale = 1f;
         }
 
         m_Rb.angularVelocity = 0f;
 
-        if (!m_CanControl_hole) return;
+        if (!m_CanControl_hole)
+            return;
 
-        bool jump = Input.GetAxis("Jump") > 0 /*|| Input.GetKeyDown(KeyCode.Space)*/;
+        bool jump =
+            Input.GetAxis("Jump")
+            > 0 /*|| Input.GetKeyDown(KeyCode.Space)*/
+        ;
 
         if (jump && m_GroundContacts > 0 && !m_IsJumping)
         {
@@ -155,14 +166,12 @@ public class Player : MonoBehaviour
                     transform.position = new Vector2(transform.position.x, newY);
                     return;
                 }
-                
             }
             //Debug.LogError(Time.frameCount+" colLocalPt = " + colLocalPt+ "   colLocalPt.magnitude = "+ colLocalPt.magnitude);
 
             m_GroundContacts++;
             //Debug.Log("Au sol (" + m_GroundContacts + ")");
         }
-
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -196,7 +205,8 @@ public class Player : MonoBehaviour
     IEnumerator TimedJump()
     {
         m_IsJumping = true;
-        if(m_Animator) m_Animator.SetBool("IsJumping", true);
+        if (m_Animator)
+            m_Animator.SetBool("IsJumping", true);
         m_GroundContacts = 0;
         m_Rb.gravityScale = 0f;
         m_Rb.linearVelocity = new Vector2(m_Rb.linearVelocity.x, 0);
@@ -206,8 +216,8 @@ public class Player : MonoBehaviour
         m_CurrentJumpTimer = 0f;
         while (m_CurrentJumpTimer < m_HoverTime)
         {
-            m_CurrentJumpTimer += Time.deltaTime;            
-            yield return null; 
+            m_CurrentJumpTimer += Time.deltaTime;
+            yield return null;
         }
 
         // On cherche le sol directement en dessous
@@ -221,7 +231,8 @@ public class Player : MonoBehaviour
 
         m_Rb.gravityScale = 1f;
         m_IsJumping = false;
-        if(m_Animator) m_Animator.SetBool("IsJumping", false);
+        if (m_Animator)
+            m_Animator.SetBool("IsJumping", false);
     }
 
     void HandleAttackInput()
@@ -244,20 +255,28 @@ public class Player : MonoBehaviour
     {
         if (m_Animator != null)
         {
-            if (color == Color.red) m_Animator.SetTrigger("TrigAttackR");
-            else if (color == Color.green) m_Animator.SetTrigger("TrigAttackG");
-            else if (color == Color.blue) m_Animator.SetTrigger("TrigAttackB");
+            if (color == Color.red)
+                m_Animator.SetTrigger("TrigAttackR");
+            else if (color == Color.green)
+                m_Animator.SetTrigger("TrigAttackG");
+            else if (color == Color.blue)
+                m_Animator.SetTrigger("TrigAttackB");
         }
 
-        if (m_ColorZonePrefab == null) return;
+        if (m_ColorZonePrefab == null)
+            return;
         ExtendAirTime();
 
-        float spawnX = transform.position.x + m_ZoneDistance + 0.5f; 
+        float spawnX = transform.position.x + m_ZoneDistance + 0.5f;
         float spawnY = transform.position.y + 1;
 
-        Vector2 spawnPosition = new Vector2(spawnX, spawnY); 
-        
-        GameObject attackObject = Instantiate(m_ColorZonePrefab, spawnPosition, Quaternion.identity);
+        Vector2 spawnPosition = new Vector2(spawnX, spawnY);
+
+        GameObject attackObject = Instantiate(
+            m_ColorZonePrefab,
+            spawnPosition,
+            Quaternion.identity
+        );
 
         attackObject.transform.SetParent(transform);
 
@@ -272,6 +291,7 @@ public class Player : MonoBehaviour
         AttackZone zoneScript = attackObject.GetComponent<AttackZone>();
         if (zoneScript != null)
         {
+            Debug.Log($"{color}");
             zoneScript.attackColor = color;
         }
 
@@ -283,39 +303,43 @@ public class Player : MonoBehaviour
     {
         m_CurrentHealth--;
         Debug.Log("Player damaged! Current health: " + m_CurrentHealth);
-        if(m_Animator) m_Animator.SetTrigger("TrigDamage");
+        if (m_Animator)
+            m_Animator.SetTrigger("TrigDamage");
 
         if (m_CurrentHealth <= 0)
         {
             Debug.Log("Player is dead!");
-            Die();  
+            Die();
         }
     }
 
     private void Die()
     {
         Debug.Log("Player has died. Game Over.");
-        if(m_Animator && m_CanControl_hole) { 
+        if (m_Animator && m_CanControl_hole)
+        {
             m_Rb.linearVelocity = Vector2.zero;
             m_CanControl = false;
             m_Animator.SetTrigger("TrigDeath");
             StartCoroutine(GameOverDelay(1.0f));
-            } else {
-                // Si on ne peut plus contrôler le perso (chute dans trou), on skip l'anim de mort
-                MenuManager.Instance.OpenGameoverMenu();
+        }
+        else
+        {
+            // Si on ne peut plus contrôler le perso (chute dans trou), on skip l'anim de mort
+            MenuManager.Instance.OpenGameoverMenu();
         }
     }
 
     public void ExtendAirTime()
     {
-        if (!m_IsJumping) return;
+        if (!m_IsJumping)
+            return;
 
         float halfTime = m_HoverTime / 2f;
 
         if (m_CurrentJumpTimer > halfTime)
         {
             m_CurrentJumpTimer = halfTime;
-            
             Debug.Log("Saut prolongé !");
         }
     }
@@ -323,19 +347,14 @@ public class Player : MonoBehaviour
     IEnumerator DieSequence()
     {
         Debug.Log("Chute en cours...");
-
         m_CanControl_hole = false;
-
-        yield return new WaitForSeconds(0.3f); 
-
+        yield return new WaitForSeconds(0.3f);
         Die();
     }
 
     IEnumerator GameOverDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        
         MenuManager.Instance.OpenGameoverMenu();
     }
-
 }
