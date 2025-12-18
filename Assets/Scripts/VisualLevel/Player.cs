@@ -247,17 +247,17 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             PerformAttack(Color.red);
-            RedAttack?.Invoke();
+            // RedAttack?.Invoke();
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
             PerformAttack(Color.green);
-            GreenAttack?.Invoke();
+            // GreenAttack?.Invoke();
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
             PerformAttack(Color.blue);
-            BlueAttack?.Invoke();
+            // BlueAttack?.Invoke();
         }
     }
 
@@ -349,7 +349,6 @@ public class Player : MonoBehaviour
         if (m_CurrentJumpTimer > halfTime)
         {
             m_CurrentJumpTimer = halfTime;
-
             Debug.Log("Saut prolongé !");
         }
     }
@@ -357,18 +356,14 @@ public class Player : MonoBehaviour
     IEnumerator DieSequence()
     {
         Debug.Log("Chute en cours...");
-
         m_CanControl_hole = false;
-
         yield return new WaitForSeconds(0.3f);
-
         Die();
     }
 
     IEnumerator GameOverDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-
         MenuManager.Instance.OpenGameoverMenu();
     }
 }
