@@ -4,7 +4,7 @@ public class Background : MonoBehaviour
 {
     [Header("Paramètres de Parallaxe")]
     [Tooltip("0 = Bouge pas (Premier plan/Vite), 1 = Suit la caméra (Fond/Immobile)")]
-    [Range(0f, 1f)]
+    [Range(-0.2f, 1f)]
     public float parallaxEffect;
 
     [Header("Répétition Infinie")]
