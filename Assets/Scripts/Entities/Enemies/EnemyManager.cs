@@ -53,7 +53,7 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         this.bpm = Metronome.Instance.Bpm;
-        this.playerSpeed = playerSpeed * 1.5f / 6.0f;
+        this.playerSpeed = playerSpeed / 6.0f;
         this.player = FindObjectOfType<Player>(); // Unity 2023+
         if (this.player == null)
         {

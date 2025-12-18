@@ -15,7 +15,8 @@ public class Metronome : MonoBehaviour
     }
 
     [SerializeField]
-    private float marginMs = 100;
+    private float marginMs = 200;
+    private float marginOffsetToBeatMs;
 
     private int currentBeat = 0;
     private float beatDurationMs;
@@ -41,6 +42,7 @@ public class Metronome : MonoBehaviour
     void Start()
     {
         beatDurationMs = 60f / _bpm * 1000f;
+        marginOffsetToBeatMs = marginMs / 2.0f;
     }
 
     void Update()
@@ -52,14 +54,14 @@ public class Metronome : MonoBehaviour
         {
             OpenWindow?.Invoke(currentBeat);
             nextBeatPositionMs += beatDurationMs;
-            activeBeatStartPositionMs = nextBeatPositionMs - marginMs;
-            Debug.Log($"Beat {currentBeat} opened at {position}");
+            activeBeatStartPositionMs = nextBeatPositionMs - marginOffsetToBeatMs;
+            // Debug.Log($"Beat {currentBeat} opened at {position}");
         }
         if (position >= activeBeatEndPositionMs)
         {
             CloseWindow?.Invoke(currentBeat);
-            activeBeatEndPositionMs = nextBeatPositionMs + marginMs;
-            Debug.Log($"Beat {currentBeat} closed at {position}");
+            activeBeatEndPositionMs = nextBeatPositionMs + marginOffsetToBeatMs;
+            // Debug.Log($"Beat {currentBeat} closed at {position}");
             currentBeat += 1;
         }
     }
