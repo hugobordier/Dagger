@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RedBaseSamourai : MonoBehaviour
+public class GreenBaseSamourai : MonoBehaviour
 {
     void Start() { }
 

@@ -38,13 +38,6 @@ public class Player : MonoBehaviour
     private bool m_CanControl_hole = true;
     private bool m_CanControl = true;
 
-    public delegate void RedAttackEvent();
-    public static event RedAttackEvent RedAttack;
-    public delegate void BlueAttackEvent();
-    public static event BlueAttackEvent BlueAttack;
-    public delegate void GreenAttackEvent();
-    public static event GreenAttackEvent GreenAttack;
-
     void Awake()
     {
         m_Rb = GetComponent<Rigidbody2D>();
@@ -247,17 +240,14 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             PerformAttack(Color.red);
-            // RedAttack?.Invoke();
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
             PerformAttack(Color.green);
-            // GreenAttack?.Invoke();
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
             PerformAttack(Color.blue);
-            // BlueAttack?.Invoke();
         }
     }
 
@@ -301,6 +291,7 @@ public class Player : MonoBehaviour
         AttackZone zoneScript = attackObject.GetComponent<AttackZone>();
         if (zoneScript != null)
         {
+            Debug.Log($"{color}");
             zoneScript.attackColor = color;
         }
 

@@ -73,9 +73,6 @@ public class EnemyManager : MonoBehaviour
         }
         LoadLevelData();
         InitializePools();
-
-        // Player.Instance.OpenWindow += OpenWindow;
-        // Metronome.Instance.CloseWindow += CloseWindow;
     }
 
     void Update()
@@ -129,7 +126,6 @@ public class EnemyManager : MonoBehaviour
         );
         foreach (string line in lines)
         {
-            // Format: Beat;Type
             string[] parts = line.Split(';');
             if (parts.Length >= 2)
             {
@@ -149,8 +145,6 @@ public class EnemyManager : MonoBehaviour
                 }
             }
         }
-        // Sort by position ensures the loop in Update works correctly
-        // allEnemiesData.Sort((a, b) => a.xPosition.CompareTo(b.xPosition));
         Debug.Log($"EnemyManager: Loaded {allEnemiesData.Count} enemies.");
     }
 
@@ -165,11 +159,11 @@ public class EnemyManager : MonoBehaviour
         for (int i = 0; i < enemyPrefabs.Count; i++)
         {
             enemyPools[i] = new Queue<GameObject>();
-
             // Pre-instantiate some objects
             for (int k = 0; k < initialPoolSizePerType; k++)
             {
                 GameObject obj = CreateEnemy(i);
+                Debug.Log($"{obj.name}");
                 obj.SetActive(false);
                 enemyPools[i].Enqueue(obj);
             }
@@ -222,6 +216,36 @@ public class EnemyManager : MonoBehaviour
             // Pool empty, create new (expand pool)
             return CreateEnemy(type);
         }
+    }
+
+    public GameObject GetClosestEnemy(float referenceX)
+    {
+        GameObject closest = null;
+        float minDistance = float.MaxValue;
+
+        for (int i = 0; i < activeEnemies.Count; i++)
+        {
+            GameObject enemy = activeEnemies[i];
+            if (enemy == null || !enemy.activeInHierarchy)
+                continue;
+
+            float dist = Mathf.Abs(enemy.transform.position.x - referenceX);
+            if (dist < minDistance)
+            {
+                minDistance = dist;
+                closest = enemy;
+            }
+        }
+        return closest;
+    }
+
+    public void ReturnEnemy(GameObject enemy)
+    {
+        if (activeEnemies.Contains(enemy))
+        {
+            activeEnemies.Remove(enemy);
+        }
+        ReturnEnemyToPool(enemy);
     }
 
     void ReturnEnemyToPool(GameObject enemy)
