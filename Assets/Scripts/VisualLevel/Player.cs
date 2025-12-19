@@ -47,6 +47,7 @@ public class Player : MonoBehaviour
     {
         m_Rb = GetComponent<Rigidbody2D>();
         m_Animator = GetComponentInChildren<Animator>();
+        m_StartX = transform.position.x;
         if (MenuManager.Instance != null)
         {
             if (MenuManager.Instance.IsEasyMode)
@@ -83,13 +84,37 @@ public class Player : MonoBehaviour
         }
     }
 
+    private float m_StartX;
+
     void FixedUpdate()
     {
         if (!m_CanControl)
             return;
-        // Vector2 moveVect = (Vector2)transform.right * m_TranslationSpeed * Time.deltaTime / 6.0f;
-        // m_Rb.MovePosition(m_Rb.position + moveVect);
-        m_Rb.linearVelocity = new Vector2(m_TranslationSpeed / 6.0f, m_Rb.linearVelocity.y);
+        
+        float currentSpeedX = m_TranslationSpeed / 6.0f;
+        
+        // Sync with Music Logic
+        if (SoundPlayer.Instance != null && SoundPlayer.Instance.IsMusicPlaying)
+        {
+            // Calculate where we should be based on music time
+            float musicTimeSeconds = SoundPlayer.Instance.GetMusicPosition() / 1000f;
+            float expectedX = m_StartX + (currentSpeedX * musicTimeSeconds);
+            float currentX = m_Rb.position.x;
+            
+            // Calculate error and correction
+            float error = expectedX - currentX;
+            // Correction gain: adjust velocity to close the gap
+            float correction = error * 2.0f; 
+            
+            // Apply corrected velocity
+            m_Rb.linearVelocity = new Vector2(currentSpeedX + correction, m_Rb.linearVelocity.y);
+        }
+        else
+        {
+            // Fallback to standard movement if music isn't playing
+            m_Rb.linearVelocity = new Vector2(currentSpeedX, m_Rb.linearVelocity.y);
+        }
+
         m_HoverTime = 60.0f / m_TranslationSpeed; // ajuster le temps de vol en fonction de la vitesse
 
         // if (m_GroundContacts > 0)

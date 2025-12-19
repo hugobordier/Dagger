@@ -27,6 +27,7 @@ public class EnemyManager : MonoBehaviour
 
     private Player player;
     private Transform playerTransform;
+    private float playerHalfWidth = 0f;
     private List<EnemySpawnData> allEnemiesData = new List<EnemySpawnData>();
     private Dictionary<int, Queue<GameObject>> enemyPools =
         new Dictionary<int, Queue<GameObject>>();
@@ -62,6 +63,10 @@ public class EnemyManager : MonoBehaviour
         else if (this.player != null)
         {
             this.playerTransform = this.player.transform;
+            Collider2D col = player.GetComponent<Collider2D>();
+            if (col != null)
+                playerHalfWidth = col.bounds.size.x / 2.0f;
+
             // NOTE: Verify if you want to auto-fetch speed:
             // playerSpeed = player.m_TranslationSpeed * 0.25f;
         }
@@ -163,7 +168,7 @@ public class EnemyManager : MonoBehaviour
     float CalculatePosition(float beat)
     {
         // return playerSpeed * beat * (60f / bpm);
-        return (playerSpeed * beat * 60f) / (bpm * 6.0f);
+        return ((playerSpeed * beat * 60f) / (bpm * 6.0f)) + playerHalfWidth;
     }
 
     void InitializePools()
