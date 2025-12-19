@@ -90,31 +90,21 @@ public class Player : MonoBehaviour
     {
         if (!m_CanControl)
             return;
-        
         float currentSpeedX = m_TranslationSpeed / 6.0f;
-        
         // Sync with Music Logic
         if (SoundPlayer.Instance != null && SoundPlayer.Instance.IsMusicPlaying)
         {
-            // Calculate where we should be based on music time
-            float musicTimeSeconds = SoundPlayer.Instance.GetMusicPosition() / 1000f;
-            float expectedX = m_StartX + (currentSpeedX * musicTimeSeconds);
+            float musicPositionSeconds = SoundPlayer.Instance.GetMusicPosition() / 1000f;
+            float expectedX = m_StartX + (currentSpeedX * musicPositionSeconds);
             float currentX = m_Rb.position.x;
-            
-            // Calculate error and correction
             float error = expectedX - currentX;
-            // Correction gain: adjust velocity to close the gap
-            float correction = error * 2.0f; 
-            
-            // Apply corrected velocity
+            float correction = error * 2.0f;
             m_Rb.linearVelocity = new Vector2(currentSpeedX + correction, m_Rb.linearVelocity.y);
         }
         else
         {
-            // Fallback to standard movement if music isn't playing
             m_Rb.linearVelocity = new Vector2(currentSpeedX, m_Rb.linearVelocity.y);
         }
-
         m_HoverTime = 60.0f / m_TranslationSpeed; // ajuster le temps de vol en fonction de la vitesse
 
         // if (m_GroundContacts > 0)
@@ -197,10 +187,7 @@ public class Player : MonoBehaviour
                     return;
                 }
             }
-            //Debug.LogError(Time.frameCount+" colLocalPt = " + colLocalPt+ "   colLocalPt.magnitude = "+ colLocalPt.magnitude);
-
             m_GroundContacts++;
-            //Debug.Log("Au sol (" + m_GroundContacts + ")");
         }
     }
 
@@ -297,7 +284,8 @@ public class Player : MonoBehaviour
             return;
         ExtendAirTime();
 
-        float spawnX = transform.position.x + m_ZoneDistance + 0.5f;
+        // float spawnX = transform.position.x + m_ZoneDistance + 0.5f;
+        float spawnX = transform.position.x + m_ZoneDistance + 0.4f;
         float spawnY = transform.position.y + 1;
 
         Vector2 spawnPosition = new Vector2(spawnX, spawnY);

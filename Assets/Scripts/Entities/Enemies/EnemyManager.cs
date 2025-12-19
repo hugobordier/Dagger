@@ -27,7 +27,7 @@ public class EnemyManager : MonoBehaviour
 
     private Player player;
     private Transform playerTransform;
-    private float playerHalfWidth = 0f;
+    private float xOffset = 0f;
     private List<EnemySpawnData> allEnemiesData = new List<EnemySpawnData>();
     private Dictionary<int, Queue<GameObject>> enemyPools =
         new Dictionary<int, Queue<GameObject>>();
@@ -65,7 +65,10 @@ public class EnemyManager : MonoBehaviour
             this.playerTransform = this.player.transform;
             Collider2D col = player.GetComponent<Collider2D>();
             if (col != null)
-                playerHalfWidth = col.bounds.size.x / 2.0f;
+            {
+                xOffset = col.bounds.size.x + 0.15f;
+                Debug.Log($"EnemyOffset = {xOffset}");
+            }
 
             // NOTE: Verify if you want to auto-fetch speed:
             // playerSpeed = player.m_TranslationSpeed * 0.25f;
@@ -127,7 +130,6 @@ public class EnemyManager : MonoBehaviour
     /// </summary>
     void LoadLevelData()
     {
-        Debug.Log($"PlayerSpeed = {this.playerSpeed}, bpm = {this.bpm}");
         TextAsset file = Resources.Load<TextAsset>($"EntityData/{levelFileName}");
         if (file == null)
         {
@@ -150,7 +152,7 @@ public class EnemyManager : MonoBehaviour
                 )
                 {
                     float xPos = CalculatePosition(beat);
-                    Debug.Log(xPos);
+                    // Debug.Log(xPos);
                     allEnemiesData.Add(
                         new EnemySpawnData
                         {
@@ -168,7 +170,7 @@ public class EnemyManager : MonoBehaviour
     float CalculatePosition(float beat)
     {
         // return playerSpeed * beat * (60f / bpm);
-        return ((playerSpeed * beat * 60f) / (bpm * 6.0f)) + playerHalfWidth;
+        return ((playerSpeed * beat * 60f) / (bpm * 6.0f)) + xOffset;
     }
 
     void InitializePools()
