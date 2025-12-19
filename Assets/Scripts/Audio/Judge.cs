@@ -4,6 +4,7 @@ public class Judge : MonoBehaviour
 {
     public static Judge Instance { get; private set; }
 
+    private float position;
     private bool windowOpened = false;
 
     private void Awake()
@@ -28,6 +29,8 @@ public class Judge : MonoBehaviour
         AttackZone.HitRedBaseSamourai += OnHitRed;
         AttackZone.HitGreenBaseSamourai += OnHitGreen;
         AttackZone.HitBlueBaseSamourai += OnHitBlue;
+
+        position = 0;
     }
 
     void Update() { }
@@ -58,10 +61,11 @@ public class Judge : MonoBehaviour
         AttackZone.HitBlueBaseSamourai -= OnHitBlue;
     }
 
-    private void OpenWindow(int beatIndex)
+    private void OpenWindow(int beatIndex, float position)
     {
         // Debug.Log($"Judge: window {beatIndex} opened");
         windowOpened = true;
+        this.position = position;
     }
 
     private void CloseWindow(int beatIndex)
@@ -70,42 +74,49 @@ public class Judge : MonoBehaviour
         windowOpened = false;
     }
 
-    private void OnHitRed(RedBaseSamourai enemy)
+    private void OnHitRed(RedBaseSamourai enemy, float hitPosition)
+    // private void OnHitRed(RedBaseSamourai enemy)
     {
         if (windowOpened)
         {
-            Debug.Log("Perfect Hit Red!");
+            // Debug.Log("Perfect Hit Red!");
             enemy.Die();
         }
         else
         {
-            Debug.Log("Bad Timing Red!");
+            // Debug.Log($"Bad Timing Red! Off : {hitPosition - this.position} ms at {this.position}");
         }
     }
 
+    // private void OnHitGreen(GreenBaseSamourai enemy, float hitPosition)
     private void OnHitGreen(GreenBaseSamourai enemy)
     {
         if (windowOpened)
         {
-            Debug.Log("Perfect Hit Green!");
+            // Debug.Log("Perfect Hit Green!");
             enemy.Die();
         }
         else
         {
-            Debug.Log("Bad Timing Green!");
+            // Debug.Log(
+            //     $"Bad Timing Green! Off : {hitPosition - this.position} ms at {this.position}"
+            // );
         }
     }
 
+    // private void OnHitBlue(BlueBaseSamourai enemy, float hitPosition)
     private void OnHitBlue(BlueBaseSamourai enemy)
     {
         if (windowOpened)
         {
-            Debug.Log("Perfect Hit Blue!");
+            // Debug.Log("Perfect Hit Blue!");
             enemy.Die();
         }
         else
         {
-            Debug.Log("Bad Timing Blue!");
+            // Debug.Log(
+            //     $"Bad Timing Blue! Off : {hitPosition - this.position} ms at {this.position}"
+            // );
         }
     }
 }

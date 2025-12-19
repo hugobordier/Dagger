@@ -36,12 +36,18 @@ public class Player : MonoBehaviour
     private int m_GroundContacts = 0;
     private bool k_pressed;
     private bool m_CanControl_hole = true;
-    private bool m_CanControl = true;
+    private bool m_CanControl = false;
+
+    public void EnableControl()
+    {
+        m_CanControl = true;
+    }
 
     void Awake()
     {
         m_Rb = GetComponent<Rigidbody2D>();
         m_Animator = GetComponentInChildren<Animator>();
+        m_StartX = transform.position.x;
         if (MenuManager.Instance != null)
         {
             if (MenuManager.Instance.IsEasyMode)
@@ -78,13 +84,27 @@ public class Player : MonoBehaviour
         }
     }
 
+    private float m_StartX;
+
     void FixedUpdate()
     {
         if (!m_CanControl)
             return;
-        // Vector2 moveVect = (Vector2)transform.right * m_TranslationSpeed * Time.deltaTime / 6.0f;
-        // m_Rb.MovePosition(m_Rb.position + moveVect);
-        m_Rb.linearVelocity = new Vector2(m_TranslationSpeed / 6.0f, m_Rb.linearVelocity.y);
+        float currentSpeedX = m_TranslationSpeed / 6.0f;
+        // Sync with Music Logic
+        if (SoundPlayer.Instance != null && SoundPlayer.Instance.IsMusicPlaying)
+        {
+            float musicPositionSeconds = SoundPlayer.Instance.GetMusicPosition() / 1000f;
+            float expectedX = m_StartX + (currentSpeedX * musicPositionSeconds);
+            float currentX = m_Rb.position.x;
+            float error = expectedX - currentX;
+            float correction = error * 2.0f;
+            m_Rb.linearVelocity = new Vector2(currentSpeedX + correction, m_Rb.linearVelocity.y);
+        }
+        else
+        {
+            m_Rb.linearVelocity = new Vector2(currentSpeedX, m_Rb.linearVelocity.y);
+        }
         m_HoverTime = 60.0f / m_TranslationSpeed; // ajuster le temps de vol en fonction de la vitesse
 
         // if (m_GroundContacts > 0)
@@ -167,10 +187,7 @@ public class Player : MonoBehaviour
                     return;
                 }
             }
-            //Debug.LogError(Time.frameCount+" colLocalPt = " + colLocalPt+ "   colLocalPt.magnitude = "+ colLocalPt.magnitude);
-
             m_GroundContacts++;
-            //Debug.Log("Au sol (" + m_GroundContacts + ")");
         }
     }
 
@@ -267,7 +284,8 @@ public class Player : MonoBehaviour
             return;
         ExtendAirTime();
 
-        float spawnX = transform.position.x + m_ZoneDistance + 0.5f;
+        // float spawnX = transform.position.x + m_ZoneDistance + 0.5f;
+        float spawnX = transform.position.x + m_ZoneDistance + 0.4f;
         float spawnY = transform.position.y + 1;
 
         Vector2 spawnPosition = new Vector2(spawnX, spawnY);

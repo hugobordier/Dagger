@@ -15,7 +15,7 @@ public class Referee : MonoBehaviour
 
     void Start()
     {
-        StartAudioPipeline();
+        // StartAudioPipeline();
     }
 
     public void StartAudioPipeline()

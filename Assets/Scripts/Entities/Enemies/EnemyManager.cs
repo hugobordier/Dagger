@@ -27,6 +27,7 @@ public class EnemyManager : MonoBehaviour
 
     private Player player;
     private Transform playerTransform;
+    private float xOffset = 0f;
     private List<EnemySpawnData> allEnemiesData = new List<EnemySpawnData>();
     private Dictionary<int, Queue<GameObject>> enemyPools =
         new Dictionary<int, Queue<GameObject>>();
@@ -53,7 +54,7 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         this.bpm = Metronome.Instance.Bpm;
-        this.playerSpeed = playerSpeed / 6.0f;
+        // this.playerSpeed = playerSpeed / 6.0f;
         this.player = FindObjectOfType<Player>(); // Unity 2023+
         if (this.player == null)
         {
@@ -62,6 +63,13 @@ public class EnemyManager : MonoBehaviour
         else if (this.player != null)
         {
             this.playerTransform = this.player.transform;
+            Collider2D col = player.GetComponent<Collider2D>();
+            if (col != null)
+            {
+                xOffset = col.bounds.size.x + 0.15f;
+                Debug.Log($"EnemyOffset = {xOffset}");
+            }
+
             // NOTE: Verify if you want to auto-fetch speed:
             // playerSpeed = player.m_TranslationSpeed * 0.25f;
         }
@@ -73,6 +81,16 @@ public class EnemyManager : MonoBehaviour
         }
         LoadLevelData();
         InitializePools();
+
+        if (Referee.Instance != null)
+        {
+            Referee.Instance.StartAudioPipeline();
+        }
+
+        if (player != null)
+        {
+            player.EnableControl();
+        }
     }
 
     void Update()
@@ -134,6 +152,7 @@ public class EnemyManager : MonoBehaviour
                 )
                 {
                     float xPos = CalculatePosition(beat);
+                    // Debug.Log(xPos);
                     allEnemiesData.Add(
                         new EnemySpawnData
                         {
@@ -145,12 +164,13 @@ public class EnemyManager : MonoBehaviour
                 }
             }
         }
-        Debug.Log($"EnemyManager: Loaded {allEnemiesData.Count} enemies.");
+        // Debug.Log($"EnemyManager: Loaded {allEnemiesData.Count} enemies.");
     }
 
     float CalculatePosition(float beat)
     {
-        return playerSpeed * beat * (60f / bpm);
+        // return playerSpeed * beat * (60f / bpm);
+        return ((playerSpeed * beat * 60f) / (bpm * 6.0f)) + xOffset;
     }
 
     void InitializePools()
@@ -163,7 +183,7 @@ public class EnemyManager : MonoBehaviour
             for (int k = 0; k < initialPoolSizePerType; k++)
             {
                 GameObject obj = CreateEnemy(i);
-                Debug.Log($"{obj.name}");
+                // Debug.Log($"{obj.name}");
                 obj.SetActive(false);
                 enemyPools[i].Enqueue(obj);
             }
