@@ -1,32 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6851859749063229568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/MusicTest
-  m_EditorClassIdentifier: 
-  Path: event:/Music/MusicTest
-  Guid:
-    Data1: -1847451701
-    Data2: 1217666990
-    Data3: -748242007
-    Data4: -1643695253
-  Banks:
-  - {fileID: 4305733815743100761}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 184200
 --- !u!114 &-6473093416476234729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,7 +15,7 @@ MonoBehaviour:
   Path: Dagger-audio/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638992716524411977
+  lastModified: 639017501738490813
   FileSizes:
   - Name: Desktop
     Value: 1074
@@ -89,10 +62,10 @@ MonoBehaviour:
   Path: Dagger-audio/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638992716524413709
+  lastModified: 639017501738607758
   FileSizes:
   - Name: Desktop
-    Value: 962
+    Value: 948
   Exists: 1
 --- !u!114 &-4169373613305262307
 MonoBehaviour:
@@ -167,7 +140,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 184200
+  Length: 183948
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,20 +161,20 @@ MonoBehaviour:
   EditorEvents:
   - {fileID: -1200965278338412488}
   - {fileID: 5270849951433002081}
-  - {fileID: -6851859749063229568}
+  - {fileID: 903328713049644375}
   EditorParameters: []
   MasterBanks:
   - {fileID: -6473093416476234729}
   StringsBanks:
   - {fileID: -6163749641091443889}
   cacheVersion: 131849
-  cacheTime: 638992716524491014
+  cacheTime: 639017501794694347
   SerializableEventsDict:
   - key: event:/Music/MusicLevel1
     index: 0
   - key: event:/Music/MusicLevel2
     index: 1
-  - key: event:/Music/MusicTest
+  - key: event:/Music/MusicLevel3
     index: 2
 --- !u!114 &384076062840764820
 MonoBehaviour:
@@ -245,11 +218,38 @@ MonoBehaviour:
   Path: Dagger-audio/Build/Desktop/Sfx.bank
   Name: Sfx
   StudioPath: bank:/Sfx
-  lastModified: 638992716524491014
+  lastModified: 639017501794694347
   FileSizes:
   - Name: Desktop
     Value: 506
   Exists: 1
+--- !u!114 &903328713049644375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/MusicLevel3
+  m_EditorClassIdentifier: 
+  Path: event:/Music/MusicLevel3
+  Guid:
+    Data1: 833422950
+    Data2: 1192225409
+    Data3: 2133696936
+    Data4: -575030289
+  Banks:
+  - {fileID: 4305733815743100761}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &2385557627412602063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,10 +325,10 @@ MonoBehaviour:
   Path: Dagger-audio/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638992716524489050
+  lastModified: 639017501794505908
   FileSizes:
   - Name: Desktop
-    Value: 2566464
+    Value: 2646912
   Exists: 1
 --- !u!114 &5160593275071963117
 MonoBehaviour:

@@ -291,7 +291,6 @@ public class Player : MonoBehaviour
         AttackZone zoneScript = attackObject.GetComponent<AttackZone>();
         if (zoneScript != null)
         {
-            Debug.Log($"{color}");
             zoneScript.attackColor = color;
         }
 

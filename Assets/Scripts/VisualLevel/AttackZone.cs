@@ -2,8 +2,16 @@ using UnityEngine;
 
 public class AttackZone : MonoBehaviour
 {
-    // On stocke la couleur (ou le type d'attaque) pour que l'ennemi sache par quoi il est touché
     public Color attackColor;
+
+    public delegate void HitRedBaseSamouraiEvent(RedBaseSamourai redBaseSamourai);
+    public static event HitRedBaseSamouraiEvent HitRedBaseSamourai;
+
+    public delegate void HitGreenBaseSamouraiEvent(GreenBaseSamourai greenBaseSamourai);
+    public static event HitGreenBaseSamouraiEvent HitGreenBaseSamourai;
+
+    public delegate void HitBlueBaseSamouraiEvent(BlueBaseSamourai blueBaseSamourai);
+    public static event HitBlueBaseSamouraiEvent HitBlueBaseSamourai;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -12,7 +20,8 @@ public class AttackZone : MonoBehaviour
             RedBaseSamourai enemy = collision.GetComponent<RedBaseSamourai>();
             if (enemy != null)
             {
-                enemy.Die();
+                HitRedBaseSamourai?.Invoke(enemy);
+                // enemy.Die();
             }
         }
         if (attackColor == Color.green)
@@ -20,7 +29,8 @@ public class AttackZone : MonoBehaviour
             GreenBaseSamourai enemy = collision.GetComponent<GreenBaseSamourai>();
             if (enemy != null)
             {
-                enemy.Die();
+                HitGreenBaseSamourai?.Invoke(enemy);
+                // enemy.Die();
             }
         }
         if (attackColor == Color.blue)
@@ -28,7 +38,8 @@ public class AttackZone : MonoBehaviour
             BlueBaseSamourai enemy = collision.GetComponent<BlueBaseSamourai>();
             if (enemy != null)
             {
-                enemy.Die();
+                HitBlueBaseSamourai?.Invoke(enemy);
+                // enemy.Die();
             }
         }
     }

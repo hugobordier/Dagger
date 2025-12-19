@@ -15,14 +15,14 @@ public class InputHandler : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && SoundPlayer.Instance.IsMusicPlaying == false)
-        {
-            Referee.Instance.StartGame();
-        }
+        // if (Input.GetKeyDown(KeyCode.Space) && SoundPlayer.Instance.IsMusicPlaying == false)
+        // {
+        //     Referee.Instance.StartGame();
+        // }
 
-        if (Input.GetKeyDown(KeyCode.Backspace) && SoundPlayer.Instance.IsMusicPlaying == true)
-        {
-            Referee.Instance.StopGame();
-        }
+        // if (Input.GetKeyDown(KeyCode.Backspace) && SoundPlayer.Instance.IsMusicPlaying == true)
+        // {
+        //     Referee.Instance.StopGame();
+        // }
     }
 }

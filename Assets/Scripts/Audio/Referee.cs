@@ -13,9 +13,12 @@ public class Referee : MonoBehaviour
         Instance = this;
     }
 
-    void Start() { }
+    void Start()
+    {
+        StartAudioPipeline();
+    }
 
-    public void StartGame()
+    public void StartAudioPipeline()
     {
         if (SoundPlayer.Instance != null && Metronome.Instance != null)
         {
@@ -30,7 +33,7 @@ public class Referee : MonoBehaviour
     }
 
     /// Arrête la musique et le métronome
-    public void StopGame()
+    public void StopAudioPipeline()
     {
         if (SoundPlayer.Instance != null && Metronome.Instance != null)
         {
@@ -43,6 +46,6 @@ public class Referee : MonoBehaviour
     /// Pause le jeu (TODO)
     public void PauseGame()
     {
-        StopGame();
+        StopAudioPipeline();
     }
 }

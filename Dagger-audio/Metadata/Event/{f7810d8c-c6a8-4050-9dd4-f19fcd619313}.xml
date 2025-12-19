@@ -27,6 +27,7 @@
 		</relationship>
 		<relationship name="groupTracks">
 			<destination>{40bee939-1472-49b2-8b91-689b5f6293a2}</destination>
+			<destination>{0688769a-9ee4-4fce-8897-e4fd05a32699}</destination>
 		</relationship>
 		<relationship name="timeline">
 			<destination>{05c12a37-770c-47ad-93ae-27a37072a27c}</destination>
@@ -60,15 +61,24 @@
 	<object class="MarkerTrack" id="{04a54e76-3482-4002-b93d-3de336d4f2a3}" />
 	<object class="GroupTrack" id="{40bee939-1472-49b2-8b91-689b5f6293a2}">
 		<relationship name="modules">
-			<destination>{6adaf31f-d7ff-4dfe-805f-ed271886d209}</destination>
+			<destination>{b73881ac-aae6-4903-ba09-ac0c12aa998f}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{a90746ee-a2a3-49b1-a92e-2932dc18b1ba}</destination>
 		</relationship>
 	</object>
+	<object class="GroupTrack" id="{0688769a-9ee4-4fce-8897-e4fd05a32699}">
+		<relationship name="modules">
+			<destination>{16e9b856-4dae-483c-97e9-36881cbb52fc}</destination>
+		</relationship>
+		<relationship name="mixerGroup">
+			<destination>{8c476d13-5c39-4f1d-9847-d5ca8f8d09b5}</destination>
+		</relationship>
+	</object>
 	<object class="Timeline" id="{05c12a37-770c-47ad-93ae-27a37072a27c}">
 		<relationship name="modules">
-			<destination>{6adaf31f-d7ff-4dfe-805f-ed271886d209}</destination>
+			<destination>{16e9b856-4dae-483c-97e9-36881cbb52fc}</destination>
+			<destination>{b73881ac-aae6-4903-ba09-ac0c12aa998f}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{d0b910ae-7a5d-4af5-a6dc-c1eef3a315ce}">
@@ -88,12 +98,15 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{99774029-2bdb-4927-b95a-093e44281488}" />
-	<object class="SingleSound" id="{6adaf31f-d7ff-4dfe-805f-ed271886d209}">
+	<object class="SingleSound" id="{b73881ac-aae6-4903-ba09-ac0c12aa998f}">
 		<property name="length">
-			<value>184.19999999999999</value>
+			<value>183.94847581820608</value>
+		</property>
+		<property name="timelockedOffset">
+			<value>4.0547894879163504</value>
 		</property>
 		<relationship name="audioFile">
-			<destination>{17238971-69d3-40e6-b397-37140643d3f2}</destination>
+			<destination>{303640a7-b2d5-4cbf-9565-3c593f2802ce}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{a90746ee-a2a3-49b1-a92e-2932dc18b1ba}">
@@ -105,6 +118,28 @@
 		</relationship>
 		<relationship name="panner">
 			<destination>{233653cc-ba4f-412c-8272-69d5aad5448f}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{d0b910ae-7a5d-4af5-a6dc-c1eef3a315ce}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{16e9b856-4dae-483c-97e9-36881cbb52fc}">
+		<property name="length">
+			<value>64</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{0f8110cd-ec59-48c8-b303-caf418081d7c}</destination>
+		</relationship>
+	</object>
+	<object class="EventMixerGroup" id="{8c476d13-5c39-4f1d-9847-d5ca8f8d09b5}">
+		<property name="name">
+			<value>Audio 2</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{7c665b7a-edb4-4dd3-824c-9ddbb39119b9}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{89cc23bd-20d4-48b5-8e06-2a9a75aea6fd}</destination>
 		</relationship>
 		<relationship name="output">
 			<destination>{d0b910ae-7a5d-4af5-a6dc-c1eef3a315ce}</destination>
@@ -123,6 +158,13 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{233653cc-ba4f-412c-8272-69d5aad5448f}" />
+	<object class="MixerBusEffectChain" id="{7c665b7a-edb4-4dd3-824c-9ddbb39119b9}">
+		<relationship name="effects">
+			<destination>{3a3b2a49-c785-430c-95e5-7198097a6840}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{89cc23bd-20d4-48b5-8e06-2a9a75aea6fd}" />
 	<object class="MixerBusFader" id="{ca827332-b219-4ba0-b3de-48c2a31c3658}" />
 	<object class="MixerBusFader" id="{e4d967a8-91b4-4107-ab3c-0ee69dbfc545}" />
+	<object class="MixerBusFader" id="{3a3b2a49-c785-430c-95e5-7198097a6840}" />
 </objects>
