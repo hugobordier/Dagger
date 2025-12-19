@@ -1291,6 +1291,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1944132355}
     m_Modifications:
+    - target: {fileID: 9935303206803875, guid: e779b0fedf9680ba89b79ee64631ed90, type: 3}
+      propertyPath: <MusicLevel>k__BackingField.Path
+      value: event:/Music/MusicLevel1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9935303206803875, guid: e779b0fedf9680ba89b79ee64631ed90, type: 3}
+      propertyPath: <MusicLevel>k__BackingField.Guid.Data1
+      value: -142537332
+      objectReference: {fileID: 0}
+    - target: {fileID: 9935303206803875, guid: e779b0fedf9680ba89b79ee64631ed90, type: 3}
+      propertyPath: <MusicLevel>k__BackingField.Guid.Data2
+      value: 1079035560
+      objectReference: {fileID: 0}
+    - target: {fileID: 9935303206803875, guid: e779b0fedf9680ba89b79ee64631ed90, type: 3}
+      propertyPath: <MusicLevel>k__BackingField.Guid.Data3
+      value: -1611541347
+      objectReference: {fileID: 0}
+    - target: {fileID: 9935303206803875, guid: e779b0fedf9680ba89b79ee64631ed90, type: 3}
+      propertyPath: <MusicLevel>k__BackingField.Guid.Data4
+      value: 328425933
+      objectReference: {fileID: 0}
     - target: {fileID: 1951687934505656162, guid: e779b0fedf9680ba89b79ee64631ed90,
         type: 3}
       propertyPath: m_Name
