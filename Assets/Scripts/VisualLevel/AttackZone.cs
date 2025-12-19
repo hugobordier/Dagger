@@ -4,13 +4,19 @@ public class AttackZone : MonoBehaviour
 {
     public Color attackColor;
 
-    public delegate void HitRedBaseSamouraiEvent(RedBaseSamourai redBaseSamourai);
+    public delegate void HitRedBaseSamouraiEvent(RedBaseSamourai redBaseSamourai, float hitPostion);
     public static event HitRedBaseSamouraiEvent HitRedBaseSamourai;
 
-    public delegate void HitGreenBaseSamouraiEvent(GreenBaseSamourai greenBaseSamourai);
+    public delegate void HitGreenBaseSamouraiEvent(
+        GreenBaseSamourai greenBaseSamourai,
+        float hitPosition
+    );
     public static event HitGreenBaseSamouraiEvent HitGreenBaseSamourai;
 
-    public delegate void HitBlueBaseSamouraiEvent(BlueBaseSamourai blueBaseSamourai);
+    public delegate void HitBlueBaseSamouraiEvent(
+        BlueBaseSamourai blueBaseSamourai,
+        float hitPosition
+    );
     public static event HitBlueBaseSamouraiEvent HitBlueBaseSamourai;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -20,7 +26,7 @@ public class AttackZone : MonoBehaviour
             RedBaseSamourai enemy = collision.GetComponent<RedBaseSamourai>();
             if (enemy != null)
             {
-                HitRedBaseSamourai?.Invoke(enemy);
+                HitRedBaseSamourai?.Invoke(enemy, SoundPlayer.Instance.GetMusicPosition());
                 // enemy.Die();
             }
         }
@@ -29,7 +35,7 @@ public class AttackZone : MonoBehaviour
             GreenBaseSamourai enemy = collision.GetComponent<GreenBaseSamourai>();
             if (enemy != null)
             {
-                HitGreenBaseSamourai?.Invoke(enemy);
+                HitGreenBaseSamourai?.Invoke(enemy, SoundPlayer.Instance.GetMusicPosition());
                 // enemy.Die();
             }
         }
@@ -38,7 +44,7 @@ public class AttackZone : MonoBehaviour
             BlueBaseSamourai enemy = collision.GetComponent<BlueBaseSamourai>();
             if (enemy != null)
             {
-                HitBlueBaseSamourai?.Invoke(enemy);
+                HitBlueBaseSamourai?.Invoke(enemy, SoundPlayer.Instance.GetMusicPosition());
                 // enemy.Die();
             }
         }

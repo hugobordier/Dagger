@@ -24,7 +24,7 @@ public class Metronome : MonoBehaviour
     private float activeBeatStartPositionMs = 0;
     private float activeBeatEndPositionMs = 0;
 
-    public delegate void OpenWindowEvent(int beat);
+    public delegate void OpenWindowEvent(int beat, float position);
     public event OpenWindowEvent OpenWindow;
 
     public delegate void CloseWindowEvent(int beat);
@@ -52,7 +52,7 @@ public class Metronome : MonoBehaviour
         int position = SoundPlayer.Instance.GetMusicPosition();
         if (position >= activeBeatStartPositionMs)
         {
-            OpenWindow?.Invoke(currentBeat);
+            OpenWindow?.Invoke(currentBeat, nextBeatPositionMs);
             nextBeatPositionMs += beatDurationMs;
             activeBeatStartPositionMs = nextBeatPositionMs - marginOffsetToBeatMs;
             // Debug.Log($"Beat {currentBeat} opened at {position}");
