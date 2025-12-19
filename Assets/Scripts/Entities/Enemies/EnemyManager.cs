@@ -21,7 +21,7 @@ public class EnemyManager : MonoBehaviour
     public Transform enemyParent;
 
     [Header("Pooling Settings")]
-    public int initialPoolSizePerType = 10;
+    public int initialPoolSizePerType = 200;
     public float spawnAheadDistance = 40f; // Distance ahead of camera to activate enemies
     public float despawnBehindDistance = 15f; // Distance behind camera to deactivate
 
@@ -54,7 +54,6 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         this.bpm = Metronome.Instance.Bpm;
-        // this.playerSpeed = playerSpeed / 6.0f;
         this.player = FindObjectOfType<Player>(); // Unity 2023+
         if (this.player == null)
         {
