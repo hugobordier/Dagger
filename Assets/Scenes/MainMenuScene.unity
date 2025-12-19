@@ -180,8 +180,8 @@ MonoBehaviour:
     un trou est un game over\nLe mode facile vous donnera vie infinie, mais les trous
     am\xE8neront toujours aux game over"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 32f66c6806a684b23991b801c14d46f6, type: 2}
-  m_sharedMaterial: {fileID: -4930881246876370111, guid: 32f66c6806a684b23991b801c14d46f6,
+  m_fontAsset: {fileID: 11400000, guid: 5cad7ffaf573b408da1c573f3bca7312, type: 2}
+  m_sharedMaterial: {fileID: 5795825407157463405, guid: 5cad7ffaf573b408da1c573f3bca7312,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -614,8 +614,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: SUCESS
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 84688953b3c6741e7ab401a4693cb653, type: 2}
-  m_sharedMaterial: {fileID: -351810177042663705, guid: 84688953b3c6741e7ab401a4693cb653,
+  m_fontAsset: {fileID: 11400000, guid: f581628b98ae94b7da1c6763eeb1a37d, type: 2}
+  m_sharedMaterial: {fileID: -180131974451726504, guid: f581628b98ae94b7da1c6763eeb1a37d,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -751,8 +751,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: PAUSE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 84688953b3c6741e7ab401a4693cb653, type: 2}
-  m_sharedMaterial: {fileID: -351810177042663705, guid: 84688953b3c6741e7ab401a4693cb653,
+  m_fontAsset: {fileID: 11400000, guid: f581628b98ae94b7da1c6763eeb1a37d, type: 2}
+  m_sharedMaterial: {fileID: -180131974451726504, guid: f581628b98ae94b7da1c6763eeb1a37d,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -772,7 +772,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 97690656
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -1971,8 +1971,8 @@ MonoBehaviour:
     les avec la bonne couleur pour r\xE9ussir et augmenter votre score :\nA pour
     rouge, S pour vert, D pour bleu"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 32f66c6806a684b23991b801c14d46f6, type: 2}
-  m_sharedMaterial: {fileID: -4930881246876370111, guid: 32f66c6806a684b23991b801c14d46f6,
+  m_fontAsset: {fileID: 11400000, guid: 5cad7ffaf573b408da1c573f3bca7312, type: 2}
+  m_sharedMaterial: {fileID: 5795825407157463405, guid: 5cad7ffaf573b408da1c573f3bca7312,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2551,8 +2551,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: DAGGER
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 84688953b3c6741e7ab401a4693cb653, type: 2}
-  m_sharedMaterial: {fileID: -351810177042663705, guid: 84688953b3c6741e7ab401a4693cb653,
+  m_fontAsset: {fileID: 11400000, guid: f581628b98ae94b7da1c6763eeb1a37d, type: 2}
+  m_sharedMaterial: {fileID: -180131974451726504, guid: f581628b98ae94b7da1c6763eeb1a37d,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2977,8 +2977,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Le jeu se joue mieux avec de la musique, mettez donc le son
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 32f66c6806a684b23991b801c14d46f6, type: 2}
-  m_sharedMaterial: {fileID: -4930881246876370111, guid: 32f66c6806a684b23991b801c14d46f6,
+  m_fontAsset: {fileID: 11400000, guid: 5cad7ffaf573b408da1c573f3bca7312, type: 2}
+  m_sharedMaterial: {fileID: 5795825407157463405, guid: 5cad7ffaf573b408da1c573f3bca7312,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -3565,8 +3565,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'SCORE DE '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 32f66c6806a684b23991b801c14d46f6, type: 2}
-  m_sharedMaterial: {fileID: -4930881246876370111, guid: 32f66c6806a684b23991b801c14d46f6,
+  m_fontAsset: {fileID: 11400000, guid: 5cad7ffaf573b408da1c573f3bca7312, type: 2}
+  m_sharedMaterial: {fileID: 5795825407157463405, guid: 5cad7ffaf573b408da1c573f3bca7312,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -4197,8 +4197,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: GAME OVER
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 84688953b3c6741e7ab401a4693cb653, type: 2}
-  m_sharedMaterial: {fileID: -351810177042663705, guid: 84688953b3c6741e7ab401a4693cb653,
+  m_fontAsset: {fileID: 11400000, guid: f581628b98ae94b7da1c6763eeb1a37d, type: 2}
+  m_sharedMaterial: {fileID: -180131974451726504, guid: f581628b98ae94b7da1c6763eeb1a37d,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -4923,8 +4923,8 @@ MonoBehaviour:
   m_text: "Vous pouvez sauter avec la touche : Espace\n\xC9viter les ennemis ou les
     trous en sautant"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 32f66c6806a684b23991b801c14d46f6, type: 2}
-  m_sharedMaterial: {fileID: -4930881246876370111, guid: 32f66c6806a684b23991b801c14d46f6,
+  m_fontAsset: {fileID: 11400000, guid: 5cad7ffaf573b408da1c573f3bca7312, type: 2}
+  m_sharedMaterial: {fileID: 5795825407157463405, guid: 5cad7ffaf573b408da1c573f3bca7312,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
