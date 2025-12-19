@@ -78,12 +78,12 @@ public class Judge : MonoBehaviour
     {
         if (windowOpened)
         {
-            Debug.Log("Perfect Hit Red!");
+            // Debug.Log("Perfect Hit Red!");
             enemy.Die();
         }
         else
         {
-            Debug.Log($"Bad Timing Red! Off : {hitPosition - this.position} ms at {this.position}");
+            // Debug.Log($"Bad Timing Red! Off : {hitPosition - this.position} ms at {this.position}");
         }
     }
 
@@ -91,14 +91,14 @@ public class Judge : MonoBehaviour
     {
         if (windowOpened)
         {
-            Debug.Log("Perfect Hit Green!");
+            // Debug.Log("Perfect Hit Green!");
             enemy.Die();
         }
         else
         {
-            Debug.Log(
-                $"Bad Timing Green! Off : {hitPosition - this.position} ms at {this.position}"
-            );
+            // Debug.Log(
+            //     $"Bad Timing Green! Off : {hitPosition - this.position} ms at {this.position}"
+            // );
         }
     }
 
@@ -106,14 +106,14 @@ public class Judge : MonoBehaviour
     {
         if (windowOpened)
         {
-            Debug.Log("Perfect Hit Blue!");
+            // Debug.Log("Perfect Hit Blue!");
             enemy.Die();
         }
         else
         {
-            Debug.Log(
-                $"Bad Timing Blue! Off : {hitPosition - this.position} ms at {this.position}"
-            );
+            // Debug.Log(
+            //     $"Bad Timing Blue! Off : {hitPosition - this.position} ms at {this.position}"
+            // );
         }
     }
 }

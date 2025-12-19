@@ -145,7 +145,7 @@ public class EnemyManager : MonoBehaviour
                 }
             }
         }
-        Debug.Log($"EnemyManager: Loaded {allEnemiesData.Count} enemies.");
+        // Debug.Log($"EnemyManager: Loaded {allEnemiesData.Count} enemies.");
     }
 
     float CalculatePosition(float beat)
@@ -163,7 +163,7 @@ public class EnemyManager : MonoBehaviour
             for (int k = 0; k < initialPoolSizePerType; k++)
             {
                 GameObject obj = CreateEnemy(i);
-                Debug.Log($"{obj.name}");
+                // Debug.Log($"{obj.name}");
                 obj.SetActive(false);
                 enemyPools[i].Enqueue(obj);
             }

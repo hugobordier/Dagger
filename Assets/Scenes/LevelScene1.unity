@@ -1329,7 +1329,7 @@ PrefabInstance:
     - target: {fileID: 2121768611127330412, guid: e779b0fedf9680ba89b79ee64631ed90,
         type: 3}
       propertyPath: marginMs
-      value: 120
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 7005752817840946399, guid: e779b0fedf9680ba89b79ee64631ed90,
         type: 3}
