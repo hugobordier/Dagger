@@ -15,7 +15,7 @@ public class Referee : MonoBehaviour
 
     void Start()
     {
-        StartAudioPipeline();
+        // StartAudioPipeline();
     }
 
     public void StartAudioPipeline()
@@ -24,7 +24,7 @@ public class Referee : MonoBehaviour
         {
             SoundPlayer.Instance.PlayMusic();
             Metronome.Instance.StartMetronome();
-            // Debug.Log("Game started : components synchronized");
+            Debug.Log("Game started : components synchronized");
         }
         else
         {

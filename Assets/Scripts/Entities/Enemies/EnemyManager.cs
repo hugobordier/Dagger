@@ -53,7 +53,7 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         this.bpm = Metronome.Instance.Bpm;
-        this.playerSpeed = playerSpeed / 6.0f;
+        // this.playerSpeed = playerSpeed / 6.0f;
         this.player = FindObjectOfType<Player>(); // Unity 2023+
         if (this.player == null)
         {
@@ -73,6 +73,16 @@ public class EnemyManager : MonoBehaviour
         }
         LoadLevelData();
         InitializePools();
+
+        if (Referee.Instance != null)
+        {
+            Referee.Instance.StartAudioPipeline();
+        }
+
+        if (player != null)
+        {
+            player.EnableControl();
+        }
     }
 
     void Update()
@@ -112,6 +122,7 @@ public class EnemyManager : MonoBehaviour
     /// </summary>
     void LoadLevelData()
     {
+        Debug.Log($"PlayerSpeed = {this.playerSpeed}, bpm = {this.bpm}");
         TextAsset file = Resources.Load<TextAsset>($"EntityData/{levelFileName}");
         if (file == null)
         {
@@ -134,6 +145,7 @@ public class EnemyManager : MonoBehaviour
                 )
                 {
                     float xPos = CalculatePosition(beat);
+                    Debug.Log(xPos);
                     allEnemiesData.Add(
                         new EnemySpawnData
                         {
@@ -150,7 +162,8 @@ public class EnemyManager : MonoBehaviour
 
     float CalculatePosition(float beat)
     {
-        return playerSpeed * beat * (60f / bpm);
+        // return playerSpeed * beat * (60f / bpm);
+        return (playerSpeed * beat * 60f) / (bpm * 6.0f);
     }
 
     void InitializePools()

@@ -1256,6 +1256,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1239134946461476871, guid: 084770570ef04c4fdb402b102b17089a,
         type: 3}
+      propertyPath: levelFileName
+      value: enemylevel1_test
+      objectReference: {fileID: 0}
+    - target: {fileID: 1239134946461476871, guid: 084770570ef04c4fdb402b102b17089a,
+        type: 3}
       propertyPath: enemyPrefabs.Array.size
       value: 4
       objectReference: {fileID: 0}

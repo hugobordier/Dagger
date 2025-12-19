@@ -63,18 +63,19 @@ public class Judge : MonoBehaviour
 
     private void OpenWindow(int beatIndex, float position)
     {
-        // Debug.Log($"Judge: window {beatIndex} opened");
+        Debug.Log($"Judge: window {beatIndex} opened");
         windowOpened = true;
         this.position = position;
     }
 
     private void CloseWindow(int beatIndex)
     {
-        // Debug.Log($"Judge: window {beatIndex} closed");
+        Debug.Log($"Judge: window {beatIndex} closed");
         windowOpened = false;
     }
 
-    private void OnHitRed(RedBaseSamourai enemy, float hitPosition)
+    // private void OnHitRed(RedBaseSamourai enemy, float hitPosition)
+    private void OnHitRed(RedBaseSamourai enemy)
     {
         if (windowOpened)
         {
@@ -87,7 +88,8 @@ public class Judge : MonoBehaviour
         }
     }
 
-    private void OnHitGreen(GreenBaseSamourai enemy, float hitPosition)
+    // private void OnHitGreen(GreenBaseSamourai enemy, float hitPosition)
+    private void OnHitGreen(GreenBaseSamourai enemy)
     {
         if (windowOpened)
         {
@@ -102,7 +104,8 @@ public class Judge : MonoBehaviour
         }
     }
 
-    private void OnHitBlue(BlueBaseSamourai enemy, float hitPosition)
+    // private void OnHitBlue(BlueBaseSamourai enemy, float hitPosition)
+    private void OnHitBlue(BlueBaseSamourai enemy)
     {
         if (windowOpened)
         {

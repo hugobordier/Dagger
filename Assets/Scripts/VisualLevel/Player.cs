@@ -36,7 +36,12 @@ public class Player : MonoBehaviour
     private int m_GroundContacts = 0;
     private bool k_pressed;
     private bool m_CanControl_hole = true;
-    private bool m_CanControl = true;
+    private bool m_CanControl = false;
+
+    public void EnableControl()
+    {
+        m_CanControl = true;
+    }
 
     void Awake()
     {
