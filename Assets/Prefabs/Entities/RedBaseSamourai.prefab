@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6396504747202994304}
   - component: {fileID: 6898111657996782069}
   - component: {fileID: 8780685398717907251}
+  - component: {fileID: 3535473434820643872}
   m_Layer: 0
   m_Name: RedBaseSamourai
   m_TagString: Untagged
@@ -143,8 +144,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 763cb073d5569974bb4bae64b145d766, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: -24040541, guid: 8ec1f2367d48445cf9971af876374b98, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -166,3 +167,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4a87edba767d9531a347c29f793e3b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &3535473434820643872
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587067285977308964}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a0838f24b65344dccb68697a6db75c9b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
