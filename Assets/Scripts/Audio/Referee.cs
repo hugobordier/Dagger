@@ -18,6 +18,48 @@ public class Referee : MonoBehaviour
         // StartAudioPipeline();
     }
 
+    void Update()
+    {
+        if (SoundPlayer.Instance != null && SoundPlayer.Instance.IsMusicPlaying)
+        {
+            if (SoundPlayer.Instance.GetPlaybackState() == FMOD.Studio.PLAYBACK_STATE.STOPPED)
+            {
+                OnMusicFinished();
+            }
+        }
+    }
+
+    private void OnMusicFinished()
+    {
+        Debug.Log("Music Finished! Triggering Level End.");
+        
+        // 1. Launch PanelEndMenu in MainMenuScene
+        if (MenuManager.Instance != null)
+        {
+            MenuManager.Instance.OpenEndMenu();
+        }
+        else
+        {
+            Debug.LogError("MenuManager instance not found!");
+        }
+
+        // 2. Stop AudioManager (SoundPlayer/Referee)
+        StopAudioPipeline();
+
+        // 3. Stop EnemyManager
+        if (EnemyManager.Instance != null)
+        {
+            EnemyManager.Instance.Stop();
+        }
+
+        // 4. Stop Player
+        Player player = FindObjectOfType<Player>();
+        if (player != null)
+        {
+            player.Stop();
+        }
+    }
+
     public void StartAudioPipeline()
     {
         if (SoundPlayer.Instance != null && Metronome.Instance != null)

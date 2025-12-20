@@ -43,6 +43,13 @@ public class Player : MonoBehaviour
         m_CanControl = true;
     }
 
+    public void Stop()
+    {
+        m_CanControl = false;
+        if(m_Rb != null) m_Rb.linearVelocity = Vector2.zero;
+        if(m_Animator != null) m_Animator.SetBool("IsJumping", false); // Reset states if needed
+    }
+
     void Awake()
     {
         m_Rb = GetComponent<Rigidbody2D>();

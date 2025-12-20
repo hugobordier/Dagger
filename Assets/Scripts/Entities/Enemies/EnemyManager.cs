@@ -33,6 +33,7 @@ public class EnemyManager : MonoBehaviour
         new Dictionary<int, Queue<GameObject>>();
     private List<GameObject> activeEnemies = new List<GameObject>();
     private int nextEnemyIndex = 0;
+    private bool canSpawn = true;
 
     // Data structure to hold parsed file info
     private struct EnemySpawnData
@@ -97,6 +98,8 @@ public class EnemyManager : MonoBehaviour
         if (playerTransform == null)
             return;
 
+        if (!canSpawn) return;
+
         float playerX = playerTransform.position.x;
         float spawnThreshold = playerX + spawnAheadDistance;
         float despawnThreshold = playerX - despawnBehindDistance;
@@ -121,6 +124,18 @@ public class EnemyManager : MonoBehaviour
                 activeEnemies.RemoveAt(i);
             }
         }
+    }
+
+    public void Stop()
+    {
+        canSpawn = false;
+        // Optional: Disable all active enemies
+        foreach (var enemy in activeEnemies)
+        {
+            if (enemy != null)
+                enemy.SetActive(false);
+        }
+        // activeEnemies.Clear(); // Optionally clear the list if you want to reuse them later via pool completely reset
     }
 
     /// <summary>
