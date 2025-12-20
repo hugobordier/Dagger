@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[DefaultExecutionOrder(-20)]
 public class Referee : MonoBehaviour
 {
     public static Referee Instance { get; private set; }
@@ -32,7 +33,7 @@ public class Referee : MonoBehaviour
     private void OnMusicFinished()
     {
         Debug.Log("Music Finished! Triggering Level End.");
-        
+
         // 1. Launch PanelEndMenu in MainMenuScene
         if (MenuManager.Instance != null)
         {
@@ -72,6 +73,8 @@ public class Referee : MonoBehaviour
         {
             Debug.LogError("SoundPlayer or Metronome not found!");
         }
+        Debug.Log(SoundPlayer.Instance.IsMusicPlaying);
+        Debug.Log(SoundPlayer.Instance.GetPlaybackState());
     }
 
     /// Arrête la musique et le métronome

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[DefaultExecutionOrder(-30)]
 public class Metronome : MonoBehaviour
 {
     public static Metronome Instance { get; private set; }

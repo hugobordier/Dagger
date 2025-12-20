@@ -2,6 +2,7 @@ using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
 
+[DefaultExecutionOrder(-40)]
 public class SoundPlayer : MonoBehaviour
 {
     public static SoundPlayer Instance { get; private set; }
@@ -48,6 +49,7 @@ public class SoundPlayer : MonoBehaviour
 
     public FMOD.Studio.PLAYBACK_STATE GetPlaybackState()
     {
+        Debug.Log($"musicInstance = {musicInstance.isValid()}");
         if (musicInstance.isValid())
         {
             musicInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);

@@ -1,6 +1,7 @@
 using FMODUnity;
 using UnityEngine;
 
+[DefaultExecutionOrder(-50)]
 public class FMODEvents : MonoBehaviour
 {
     [field: SerializeField]
