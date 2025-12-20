@@ -46,8 +46,10 @@ public class Player : MonoBehaviour
     public void Stop()
     {
         m_CanControl = false;
-        if(m_Rb != null) m_Rb.linearVelocity = Vector2.zero;
-        if(m_Animator != null) m_Animator.SetBool("IsJumping", false); // Reset states if needed
+        if (m_Rb != null)
+            m_Rb.linearVelocity = Vector2.zero;
+        if (m_Animator != null)
+            m_Animator.SetBool("IsJumping", false); // Reset states if needed
     }
 
     void Awake()
@@ -145,7 +147,6 @@ public class Player : MonoBehaviour
                 m_Rb.gravityScale = 1f;
             }
         }
-
         if (m_GroundContacts == 0 && !m_IsJumping)
         {
             m_Rb.gravityScale = 10f;
@@ -158,17 +159,13 @@ public class Player : MonoBehaviour
         {
             m_Rb.gravityScale = 1f;
         }
-
         m_Rb.angularVelocity = 0f;
-
         if (!m_CanControl_hole)
             return;
-
         bool jump =
             Input.GetAxis("Jump")
             > 0 /*|| Input.GetKeyDown(KeyCode.Space)*/
         ;
-
         if (jump && m_GroundContacts > 0 && !m_IsJumping)
         {
             // Vector2 jumpForce = Vector2.up * m_JumpImpulsionMagnitude;
