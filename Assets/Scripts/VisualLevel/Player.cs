@@ -75,7 +75,26 @@ public class Player : MonoBehaviour
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start() { }
+    void Start()
+    {
+        if (Metronome.Instance != null)
+        {
+            Metronome.Instance.CloseWindow += OnCloseWindow;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (Metronome.Instance != null)
+        {
+            Metronome.Instance.CloseWindow -= OnCloseWindow;
+        }
+    }
+
+    private void OnCloseWindow(int beat)
+    {
+        m_HasAttacked = false;
+    }
 
     // Update is called once per frame
     void Update()
@@ -96,6 +115,7 @@ public class Player : MonoBehaviour
     }
 
     private float m_StartX;
+    private bool m_HasAttacked = false;
 
     void FixedUpdate()
     {
@@ -287,17 +307,22 @@ public class Player : MonoBehaviour
 
     void HandleAttackInput()
     {
+        if (m_HasAttacked) return;
+
         if (Input.GetKeyDown(KeyCode.A))
         {
             PerformAttack(Color.red);
+            m_HasAttacked = true;
         }
         else if (Input.GetKeyDown(KeyCode.S))
         {
             PerformAttack(Color.green);
+            m_HasAttacked = true;
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
             PerformAttack(Color.blue);
+            m_HasAttacked = true;
         }
     }
 
