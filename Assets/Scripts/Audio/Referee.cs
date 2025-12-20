@@ -14,10 +14,7 @@ public class Referee : MonoBehaviour
         Instance = this;
     }
 
-    void Start()
-    {
-        // StartAudioPipeline();
-    }
+    void Start() { }
 
     void Update()
     {
@@ -32,8 +29,7 @@ public class Referee : MonoBehaviour
 
     private void OnMusicFinished()
     {
-        Debug.Log("Music Finished! Triggering Level End.");
-
+        // Debug.Log("Music Finished! Triggering Level End.");
         // 1. Launch PanelEndMenu in MainMenuScene
         if (MenuManager.Instance != null)
         {
@@ -67,14 +63,11 @@ public class Referee : MonoBehaviour
         {
             SoundPlayer.Instance.PlayMusic();
             Metronome.Instance.StartMetronome();
-            Debug.Log("Game started : components synchronized");
         }
         else
         {
             Debug.LogError("SoundPlayer or Metronome not found!");
         }
-        Debug.Log(SoundPlayer.Instance.IsMusicPlaying);
-        Debug.Log(SoundPlayer.Instance.GetPlaybackState());
     }
 
     /// Arrête la musique et le métronome

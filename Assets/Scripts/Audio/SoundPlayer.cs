@@ -49,7 +49,6 @@ public class SoundPlayer : MonoBehaviour
 
     public FMOD.Studio.PLAYBACK_STATE GetPlaybackState()
     {
-        Debug.Log($"musicInstance = {musicInstance.isValid()}");
         if (musicInstance.isValid())
         {
             musicInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
