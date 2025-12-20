@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class GreenBaseSamourai : MonoBehaviour
 {
+    public int beat;
+
     void Start() { }
 
     void Update() { }

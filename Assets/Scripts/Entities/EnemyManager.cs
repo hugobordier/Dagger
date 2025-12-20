@@ -25,6 +25,7 @@ public class EnemyManager : MonoBehaviour
     public float spawnAheadDistance = 40f; // Distance ahead of camera to activate enemies
     public float despawnBehindDistance = 15f; // Distance behind camera to deactivate
 
+    // Data field for enemy loading
     private Player player;
     private Transform playerTransform;
     private float xOffset = 0f;
@@ -69,9 +70,6 @@ public class EnemyManager : MonoBehaviour
                 xOffset = col.bounds.size.x + 0.15f;
                 Debug.Log($"EnemyOffset = {xOffset}");
             }
-
-            // NOTE: Verify if you want to auto-fetch speed:
-            // playerSpeed = player.m_TranslationSpeed * 0.25f;
         }
         else
         {
@@ -81,12 +79,10 @@ public class EnemyManager : MonoBehaviour
         }
         LoadLevelData();
         InitializePools();
-
         if (Referee.Instance != null)
         {
             Referee.Instance.StartAudioPipeline();
         }
-
         if (player != null)
         {
             player.EnableControl();
@@ -98,13 +94,12 @@ public class EnemyManager : MonoBehaviour
         if (playerTransform == null)
             return;
 
-        if (!canSpawn) return;
-
+        if (!canSpawn)
+            return;
         float playerX = playerTransform.position.x;
         float spawnThreshold = playerX + spawnAheadDistance;
         float despawnThreshold = playerX - despawnBehindDistance;
-
-        // 1. Spawn enemies that are coming into view
+        // Spawn enemies that are coming into view
         while (
             nextEnemyIndex < allEnemiesData.Count
             && allEnemiesData[nextEnemyIndex].xPosition <= spawnThreshold
@@ -113,8 +108,7 @@ public class EnemyManager : MonoBehaviour
             SpawnEnemy(allEnemiesData[nextEnemyIndex]);
             nextEnemyIndex++;
         }
-
-        // 2. Despawn enemies that have passed out of view
+        // Despawn enemies that have passed out of view
         for (int i = activeEnemies.Count - 1; i >= 0; i--)
         {
             GameObject enemy = activeEnemies[i];
@@ -229,6 +223,12 @@ public class EnemyManager : MonoBehaviour
             // Position the enemy. Assuming Y is 0 or handled by the prefab/ground check.
             // You might want to adjust Y based on the prefab or a fixed lane.
             enemy.transform.position = new Vector3(data.xPosition, 0f, 0f);
+
+            // Assign beat to the specific component
+            if (enemy.TryGetComponent<RedBaseSamourai>(out var red)) red.beat = (int)data.beat;
+            else if (enemy.TryGetComponent<GreenBaseSamourai>(out var green)) green.beat = (int)data.beat;
+            else if (enemy.TryGetComponent<BlueBaseSamourai>(out var blue)) blue.beat = (int)data.beat;
+
             enemy.SetActive(true);
             activeEnemies.Add(enemy);
         }

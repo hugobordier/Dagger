@@ -4,8 +4,8 @@ public class AttackZone : MonoBehaviour
 {
     public Color attackColor;
 
-    public delegate void HitRedBaseSamouraiEvent(RedBaseSamourai redBaseSamourai, float hitPostion);
-    public static event HitRedBaseSamouraiEvent HitRedBaseSamourai;
+    // public delegate void HitRedBaseSamouraiEvent(RedBaseSamourai redBaseSamourai, float hitPostion);
+    // public static event HitRedBaseSamouraiEvent HitRedBaseSamourai;
 
     // public delegate void HitGreenBaseSamouraiEvent(
     //     GreenBaseSamourai greenBaseSamourai,
@@ -19,8 +19,8 @@ public class AttackZone : MonoBehaviour
     // );
     // public static event HitBlueBaseSamouraiEvent HitBlueBaseSamourai;
 
-    // public delegate void HitRedBaseSamouraiEvent(RedBaseSamourai redBaseSamourai);
-    // public static event HitRedBaseSamouraiEvent HitRedBaseSamourai;
+    public delegate void HitRedBaseSamouraiEvent(RedBaseSamourai redBaseSamourai);
+    public static event HitRedBaseSamouraiEvent HitRedBaseSamourai;
 
     public delegate void HitGreenBaseSamouraiEvent(GreenBaseSamourai greenBaseSamourai);
     public static event HitGreenBaseSamouraiEvent HitGreenBaseSamourai;
@@ -35,8 +35,8 @@ public class AttackZone : MonoBehaviour
             RedBaseSamourai enemy = collision.GetComponent<RedBaseSamourai>();
             if (enemy != null)
             {
-                HitRedBaseSamourai?.Invoke(enemy, SoundPlayer.Instance.GetMusicPosition());
-                // HitRedBaseSamourai?.Invoke(enemy);
+                // HitRedBaseSamourai?.Invoke(enemy, SoundPlayer.Instance.GetMusicPosition());
+                HitRedBaseSamourai?.Invoke(enemy);
                 // enemy.Die();
             }
         }
