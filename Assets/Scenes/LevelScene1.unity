@@ -1452,6 +1452,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3873656817693317533, guid: 891187dadab86456a8a66cb0a08f432a,
         type: 3}
+      propertyPath: m_HoverTime
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3873656817693317533, guid: 891187dadab86456a8a66cb0a08f432a,
+        type: 3}
+      propertyPath: m_JumpHeight
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3873656817693317533, guid: 891187dadab86456a8a66cb0a08f432a,
+        type: 3}
       propertyPath: m_TranslationSpeed
       value: 50
       objectReference: {fileID: 0}

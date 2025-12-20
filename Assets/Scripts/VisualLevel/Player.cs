@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     // private float m_JumpImpulsionMagnitude;
-    private float m_JumpHeight = 5f; // La hauteur du saut
+    private float m_JumpHeight = 4f; // La hauteur du saut
 
     [SerializeField]
     private float m_HoverTime; // La durée en secondes passée en l'air
