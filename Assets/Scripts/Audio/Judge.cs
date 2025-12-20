@@ -11,10 +11,6 @@ public class Judge : MonoBehaviour
     public delegate void EnemyKilledEvent(int enemyBeat);
     public event EnemyKilledEvent EnemyKilled;
 
-    // TO REMOVE if not needed for score calculation
-    // public delegate void EnemyNotKilledEvent();
-    // public event EnemyNotKilledEvent EnemyNotKilled;
-
     private void Awake()
     {
         if (Instance)
@@ -33,9 +29,12 @@ public class Judge : MonoBehaviour
             Metronome.Instance.OpenWindow += OpenWindow;
             Metronome.Instance.CloseWindow += CloseWindow;
         }
-        AttackZone.HitRedBaseSamourai += OnHitRed;
-        AttackZone.HitGreenBaseSamourai += OnHitGreen;
-        AttackZone.HitBlueBaseSamourai += OnHitBlue;
+        AttackZone.HitRedBaseSamourai += OnHitRedSamourai;
+        AttackZone.HitGreenBaseSamourai += OnHitGreenSamourai;
+        AttackZone.HitBlueBaseSamourai += OnHitBlueSamourai;
+        AttackZone.HitRedBaseBird += OnHitRedBird;
+        AttackZone.HitGreenBaseBird += OnHitGreenBird;
+        AttackZone.HitBlueBaseBird += OnHitBlueBird;
     }
 
     void Update() { }
@@ -48,9 +47,12 @@ public class Judge : MonoBehaviour
             Metronome.Instance.CloseWindow -= CloseWindow;
         }
 
-        AttackZone.HitRedBaseSamourai -= OnHitRed;
-        AttackZone.HitGreenBaseSamourai -= OnHitGreen;
-        AttackZone.HitBlueBaseSamourai -= OnHitBlue;
+        AttackZone.HitRedBaseSamourai -= OnHitRedSamourai;
+        AttackZone.HitGreenBaseSamourai -= OnHitGreenSamourai;
+        AttackZone.HitBlueBaseSamourai -= OnHitBlueSamourai;
+        AttackZone.HitRedBaseBird -= OnHitRedBird;
+        AttackZone.HitGreenBaseBird -= OnHitGreenBird;
+        AttackZone.HitBlueBaseBird -= OnHitBlueBird;
     }
 
     void OnDestroy()
@@ -61,9 +63,12 @@ public class Judge : MonoBehaviour
             Metronome.Instance.CloseWindow -= CloseWindow;
         }
 
-        AttackZone.HitRedBaseSamourai -= OnHitRed;
-        AttackZone.HitGreenBaseSamourai -= OnHitGreen;
-        AttackZone.HitBlueBaseSamourai -= OnHitBlue;
+        AttackZone.HitRedBaseSamourai -= OnHitRedSamourai;
+        AttackZone.HitGreenBaseSamourai -= OnHitGreenSamourai;
+        AttackZone.HitBlueBaseSamourai -= OnHitBlueSamourai;
+        AttackZone.HitRedBaseBird -= OnHitRedBird;
+        AttackZone.HitGreenBaseBird -= OnHitGreenBird;
+        AttackZone.HitBlueBaseBird -= OnHitBlueBird;
     }
 
     private void OpenWindow(int currentBeat)
@@ -79,53 +84,60 @@ public class Judge : MonoBehaviour
         windowOpened = false;
     }
 
-    // private void OnHitRed(RedBaseSamourai enemy, float hitPosition)
-    private void OnHitRed(RedBaseSamourai enemy)
+    // private void OnHitRedSamourai(RedBaseSamourai enemy, float hitPosition)
+    private void OnHitRedSamourai(RedBaseSamourai enemy)
     {
         if (windowOpened)
         {
-            // Debug.Log("Perfect Hit Red!");
             enemy.Die();
             EnemyKilled?.Invoke(this.currentBeat);
         }
-        else
-        {
-            // Debug.Log($"Bad Timing Red! Off : {hitPosition - this.position} ms at {this.position}");
-
-            // TO REMOVE if not needed for score calculation
-            //EnemyNotKilled?.Invoke();
-        }
     }
 
-    // private void OnHitGreen(GreenBaseSamourai enemy, float hitPosition)
-    private void OnHitGreen(GreenBaseSamourai enemy)
+    // private void OnHitGreenSamourai(GreenBaseSamourai enemy, float hitPosition)
+    private void OnHitGreenSamourai(GreenBaseSamourai enemy)
     {
         if (windowOpened)
         {
-            // Debug.Log("Perfect Hit Green!");
             enemy.Die();
-        }
-        else
-        {
-            // Debug.Log(
-            //     $"Bad Timing Green! Off : {hitPosition - this.position} ms at {this.position}"
-            // );
+            EnemyKilled?.Invoke(this.currentBeat);
         }
     }
 
-    // private void OnHitBlue(BlueBaseSamourai enemy, float hitPosition)
-    private void OnHitBlue(BlueBaseSamourai enemy)
+    // private void OnHitBlueSamourai(BlueBaseSamourai enemy, float hitPosition)
+    private void OnHitBlueSamourai(BlueBaseSamourai enemy)
     {
         if (windowOpened)
         {
-            // Debug.Log("Perfect Hit Blue!");
             enemy.Die();
+            EnemyKilled?.Invoke(this.currentBeat);
         }
-        else
+    }
+
+    private void OnHitRedBird(RedBaseBird enemy)
+    {
+        if (windowOpened)
         {
-            // Debug.Log(
-            //     $"Bad Timing Blue! Off : {hitPosition - this.position} ms at {this.position}"
-            // );
+            enemy.Die();
+            EnemyKilled?.Invoke(this.currentBeat);
+        }
+    }
+
+    private void OnHitGreenBird(GreenBaseBird enemy)
+    {
+        if (windowOpened)
+        {
+            enemy.Die();
+            EnemyKilled?.Invoke(this.currentBeat);
+        }
+    }
+
+    private void OnHitBlueBird(BlueBaseBird enemy)
+    {
+        if (windowOpened)
+        {
+            enemy.Die();
+            EnemyKilled?.Invoke(this.currentBeat);
         }
     }
 }

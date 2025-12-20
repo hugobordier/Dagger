@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Hole
+  - BaseBird
+  - BaseSamourai
   layers:
   - Default
   - TransparentFX

@@ -228,18 +228,18 @@ public class EnemyManager : MonoBehaviour
         GameObject enemy = GetFromPool(data.type);
         if (enemy != null)
         {
+            float yPos = 0f;
+            if (enemy.CompareTag("BaseSamourai"))
+            {
+                yPos = 0f;
+            }
+            else if (enemy.CompareTag("BaseBird"))
+            {
+                yPos = 4f;
+            }
             // Position the enemy. Assuming Y is 0 or handled by the prefab/ground check.
             // You might want to adjust Y based on the prefab or a fixed lane.
-            enemy.transform.position = new Vector3(data.xPosition, 0f, 0f);
-
-            // Assign beat to the specific component
-            if (enemy.TryGetComponent<RedBaseSamourai>(out var red))
-                red.beat = (int)data.beat;
-            else if (enemy.TryGetComponent<GreenBaseSamourai>(out var green))
-                green.beat = (int)data.beat;
-            else if (enemy.TryGetComponent<BlueBaseSamourai>(out var blue))
-                blue.beat = (int)data.beat;
-
+            enemy.transform.position = new Vector3(data.xPosition, yPos, 0f);
             enemy.SetActive(true);
             activeEnemies.Add(enemy);
         }

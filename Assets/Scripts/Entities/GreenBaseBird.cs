@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RedBaseSamourai : MonoBehaviour
+public class GreenBaseBird : MonoBehaviour
 {
     private bool hasPassedPlayer = false;
 
