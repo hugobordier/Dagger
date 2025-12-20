@@ -4,8 +4,16 @@ public class Judge : MonoBehaviour
 {
     public static Judge Instance { get; private set; }
 
-    private float position;
     private bool windowOpened = false;
+
+    private int currentBeat = 0;
+
+    public delegate void EnemyKilledEvent(int enemyBeat);
+    public event EnemyKilledEvent EnemyKilled;
+
+    // TO REMOVE if not needed for score calculation
+    // public delegate void EnemyNotKilledEvent();
+    // public event EnemyNotKilledEvent EnemyNotKilled;
 
     private void Awake()
     {
@@ -25,12 +33,9 @@ public class Judge : MonoBehaviour
             Metronome.Instance.OpenWindow += OpenWindow;
             Metronome.Instance.CloseWindow += CloseWindow;
         }
-
         AttackZone.HitRedBaseSamourai += OnHitRed;
         AttackZone.HitGreenBaseSamourai += OnHitGreen;
         AttackZone.HitBlueBaseSamourai += OnHitBlue;
-
-        position = 0;
     }
 
     void Update() { }
@@ -61,30 +66,34 @@ public class Judge : MonoBehaviour
         AttackZone.HitBlueBaseSamourai -= OnHitBlue;
     }
 
-    private void OpenWindow(int beatIndex, float position)
+    private void OpenWindow(int currentBeat)
     {
         // Debug.Log($"Judge: window {beatIndex} opened");
         windowOpened = true;
-        this.position = position;
+        this.currentBeat = currentBeat;
     }
 
-    private void CloseWindow(int beatIndex)
+    private void CloseWindow(int currentBeat)
     {
         // Debug.Log($"Judge: window {beatIndex} closed");
         windowOpened = false;
     }
 
-    private void OnHitRed(RedBaseSamourai enemy, float hitPosition)
-    // private void OnHitRed(RedBaseSamourai enemy)
+    // private void OnHitRed(RedBaseSamourai enemy, float hitPosition)
+    private void OnHitRed(RedBaseSamourai enemy)
     {
         if (windowOpened)
         {
             // Debug.Log("Perfect Hit Red!");
             enemy.Die();
+            EnemyKilled?.Invoke(this.currentBeat);
         }
         else
         {
             // Debug.Log($"Bad Timing Red! Off : {hitPosition - this.position} ms at {this.position}");
+
+            // TO REMOVE if not needed for score calculation
+            //EnemyNotKilled?.Invoke();
         }
     }
 
