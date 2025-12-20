@@ -11,10 +11,6 @@ public class Judge : MonoBehaviour
     public delegate void EnemyKilledEvent(int enemyBeat);
     public event EnemyKilledEvent EnemyKilled;
 
-    // TO REMOVE if not needed for score calculation
-    // public delegate void EnemyNotKilledEvent();
-    // public event EnemyNotKilledEvent EnemyNotKilled;
-
     private void Awake()
     {
         if (Instance)
@@ -37,6 +33,8 @@ public class Judge : MonoBehaviour
         AttackZone.HitGreenBaseSamourai += OnHitGreenSamourai;
         AttackZone.HitBlueBaseSamourai += OnHitBlueSamourai;
         AttackZone.HitRedBaseBird += OnHitRedBird;
+        AttackZone.HitGreenBaseBird += OnHitGreenBird;
+        AttackZone.HitBlueBaseBird += OnHitBlueBird;
     }
 
     void Update() { }
@@ -53,6 +51,8 @@ public class Judge : MonoBehaviour
         AttackZone.HitGreenBaseSamourai -= OnHitGreenSamourai;
         AttackZone.HitBlueBaseSamourai -= OnHitBlueSamourai;
         AttackZone.HitRedBaseBird -= OnHitRedBird;
+        AttackZone.HitGreenBaseBird -= OnHitGreenBird;
+        AttackZone.HitBlueBaseBird -= OnHitBlueBird;
     }
 
     void OnDestroy()
@@ -67,6 +67,8 @@ public class Judge : MonoBehaviour
         AttackZone.HitGreenBaseSamourai -= OnHitGreenSamourai;
         AttackZone.HitBlueBaseSamourai -= OnHitBlueSamourai;
         AttackZone.HitRedBaseBird -= OnHitRedBird;
+        AttackZone.HitGreenBaseBird -= OnHitGreenBird;
+        AttackZone.HitBlueBaseBird -= OnHitBlueBird;
     }
 
     private void OpenWindow(int currentBeat)
@@ -121,7 +123,7 @@ public class Judge : MonoBehaviour
         }
     }
 
-    private void OnHitGreenBird(RedBaseBird enemy)
+    private void OnHitGreenBird(GreenBaseBird enemy)
     {
         if (windowOpened)
         {
@@ -130,7 +132,7 @@ public class Judge : MonoBehaviour
         }
     }
 
-    private void OnHitBlueBird(RedBaseBird enemy)
+    private void OnHitBlueBird(BlueBaseBird enemy)
     {
         if (windowOpened)
         {

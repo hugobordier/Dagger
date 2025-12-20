@@ -19,17 +19,23 @@ public class AttackZone : MonoBehaviour
     // );
     // public static event HitBlueBaseSamouraiEvent HitBlueBaseSamourai;
 
-    public delegate void HitRedBaseSamouraiEvent(RedBaseSamourai redBaseSamourai);
+    public delegate void HitRedBaseSamouraiEvent(RedBaseSamourai samourai);
     public static event HitRedBaseSamouraiEvent HitRedBaseSamourai;
 
-    public delegate void HitGreenBaseSamouraiEvent(GreenBaseSamourai greenBaseSamourai);
+    public delegate void HitGreenBaseSamouraiEvent(GreenBaseSamourai samourai);
     public static event HitGreenBaseSamouraiEvent HitGreenBaseSamourai;
 
-    public delegate void HitBlueBaseSamouraiEvent(BlueBaseSamourai blueBaseSamourai);
+    public delegate void HitBlueBaseSamouraiEvent(BlueBaseSamourai samourai);
     public static event HitBlueBaseSamouraiEvent HitBlueBaseSamourai;
 
-    public delegate void HitRedBaseBirdEvent(RedBaseBird redBaseBird);
+    public delegate void HitRedBaseBirdEvent(RedBaseBird bird);
     public static event HitRedBaseBirdEvent HitRedBaseBird;
+
+    public delegate void HitGreenBaseBirdEvent(GreenBaseBird bird);
+    public static event HitGreenBaseBirdEvent HitGreenBaseBird;
+
+    public delegate void HitBlueBaseBirdEvent(BlueBaseBird bird);
+    public static event HitBlueBaseBirdEvent HitBlueBaseBird;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -51,21 +57,31 @@ public class AttackZone : MonoBehaviour
         if (attackColor == Color.green)
         {
             GreenBaseSamourai enemy = collision.GetComponent<GreenBaseSamourai>();
+            GreenBaseBird bird = collision.GetComponent<GreenBaseBird>();
             if (enemy != null)
             {
                 // HitGreenBaseSamourai?.Invoke(enemy, SoundPlayer.Instance.GetMusicPosition());
                 HitGreenBaseSamourai?.Invoke(enemy);
                 // enemy.Die();
             }
+            if (bird != null)
+            {
+                HitGreenBaseBird?.Invoke(bird);
+            }
         }
         if (attackColor == Color.blue)
         {
             BlueBaseSamourai enemy = collision.GetComponent<BlueBaseSamourai>();
+            BlueBaseBird bird = collision.GetComponent<BlueBaseBird>();
             if (enemy != null)
             {
                 // HitBlueBaseSamourai?.Invoke(enemy, SoundPlayer.Instance.GetMusicPosition());
                 HitBlueBaseSamourai?.Invoke(enemy);
                 // enemy.Die();
+            }
+            if (bird != null)
+            {
+                HitBlueBaseBird?.Invoke(bird);
             }
         }
     }
