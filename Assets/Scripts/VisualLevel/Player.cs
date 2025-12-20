@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
 
     // [SerializeField] private Transform m_camera;
     Rigidbody2D m_Rb;
+    private Collider2D m_Collider;
 
     //private bool m_IsGrounded;
     private int m_GroundContacts = 0;
@@ -55,6 +56,7 @@ public class Player : MonoBehaviour
     void Awake()
     {
         m_Rb = GetComponent<Rigidbody2D>();
+        m_Collider = GetComponent<Collider2D>();
         m_Animator = GetComponentInChildren<Animator>();
         m_StartX = transform.position.x;
         if (MenuManager.Instance != null)
@@ -202,20 +204,33 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Hole"))
+        void OnTriggerEnter2D(Collider2D collision)
+
         {
-            StartCoroutine(DieSequence());
+
+            if (collision.gameObject.CompareTag("Hole"))
+
+            {
+
+                StartCoroutine(DieSequence());
+
+            }
+
+            else if (collision.gameObject.CompareTag("BaseSamourai") || collision.gameObject.CompareTag("BaseBird"))
+
+            {
+
+                if (m_Collider.IsTouching(collision))
+
+                {
+
+                    Damage();
+
+                }
+
+            }
+
         }
-        else if (
-            collision.gameObject.CompareTag("BaseSamourai")
-            || collision.gameObject.CompareTag("BaseBird")
-        )
-        {
-            Damage();
-        }
-    }
 
     private void OnCollisionExit2D(Collision2D collision)
     {

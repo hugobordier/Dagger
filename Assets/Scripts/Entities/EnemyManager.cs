@@ -72,10 +72,10 @@ public class EnemyManager : MonoBehaviour
         else if (this.player != null)
         {
             this.playerTransform = this.player.transform;
-            Collider2D col = player.GetComponent<Collider2D>();
-            if (col != null)
+            Collider2D playerCollider = player.GetComponent<Collider2D>();
+            if (playerCollider != null)
             {
-                xOffset = col.bounds.size.x + 0.15f;
+                xOffset = playerCollider.bounds.size.x + 0.50f;
                 Debug.Log($"EnemyOffset = {xOffset}");
             }
         }
