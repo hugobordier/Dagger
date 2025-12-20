@@ -21,7 +21,7 @@ public class EnemyManager : MonoBehaviour
     public Transform enemyParent;
 
     [Header("Pooling Settings")]
-    public int initialPoolSizePerType = 10;
+    public int initialPoolSizePerType = 200;
     public float spawnAheadDistance = 40f; // Distance ahead of camera to activate enemies
     public float despawnBehindDistance = 15f; // Distance behind camera to deactivate
 
@@ -33,6 +33,7 @@ public class EnemyManager : MonoBehaviour
         new Dictionary<int, Queue<GameObject>>();
     private List<GameObject> activeEnemies = new List<GameObject>();
     private int nextEnemyIndex = 0;
+    private bool canSpawn = true;
 
     // Data structure to hold parsed file info
     private struct EnemySpawnData
@@ -54,7 +55,6 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         this.bpm = Metronome.Instance.Bpm;
-        // this.playerSpeed = playerSpeed / 6.0f;
         this.player = FindObjectOfType<Player>(); // Unity 2023+
         if (this.player == null)
         {
@@ -98,6 +98,8 @@ public class EnemyManager : MonoBehaviour
         if (playerTransform == null)
             return;
 
+        if (!canSpawn) return;
+
         float playerX = playerTransform.position.x;
         float spawnThreshold = playerX + spawnAheadDistance;
         float despawnThreshold = playerX - despawnBehindDistance;
@@ -122,6 +124,18 @@ public class EnemyManager : MonoBehaviour
                 activeEnemies.RemoveAt(i);
             }
         }
+    }
+
+    public void Stop()
+    {
+        canSpawn = false;
+        // Optional: Disable all active enemies
+        foreach (var enemy in activeEnemies)
+        {
+            if (enemy != null)
+                enemy.SetActive(false);
+        }
+        // activeEnemies.Clear(); // Optionally clear the list if you want to reuse them later via pool completely reset
     }
 
     /// <summary>

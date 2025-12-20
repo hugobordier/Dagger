@@ -46,6 +46,16 @@ public class SoundPlayer : MonoBehaviour
         return 0;
     }
 
+    public FMOD.Studio.PLAYBACK_STATE GetPlaybackState()
+    {
+        if (musicInstance.isValid())
+        {
+            musicInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
+            return state;
+        }
+        return FMOD.Studio.PLAYBACK_STATE.STOPPED;
+    }
+
     private void OnDestroy()
     {
         if (IsMusicPlaying)
