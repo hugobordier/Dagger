@@ -1474,30 +1474,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3873656817693317533, guid: 891187dadab86456a8a66cb0a08f432a,
-        type: 3}
-      propertyPath: m_HoverTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873656817693317533, guid: 891187dadab86456a8a66cb0a08f432a,
-        type: 3}
-      propertyPath: m_JumpHeight
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3873656817693317533, guid: 891187dadab86456a8a66cb0a08f432a,
-        type: 3}
-      propertyPath: m_TranslationSpeed
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 6219629922382764922, guid: 891187dadab86456a8a66cb0a08f432a,
         type: 3}
       propertyPath: m_Name
       value: Player2D
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536908885331365435, guid: 891187dadab86456a8a66cb0a08f432a,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

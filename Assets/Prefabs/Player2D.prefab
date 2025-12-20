@@ -207,7 +207,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 1}
-  m_Size: {x: 0.5, y: 2}
+  m_Size: {x: 1, y: 2}
   m_Direction: 0
 --- !u!114 &3873656817693317533
 MonoBehaviour:
@@ -221,9 +221,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf4836e9309b3463e9e46ea52c1359e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TranslationSpeed: 60
-  m_JumpHeight: 4.5
-  m_HoverTime: 1
+  m_TranslationSpeed: 50
+  m_JumpHeight: 4
+  m_HoverTimeMultiplier: 1
   m_ColorZonePrefab: {fileID: 5387757513667314024, guid: 26f742231769c43d3af0b8fd85136798,
     type: 3}
   m_ZoneDistance: 1

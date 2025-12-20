@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     private float m_JumpHeight = 4f; // La hauteur du saut
 
     [SerializeField]
+    private float m_HoverTimeMultiplier = 1.0f; // Multiplicateur de durée de vol
     private float m_HoverTime; // La durée en secondes passée en l'air
     private bool m_IsJumping = false; // Pour savoir si on est déjà en train de sauter
 
@@ -136,7 +137,7 @@ public class Player : MonoBehaviour
         {
             m_Rb.linearVelocity = new Vector2(currentSpeedX, m_Rb.linearVelocity.y);
         }
-        m_HoverTime = 60.0f / m_TranslationSpeed; // ajuster le temps de vol en fonction de la vitesse
+        m_HoverTime = (60.0f / m_TranslationSpeed) * m_HoverTimeMultiplier; // ajuster le temps de vol en fonction de la vitesse et du multiplicateur
 
         // if (m_GroundContacts > 0)
         // {
