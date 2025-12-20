@@ -1,9 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance;
+
+    [Header("UI Elements")]
+    [SerializeField] private TextMeshProUGUI m_ScoreText;
 
     [Header("Panels")]
     [SerializeField]
@@ -77,7 +81,21 @@ public class MenuManager : MonoBehaviour
     {
         m_PanelEndMenu.SetActive(true);
         currentPanel = m_PanelEndMenu;
-        Time.timeScale = 0f; // Pause du jeu
+
+        if (m_ScoreText != null)
+        {
+            if (ScoreManager.Instance != null)
+            {
+                float score = ScoreManager.Instance.Precision;
+                m_ScoreText.text = "SCORE DE " + score.ToString("F1") + "%"; 
+            }
+            else
+            {
+                m_ScoreText.text = "SCORE : --";
+            }
+        }
+
+        Time.timeScale = 0f;
     }
 
     public void OpenCommandMenu()

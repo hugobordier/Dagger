@@ -8,6 +8,7 @@ public class ScoreManager : MonoBehaviour
     private int totalEnemeyNumber;
 
     private float precision;
+    public float Precision => precision;
 
     void Awake()
     {
