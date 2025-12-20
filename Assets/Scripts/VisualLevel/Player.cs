@@ -193,6 +193,13 @@ public class Player : MonoBehaviour
             }
             m_GroundContacts++;
         }
+        else if (
+            collision.gameObject.CompareTag("BaseSamourai")
+            || collision.gameObject.CompareTag("BaseBird")
+        )
+        {
+            Damage();
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -200,6 +207,13 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Hole"))
         {
             StartCoroutine(DieSequence());
+        }
+        else if (
+            collision.gameObject.CompareTag("BaseSamourai")
+            || collision.gameObject.CompareTag("BaseBird")
+        )
+        {
+            Damage();
         }
     }
 
@@ -329,6 +343,7 @@ public class Player : MonoBehaviour
 
         if (m_CurrentHealth <= 0)
         {
+            Referee.Instance.StopAudioPipeline();
             Debug.Log("Player is dead!");
             Die();
         }
