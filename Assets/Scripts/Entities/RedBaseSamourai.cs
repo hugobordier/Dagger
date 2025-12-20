@@ -3,10 +3,30 @@ using UnityEngine;
 public class RedBaseSamourai : MonoBehaviour
 {
     public int beat;
+    private bool hasPassedPlayer = false;
 
     void Start() { }
 
-    void Update() { }
+    void Update()
+    {
+        if (
+            !hasPassedPlayer
+            && EnemyManager.Instance != null
+            && EnemyManager.Instance.player != null
+        )
+        {
+            if (transform.position.x < EnemyManager.Instance.player.transform.position.x)
+            {
+                hasPassedPlayer = true;
+                EnemyManager.Instance.TriggerEnemyNotKilled();
+            }
+        }
+    }
+
+    void OnDisable()
+    {
+        hasPassedPlayer = false;
+    }
 
     public void Die()
     {

@@ -6,6 +6,7 @@ public class ScoreManager : MonoBehaviour
 
     private int killedEnemyNumber;
     private int totalEnemeyNumber;
+
     private float precision;
 
     void Awake()
@@ -25,6 +26,22 @@ public class ScoreManager : MonoBehaviour
         {
             Judge.Instance.EnemyKilled += IncreasePrecision;
         }
+        if (EnemyManager.Instance != null)
+        {
+            EnemyManager.Instance.OnEnemyNotKilled += DecreasePrecision;
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (Judge.Instance != null)
+        {
+            Judge.Instance.EnemyKilled -= IncreasePrecision;
+        }
+        if (EnemyManager.Instance != null)
+        {
+            EnemyManager.Instance.OnEnemyNotKilled -= DecreasePrecision;
+        }
     }
 
     // Update is called once per frame
@@ -42,5 +59,6 @@ public class ScoreManager : MonoBehaviour
     {
         totalEnemeyNumber++;
         precision = killedEnemyNumber * 100f / totalEnemeyNumber;
+        Debug.Log($"Enemykilled | Current score = {this.precision}");
     }
 }

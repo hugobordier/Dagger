@@ -26,7 +26,7 @@ public class EnemyManager : MonoBehaviour
     public float despawnBehindDistance = 15f; // Distance behind camera to deactivate
 
     // Data field for enemy loading
-    private Player player;
+    public Player player;
     private Transform playerTransform;
     private float xOffset = 0f;
     private List<EnemySpawnData> allEnemiesData = new List<EnemySpawnData>();
@@ -42,6 +42,14 @@ public class EnemyManager : MonoBehaviour
         public float beat;
         public int type;
         public float xPosition;
+    }
+
+    public delegate void EnemyNotKilledEvent();
+    public event EnemyNotKilledEvent OnEnemyNotKilled;
+
+    public void TriggerEnemyNotKilled()
+    {
+        OnEnemyNotKilled?.Invoke();
     }
 
     void Awake()
@@ -225,9 +233,12 @@ public class EnemyManager : MonoBehaviour
             enemy.transform.position = new Vector3(data.xPosition, 0f, 0f);
 
             // Assign beat to the specific component
-            if (enemy.TryGetComponent<RedBaseSamourai>(out var red)) red.beat = (int)data.beat;
-            else if (enemy.TryGetComponent<GreenBaseSamourai>(out var green)) green.beat = (int)data.beat;
-            else if (enemy.TryGetComponent<BlueBaseSamourai>(out var blue)) blue.beat = (int)data.beat;
+            if (enemy.TryGetComponent<RedBaseSamourai>(out var red))
+                red.beat = (int)data.beat;
+            else if (enemy.TryGetComponent<GreenBaseSamourai>(out var green))
+                green.beat = (int)data.beat;
+            else if (enemy.TryGetComponent<BlueBaseSamourai>(out var blue))
+                blue.beat = (int)data.beat;
 
             enemy.SetActive(true);
             activeEnemies.Add(enemy);
