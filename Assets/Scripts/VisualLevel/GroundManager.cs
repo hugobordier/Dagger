@@ -135,9 +135,24 @@ public class GroundManager : MonoBehaviour
         // monsterManager?.TrySpawnMonsterOnGround(g, (int)position.x / 10); // c'est pas super propre mais ça marche
         // //monsterManager?.TrySpawnMonsterOnGround(g, layoutIndex);
 
-        Scene levelScene = SceneManager.GetSceneByName("LevelScene");
+        Scene levelScene = SceneManager.GetSceneByName(levelName);
         if (levelScene.IsValid())
+        {
             SceneManager.MoveGameObjectToScene(g, levelScene);
+        }
+        else
+        {
+            // Fallback: Si levelName est vide ou incorrect, on essaie de trouver une scène active qui n'est pas Main
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+            {
+                Scene s = SceneManager.GetSceneAt(i);
+                if (s.name.Contains("Level"))
+                {
+                    SceneManager.MoveGameObjectToScene(g, s);
+                    break;
+                }
+            }
+        }
 
         if (prefabIndex >= 6) // UP
         {
@@ -155,6 +170,21 @@ public class GroundManager : MonoBehaviour
         rythmgrounds.Add(rythm);
 
         if (levelScene.IsValid())
+        {
             SceneManager.MoveGameObjectToScene(rythm, levelScene);
+        }
+        else
+        {
+             // Fallback pour le rythme aussi
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+            {
+                Scene s = SceneManager.GetSceneAt(i);
+                if (s.name.Contains("Level"))
+                {
+                    SceneManager.MoveGameObjectToScene(rythm, s);
+                    break;
+                }
+            }
+        }
     }
 }

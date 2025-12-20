@@ -905,7 +905,7 @@ MonoBehaviour:
   baseHeight: -1.74
   heightStep: 3
   currentHeightOffset: 0
-  levelName: leveltest3
+  levelName: LevelScene3
 --- !u!4 &1571724122
 Transform:
   m_ObjectHideFlags: 0

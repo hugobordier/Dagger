@@ -378,14 +378,16 @@ public class Player : MonoBehaviour
     {
         m_CurrentHealth--;
         Debug.Log("Player damaged! Current health: " + m_CurrentHealth);
-        if (m_Animator)
-            m_Animator.SetTrigger("TrigDamage");
-
         if (m_CurrentHealth <= 0)
         {
             Referee.Instance.StopAudioPipeline();
             Debug.Log("Player is dead!");
-            Die();
+            Die(); 
+        }
+        else
+        {
+            if (m_Animator)
+                m_Animator.SetTrigger("TrigDamage");
         }
     }
 
