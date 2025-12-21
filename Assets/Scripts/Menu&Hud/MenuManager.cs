@@ -60,6 +60,7 @@ public class MenuManager : MonoBehaviour
         CloseAllPanels();
         m_PanelPauseMenu.SetActive(true);
         currentPanel = m_PanelPauseMenu;
+        if (Referee.Instance != null) Referee.Instance.PauseGame();
         Time.timeScale = 0f; // Pause du jeu
     }
 
@@ -67,6 +68,7 @@ public class MenuManager : MonoBehaviour
     {
         m_PanelPauseMenu.SetActive(false);
         currentPanel = null;
+        if (Referee.Instance != null) Referee.Instance.ResumeAudioPipeline();
         Time.timeScale = 1f; // Reprise du jeu
     }
 

@@ -81,9 +81,27 @@ public class Referee : MonoBehaviour
         }
     }
 
-    /// Pause le jeu (TODO)
+    public void PauseAudioPipeline()
+    {
+        if (SoundPlayer.Instance != null && Metronome.Instance != null)
+        {
+            SoundPlayer.Instance.PauseMusic();
+            Metronome.Instance.StopMetronome();
+        }
+    }
+
+    public void ResumeAudioPipeline()
+    {
+        if (SoundPlayer.Instance != null && Metronome.Instance != null)
+        {
+            SoundPlayer.Instance.ResumeMusic();
+            Metronome.Instance.ResumeMetronome();
+        }
+    }
+
+    /// Pause le jeu
     public void PauseGame()
     {
-        StopAudioPipeline();
+        PauseAudioPipeline();
     }
 }

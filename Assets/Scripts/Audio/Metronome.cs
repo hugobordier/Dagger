@@ -73,6 +73,11 @@ public class Metronome : MonoBehaviour
         currentBeat = 0;
     }
 
+    public void ResumeMetronome()
+    {
+        isRunning = true;
+    }
+
     public void StopMetronome()
     {
         isRunning = false;
