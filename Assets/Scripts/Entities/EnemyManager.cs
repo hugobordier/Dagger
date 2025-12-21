@@ -25,6 +25,7 @@ public class EnemyManager : MonoBehaviour
     public int initialPoolSizePerType = 200;
     public float spawnAheadDistance = 40f; // Distance ahead of camera to activate enemies
     public float despawnBehindDistance = 15f; // Distance behind camera to deactivate
+    private float enemyBaseHeight = -0.2f;
 
     // Data field for enemy loading
     public Player player;
@@ -265,14 +266,14 @@ public class EnemyManager : MonoBehaviour
         GameObject enemy = GetFromPool(data.type);
         if (enemy != null)
         {
-            float yPos = 0f;
+            float yPos = enemyBaseHeight;
             if (enemy.CompareTag("BaseSamourai"))
             {
-                yPos = 0f;
+                yPos = enemyBaseHeight;
             }
             else if (enemy.CompareTag("BaseBird"))
             {
-                yPos = 4f;
+                yPos = enemyBaseHeight + 4f;
             }
             // Position the enemy. Assuming Y is 0 or handled by the prefab/ground check.
             // You might want to adjust Y based on the prefab or a fixed lane.
