@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: Dagger-audio/Build/Desktop/Sfx.bank
   Name: Sfx
   StudioPath: bank:/Sfx
-  lastModified: 639019028245923838
+  lastModified: 639019113776722498
   FileSizes:
   - Name: Desktop
     Value: 506
@@ -156,7 +156,7 @@ MonoBehaviour:
   Path: Dagger-audio/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639019028245842004
+  lastModified: 639019113747335245
   FileSizes:
   - Name: Desktop
     Value: 1074
@@ -196,10 +196,10 @@ MonoBehaviour:
   Path: Dagger-audio/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 639019028245921142
+  lastModified: 639019113776691617
   FileSizes:
   - Name: Desktop
-    Value: 2646912
+    Value: 4796384
   Exists: 1
 --- !u!114 &-1242502775561595925
 MonoBehaviour:
@@ -227,7 +227,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 21573
+  Length: 140859
 --- !u!114 &-1200965278338412488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,7 +270,7 @@ MonoBehaviour:
   Path: Dagger-audio/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639019028245844647
+  lastModified: 639019113747341278
   FileSizes:
   - Name: Desktop
     Value: 948
@@ -302,7 +302,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: -453075630297962921}
   cacheVersion: 131849
-  cacheTime: 639019028245923838
+  cacheTime: 639019113776722498
   SerializableEventsDict:
   - key: event:/Music/MusicLevel3
     index: 0
@@ -611,7 +611,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 183948
+  Length: 185948
 --- !u!114 &7923795225544005504
 MonoBehaviour:
   m_ObjectHideFlags: 0

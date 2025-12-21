@@ -78,7 +78,8 @@ public class EnemyManager : MonoBehaviour
             Collider2D playerCollider = player.GetComponent<Collider2D>();
             if (playerCollider != null)
             {
-                xOffset = playerCollider.bounds.size.x + 0.50f;
+                xOffset = playerCollider.bounds.size.x + 0.5f;
+                Debug.Log($"xOffset = {xOffset}");
             }
         }
         else
