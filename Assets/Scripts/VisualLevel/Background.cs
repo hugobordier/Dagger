@@ -9,7 +9,7 @@ public class Background : MonoBehaviour
 
     [Header("Répétition Infinie")]
     public bool isInfinite = true;
-    
+
     [Tooltip("Espace vide entre deux répétitions (utile pour les piliers)")]
     public float gapBetweenSprites = 0f;
 
@@ -21,32 +21,23 @@ public class Background : MonoBehaviour
     void Start()
     {
         m_CameraTransform = Camera.main.transform;
-        
         m_StartPosX = transform.position.x;
-        
         m_OffsetY = transform.position.y - m_CameraTransform.position.y;
-
         if (GetComponent<SpriteRenderer>() != null)
         {
             m_SpriteLength = GetComponent<SpriteRenderer>().bounds.size.x;
         }
-        
         m_SpriteLength += gapBetweenSprites;
     }
 
     void LateUpdate()
     {
         // --- GESTION X (Parallaxe) ---
-        
         float temp = (m_CameraTransform.position.x * (1 - parallaxEffect));
-        
         float dist = (m_CameraTransform.position.x * parallaxEffect);
-
         // --- GESTION Y (Suivi vertical) ---
         float newY = m_CameraTransform.position.y + m_OffsetY;
-
         transform.position = new Vector3(m_StartPosX + dist, newY, transform.position.z);
-
         if (isInfinite && m_SpriteLength > 0)
         {
             if (temp > m_StartPosX + m_SpriteLength)
@@ -60,3 +51,4 @@ public class Background : MonoBehaviour
         }
     }
 }
+

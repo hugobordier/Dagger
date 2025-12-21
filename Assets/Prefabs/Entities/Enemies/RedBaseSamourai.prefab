@@ -98,7 +98,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 0.5, y: 2}
   m_Direction: 0
 --- !u!212 &6898111657996782069
 SpriteRenderer:
@@ -167,7 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4a87edba767d9531a347c29f793e3b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beat: 0
 --- !u!95 &3535473434820643872
 Animator:
   serializedVersion: 7

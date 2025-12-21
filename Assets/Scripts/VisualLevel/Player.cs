@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private float m_HoverTimeMultiplier = 1.0f; // Multiplicateur de durée de vol
+
     [SerializeField]
     private float m_ExtensionAirTime = 0.5f; // Temps supplémentaire en l'air lors d'une attaque
     private float m_HoverTime; // La durée en secondes passée en l'air
@@ -66,7 +67,7 @@ public class Player : MonoBehaviour
         {
             if (MenuManager.Instance.IsEasyMode)
             {
-                m_MaxHealth = 1000; // Mode God
+                m_MaxHealth = 1000000; // Mode God
             }
             else
             {
@@ -74,7 +75,6 @@ public class Player : MonoBehaviour
             }
         }
         m_CurrentHealth = m_MaxHealth;
-        // Try to find PlayerHealth on the same gameObject if not set in inspector
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -106,11 +106,7 @@ public class Player : MonoBehaviour
             return;
         if (!m_CanControl)
             return;
-
-        // Debug.Log("m_GroundContacts = " + m_GroundContacts);
-
         HandleAttackInput();
-
         if (Input.GetKeyDown(KeyCode.K))
         {
             k_pressed = true;
@@ -140,14 +136,6 @@ public class Player : MonoBehaviour
             m_Rb.linearVelocity = new Vector2(currentSpeedX, m_Rb.linearVelocity.y);
         }
         m_HoverTime = (60.0f / m_TranslationSpeed) * m_HoverTimeMultiplier; // ajuster le temps de vol en fonction de la vitesse et du multiplicateur
-
-        // if (m_GroundContacts > 0)
-        // {
-        //     //m_Rb.linearVelocity = Vector2.zero;
-        //     // m_Rb.linearVelocity = new Vector2(m_Rb.linearVelocity.x, 0);
-        //     // Debug.Log("aux sol");
-        // }
-
         if (k_pressed)
         {
             k_pressed = false;
@@ -193,9 +181,6 @@ public class Player : MonoBehaviour
         ;
         if (jump && m_GroundContacts > 0 && !m_IsJumping)
         {
-            // Vector2 jumpForce = Vector2.up * m_JumpImpulsionMagnitude;
-            // Debug.Log("Jump ! Force = " + jumpForce);
-            // m_Rb.AddForce(jumpForce, ForceMode2D.Impulse);
             jumpCoroutine = StartCoroutine(TimedJump());
         }
     }
@@ -208,7 +193,6 @@ public class Player : MonoBehaviour
             {
                 if (contact.normal.x < -0.5f)
                 {
-                    Debug.Log("Mur détecté ! Grimpe !");
                     Damage();
                     Collider2D wallCollider = collision.collider;
                     float newY = wallCollider.bounds.max.y + 0.02f;
@@ -227,33 +211,23 @@ public class Player : MonoBehaviour
         }
     }
 
-        void OnTriggerEnter2D(Collider2D collision)
-
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Hole"))
         {
-
-            if (collision.gameObject.CompareTag("Hole"))
-
-            {
-
-                StartCoroutine(DieSequence());
-
-            }
-
-            else if (collision.gameObject.CompareTag("BaseSamourai") || collision.gameObject.CompareTag("BaseBird"))
-
-            {
-
-                if (m_Collider.IsTouching(collision))
-
-                {
-
-                    Damage();
-
-                }
-
-            }
-
+            StartCoroutine(DieSequence());
         }
+        else if (
+            collision.gameObject.CompareTag("BaseSamourai")
+            || collision.gameObject.CompareTag("BaseBird")
+        )
+        {
+            if (m_Collider.IsTouching(collision))
+            {
+                Damage();
+            }
+        }
+    }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
@@ -261,19 +235,10 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             m_GroundContacts = Mathf.Max(0, m_GroundContacts - 1);
-            //Debug.Log("Quitter sol (" + m_GroundContacts + ")");
         }
     }
 
-    void LateUpdate()
-    {
-        //        if (m_camera != null)
-        //        {
-        //            Vector3 camPos = m_camera.position;
-        //            camPos.x = m_Rb.position.x + 5.0f;
-        //            m_camera.position = camPos;
-        //        }
-    }
+    void LateUpdate() { }
 
     IEnumerator TimedJump()
     {
@@ -283,25 +248,19 @@ public class Player : MonoBehaviour
         m_GroundContacts = 0;
         m_Rb.gravityScale = 0f;
         m_Rb.linearVelocity = new Vector2(m_Rb.linearVelocity.x, 0);
-
         transform.position += Vector3.up * m_JumpHeight;
-
         m_CurrentJumpTimer = 0f;
         while (m_CurrentJumpTimer < m_HoverTime)
         {
             m_CurrentJumpTimer += Time.deltaTime;
             yield return null;
         }
-
         // On cherche le sol directement en dessous
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity);
-        // Debug.Log("Raycast hit distance = " + hit.distance);
-
         if (hit.collider != null)
         {
             transform.position = new Vector2(transform.position.x, hit.point.y);
         }
-
         m_Rb.gravityScale = 1f;
         m_IsJumping = false;
         if (m_Animator)
@@ -310,8 +269,8 @@ public class Player : MonoBehaviour
 
     void HandleAttackInput()
     {
-        if (m_HasAttacked) return;
-
+        if (m_HasAttacked)
+            return;
         if (Input.GetKeyDown(KeyCode.A))
         {
             PerformAttack(Color.red);
@@ -340,25 +299,18 @@ public class Player : MonoBehaviour
             else if (color == Color.blue)
                 m_Animator.SetTrigger("TrigAttackB");
         }
-
         if (m_ColorZonePrefab == null)
             return;
         ExtendAirTime();
-
-        // float spawnX = transform.position.x + m_ZoneDistance + 0.5f;
         float spawnX = transform.position.x + m_ZoneDistance + 0.4f;
         float spawnY = transform.position.y + 1;
-
         Vector2 spawnPosition = new Vector2(spawnX, spawnY);
-
         GameObject attackObject = Instantiate(
             m_ColorZonePrefab,
             spawnPosition,
             Quaternion.identity
         );
-
         attackObject.transform.SetParent(transform);
-
         SpriteRenderer sr = attackObject.GetComponent<SpriteRenderer>();
         if (sr != null)
         {
@@ -366,14 +318,11 @@ public class Player : MonoBehaviour
             displayColor.a = 0.5f;
             sr.color = displayColor;
         }
-
         AttackZone zoneScript = attackObject.GetComponent<AttackZone>();
         if (zoneScript != null)
         {
             zoneScript.attackColor = color;
         }
-
-        // 6. Nettoyage
         Destroy(attackObject, m_ZoneLifetime);
     }
 
@@ -385,7 +334,7 @@ public class Player : MonoBehaviour
         {
             Referee.Instance.StopAudioPipeline();
             Debug.Log("Player is dead!");
-            Die(); 
+            Die();
         }
         else
         {
@@ -396,7 +345,6 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Player has died. Game Over.");
         if (m_Animator && m_CanControl_hole)
         {
             m_Rb.linearVelocity = Vector2.zero;
@@ -415,13 +363,10 @@ public class Player : MonoBehaviour
     {
         if (!m_IsJumping)
             return;
-
         float ExtendAirTime = m_HoverTime * m_ExtensionAirTime;
-
         if (m_CurrentJumpTimer > ExtendAirTime)
         {
             m_CurrentJumpTimer = ExtendAirTime;
-            Debug.Log("Saut prolongé !");
         }
     }
 

@@ -18,18 +18,11 @@ public class PlayerHealth : MonoBehaviour
     {
         currentLives -= amount;
         currentLives = Mathf.Max(0, currentLives);
-
-        Debug.Log($"💔 Player touché ! Vies restantes : {currentLives}");
-
         // Mise à jour des cœurs
         if (playerUI != null)
         {
             playerUI.UpdateHearts(currentLives);
         }
-
-        if (currentLives <= 0)
-        {
-            Debug.Log("☠️ Player est mort ! (log seulement pour l'instant)");
-        }
+        if (currentLives <= 0) { }
     }
 }

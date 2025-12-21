@@ -1,5 +1,25 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7340064667782858153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Sfx.bank
+  m_EditorClassIdentifier: 
+  Path: Dagger-audio/Build/Desktop/Sfx.bank
+  Name: Sfx
+  StudioPath: bank:/Sfx
+  lastModified: 639019113776722498
+  FileSizes:
+  - Name: Desktop
+    Value: 506
+  Exists: 1
 --- !u!114 &-6473093416476234729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,6 +87,33 @@ MonoBehaviour:
   - Name: Desktop
     Value: 948
   Exists: 1
+--- !u!114 &-5184261666109093208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/MusicLevel3
+  m_EditorClassIdentifier: 
+  Path: event:/Music/MusicLevel3
+  Guid:
+    Data1: 833422950
+    Data2: 1192225409
+    Data3: 2133696936
+    Data4: -575030289
+  Banks:
+  - {fileID: -1900489673664347717}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 139315
 --- !u!114 &-4169373613305262307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +141,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 21573
+--- !u!114 &-3656029965719021794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Dagger-audio/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 639019143556038011
+  FileSizes:
+  - Name: Desktop
+    Value: 1074
+  Exists: 1
 --- !u!114 &-2349749568668603891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +181,53 @@ MonoBehaviour:
   - Name: Desktop
     Value: 1074
   Exists: 1
+--- !u!114 &-1900489673664347717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: Dagger-audio/Build/Desktop/Music.bank
+  Name: Music
+  StudioPath: bank:/Music
+  lastModified: 639019313620059202
+  FileSizes:
+  - Name: Desktop
+    Value: 7597728
+  Exists: 1
+--- !u!114 &-1242502775561595925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/MusicLevel2
+  m_EditorClassIdentifier: 
+  Path: event:/Music/MusicLevel2
+  Guid:
+    Data1: 1082176468
+    Data2: 1297875908
+    Data3: -215952712
+    Data4: -1305762774
+  Banks:
+  - {fileID: -1900489673664347717}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 178172
 --- !u!114 &-1200965278338412488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +255,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 183948
+--- !u!114 &-453075630297962921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Dagger-audio/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 639019143556160410
+  FileSizes:
+  - Name: Desktop
+    Value: 994
+  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,28 +288,31 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -6163749641091443889}
-  - {fileID: -6473093416476234729}
-  - {fileID: 4305733815743100761}
-  - {fileID: 496545037985988770}
+  - {fileID: -453075630297962921}
+  - {fileID: -3656029965719021794}
+  - {fileID: -1900489673664347717}
+  - {fileID: -7340064667782858153}
   EditorEvents:
-  - {fileID: -1200965278338412488}
-  - {fileID: 5270849951433002081}
-  - {fileID: 903328713049644375}
+  - {fileID: -5184261666109093208}
+  - {fileID: 6878279446875293871}
+  - {fileID: -1242502775561595925}
+  - {fileID: 1795929158568284237}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -6473093416476234729}
+  - {fileID: -3656029965719021794}
   StringsBanks:
-  - {fileID: -6163749641091443889}
+  - {fileID: -453075630297962921}
   cacheVersion: 131849
-  cacheTime: 639017712143482336
+  cacheTime: 639019313620059202
   SerializableEventsDict:
-  - key: event:/Music/MusicLevel1
-    index: 0
-  - key: event:/Music/MusicLevel2
-    index: 1
   - key: event:/Music/MusicLevel3
+    index: 0
+  - key: event:/Music/MusicLevel1
+    index: 1
+  - key: event:/Music/MusicLevel2
     index: 2
+  - key: event:/Music/MusicTest
+    index: 3
 --- !u!114 &384076062840764820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,6 +387,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &1795929158568284237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/MusicTest
+  m_EditorClassIdentifier: 
+  Path: event:/Music/MusicTest
+  Guid:
+    Data1: -1972265753
+    Data2: 1171516117
+    Data3: 1162054840
+    Data4: 399193438
+  Banks:
+  - {fileID: -1900489673664347717}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 21573
 --- !u!114 &2385557627412602063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,6 +615,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 184200
+--- !u!114 &6878279446875293871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/MusicLevel1
+  m_EditorClassIdentifier: 
+  Path: event:/Music/MusicLevel1
+  Guid:
+    Data1: -142537332
+    Data2: 1079035560
+    Data3: -1611541347
+    Data4: 328425933
+  Banks:
+  - {fileID: -1900489673664347717}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 181500
 --- !u!114 &7923795225544005504
 MonoBehaviour:
   m_ObjectHideFlags: 0

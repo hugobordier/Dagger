@@ -45,9 +45,7 @@ public class AttackZone : MonoBehaviour
             RedBaseBird bird = collision.GetComponent<RedBaseBird>();
             if (enemy != null)
             {
-                // HitRedBaseSamourai?.Invoke(enemy, SoundPlayer.Instance.GetMusicPosition());
                 HitRedBaseSamourai?.Invoke(enemy);
-                // enemy.Die();
             }
             if (bird != null)
             {
@@ -60,9 +58,7 @@ public class AttackZone : MonoBehaviour
             GreenBaseBird bird = collision.GetComponent<GreenBaseBird>();
             if (enemy != null)
             {
-                // HitGreenBaseSamourai?.Invoke(enemy, SoundPlayer.Instance.GetMusicPosition());
                 HitGreenBaseSamourai?.Invoke(enemy);
-                // enemy.Die();
             }
             if (bird != null)
             {
@@ -75,9 +71,7 @@ public class AttackZone : MonoBehaviour
             BlueBaseBird bird = collision.GetComponent<BlueBaseBird>();
             if (enemy != null)
             {
-                // HitBlueBaseSamourai?.Invoke(enemy, SoundPlayer.Instance.GetMusicPosition());
                 HitBlueBaseSamourai?.Invoke(enemy);
-                // enemy.Die();
             }
             if (bird != null)
             {

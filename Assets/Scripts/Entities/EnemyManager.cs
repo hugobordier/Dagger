@@ -6,7 +6,7 @@ public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance { get; private set; }
 
-    public float bpm;
+    private float bpm;
 
     [Header("Configuration")]
     [Tooltip("Name of the file in Resources/EntityData (without extension)")]
@@ -22,9 +22,11 @@ public class EnemyManager : MonoBehaviour
     public Transform enemyParent;
 
     [Header("Pooling Settings")]
-    public int initialPoolSizePerType = 200;
+    public int initialPoolSizePerType = 10;
     public float spawnAheadDistance = 40f; // Distance ahead of camera to activate enemies
     public float despawnBehindDistance = 15f; // Distance behind camera to deactivate
+
+    private float enemyBaseHeight = -0.2f;
 
     // Data field for enemy loading
     public Player player;
@@ -76,8 +78,8 @@ public class EnemyManager : MonoBehaviour
             Collider2D playerCollider = player.GetComponent<Collider2D>();
             if (playerCollider != null)
             {
-                xOffset = playerCollider.bounds.size.x + 0.50f;
-                Debug.Log($"EnemyOffset = {xOffset}");
+                xOffset = playerCollider.bounds.size.x + 0.5f;
+                Debug.Log($"xOffset = {xOffset}");
             }
         }
         else
@@ -132,7 +134,6 @@ public class EnemyManager : MonoBehaviour
     public void Stop()
     {
         canSpawn = false;
-        // Disable all active enemies and return them to pool
         for (int i = activeEnemies.Count - 1; i >= 0; i--)
         {
             GameObject enemy = activeEnemies[i];
@@ -147,21 +148,19 @@ public class EnemyManager : MonoBehaviour
     public void DestroyAllEnemies()
     {
         canSpawn = false;
-        
-        // Destroy active enemies
         foreach (var enemy in activeEnemies)
         {
-            if (enemy != null) Destroy(enemy);
+            if (enemy != null)
+                Destroy(enemy);
         }
         activeEnemies.Clear();
-
-        // Destroy pooled enemies
         foreach (var pool in enemyPools.Values)
         {
             while (pool.Count > 0)
             {
                 GameObject obj = pool.Dequeue();
-                if (obj != null) Destroy(obj);
+                if (obj != null)
+                    Destroy(obj);
             }
         }
         enemyPools.Clear();
@@ -203,7 +202,6 @@ public class EnemyManager : MonoBehaviour
                 )
                 {
                     float xPos = CalculatePosition(beat);
-                    // Debug.Log(xPos);
                     allEnemiesData.Add(
                         new EnemySpawnData
                         {
@@ -215,12 +213,10 @@ public class EnemyManager : MonoBehaviour
                 }
             }
         }
-        // Debug.Log($"EnemyManager: Loaded {allEnemiesData.Count} enemies.");
     }
 
     float CalculatePosition(float beat)
     {
-        // return playerSpeed * beat * (60f / bpm);
         return ((playerSpeed * beat * 60f) / (bpm * 6.0f)) + xOffset;
     }
 
@@ -234,7 +230,6 @@ public class EnemyManager : MonoBehaviour
             for (int k = 0; k < initialPoolSizePerType; k++)
             {
                 GameObject obj = CreateEnemy(i);
-                // Debug.Log($"{obj.name}");
                 obj.SetActive(false);
                 enemyPools[i].Enqueue(obj);
             }
@@ -263,14 +258,14 @@ public class EnemyManager : MonoBehaviour
         GameObject enemy = GetFromPool(data.type);
         if (enemy != null)
         {
-            float yPos = 0f;
+            float yPos = enemyBaseHeight;
             if (enemy.CompareTag("BaseSamourai"))
             {
-                yPos = 0f;
+                yPos = enemyBaseHeight;
             }
             else if (enemy.CompareTag("BaseBird"))
             {
-                yPos = 4f;
+                yPos = enemyBaseHeight + 4f;
             }
             // Position the enemy. Assuming Y is 0 or handled by the prefab/ground check.
             // You might want to adjust Y based on the prefab or a fixed lane.
@@ -293,7 +288,6 @@ public class EnemyManager : MonoBehaviour
         }
         else
         {
-            // Pool empty, create new (expand pool)
             return CreateEnemy(type);
         }
     }
@@ -302,7 +296,6 @@ public class EnemyManager : MonoBehaviour
     {
         GameObject closest = null;
         float minDistance = float.MaxValue;
-
         for (int i = 0; i < activeEnemies.Count; i++)
         {
             GameObject enemy = activeEnemies[i];
@@ -331,8 +324,6 @@ public class EnemyManager : MonoBehaviour
     void ReturnEnemyToPool(GameObject enemy)
     {
         enemy.SetActive(false);
-        // We need to know which pool it belongs to.
-        // Using a helper component 'EnemyIdentity' to store the type.
         EnemyIdentity id = enemy.GetComponent<EnemyIdentity>();
         if (id != null)
         {
