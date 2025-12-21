@@ -132,13 +132,24 @@ public class EnemyManager : MonoBehaviour
     public void Stop()
     {
         canSpawn = false;
-        // Optional: Disable all active enemies
-        foreach (var enemy in activeEnemies)
+        // Disable all active enemies and return them to pool
+        for (int i = activeEnemies.Count - 1; i >= 0; i--)
         {
+            GameObject enemy = activeEnemies[i];
             if (enemy != null)
-                enemy.SetActive(false);
+            {
+                ReturnEnemyToPool(enemy);
+            }
         }
-        // activeEnemies.Clear(); // Optionally clear the list if you want to reuse them later via pool completely reset
+        activeEnemies.Clear();
+    }
+
+    void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
     }
 
     /// <summary>

@@ -72,6 +72,7 @@ public class MenuManager : MonoBehaviour
 
     public void OpenGameoverMenu()
     {
+        if (EnemyManager.Instance != null) EnemyManager.Instance.Stop();
         m_PanelGameoverMenu.SetActive(true);
         currentPanel = m_PanelGameoverMenu;
         Time.timeScale = 0f; // Pause du jeu
@@ -79,6 +80,7 @@ public class MenuManager : MonoBehaviour
 
     public void OpenEndMenu()
     {
+        if (EnemyManager.Instance != null) EnemyManager.Instance.Stop();
         m_PanelEndMenu.SetActive(true);
         currentPanel = m_PanelEndMenu;
 
@@ -124,6 +126,7 @@ public class MenuManager : MonoBehaviour
 
     public void RestartLevel()
     {
+        if (EnemyManager.Instance != null) EnemyManager.Instance.Stop();
         CloseAllPanels();
         SceneManager.UnloadSceneAsync(selectedLevel);
         SceneManager.LoadScene(selectedLevel, LoadSceneMode.Additive);
@@ -140,6 +143,7 @@ public class MenuManager : MonoBehaviour
 
     public void QuitToMainMenu()
     {
+        if (EnemyManager.Instance != null) EnemyManager.Instance.Stop();
         Time.timeScale = 1f;
         SceneManager.UnloadSceneAsync(selectedLevel);
         OpenMainMenu();
