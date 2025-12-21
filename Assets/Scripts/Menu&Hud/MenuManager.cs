@@ -133,6 +133,10 @@ public class MenuManager : MonoBehaviour
     {
         if (EnemyManager.Instance != null)
             EnemyManager.Instance.DestroyAllEnemies();
+
+        if (Referee.Instance != null)
+            Referee.Instance.StopAudioPipeline();
+
         CloseAllPanels();
         SceneManager.UnloadSceneAsync(selectedLevel);
         SceneManager.LoadScene(selectedLevel, LoadSceneMode.Additive);
@@ -151,8 +155,20 @@ public class MenuManager : MonoBehaviour
     {
         if (EnemyManager.Instance != null)
             EnemyManager.Instance.DestroyAllEnemies();
+
+        if (Referee.Instance != null)
+            Referee.Instance.StopAudioPipeline();
+
         Time.timeScale = 1f;
-        SceneManager.UnloadSceneAsync(selectedLevel);
+
+        if (!string.IsNullOrEmpty(selectedLevel))
+        {
+            Scene scene = SceneManager.GetSceneByName(selectedLevel);
+            if (scene.IsValid() && scene.isLoaded)
+            {
+                SceneManager.UnloadSceneAsync(selectedLevel);
+            }
+        }
         OpenMainMenu();
     }
 

@@ -50,6 +50,14 @@ public class EnemyManager : MonoBehaviour
     public delegate void EnemyNotKilledEvent();
     public event EnemyNotKilledEvent OnEnemyNotKilled;
 
+    public bool IsLevelFinished
+    {
+        get
+        {
+            return nextEnemyIndex >= allEnemiesData.Count && activeEnemies.Count == 0;
+        }
+    }
+
     public void TriggerEnemyNotKilled()
     {
         OnEnemyNotKilled?.Invoke();

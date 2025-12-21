@@ -22,12 +22,16 @@ public class Referee : MonoBehaviour
         {
             if (SoundPlayer.Instance.GetPlaybackState() == FMOD.Studio.PLAYBACK_STATE.STOPPED)
             {
-                OnMusicFinished();
+                OnMusicFinishedEndOfSong();
+            }
+            else if (EnemyManager.Instance != null && EnemyManager.Instance.IsLevelFinished)
+            {
+                OnMusicFinishedNoEnemies();
             }
         }
     }
 
-    private void OnMusicFinished()
+    private void OnMusicFinishedEndOfSong()
     {
         if (MenuManager.Instance != null)
         {
@@ -38,6 +42,27 @@ public class Referee : MonoBehaviour
             Debug.LogError("MenuManager instance not found!");
         }
         StopAudioPipeline();
+        if (EnemyManager.Instance != null)
+        {
+            EnemyManager.Instance.Stop();
+        }
+        Player player = FindObjectOfType<Player>();
+        if (player != null)
+        {
+            player.Stop();
+        }
+    }
+
+    private void OnMusicFinishedNoEnemies()
+    {
+        if (MenuManager.Instance != null)
+        {
+            MenuManager.Instance.OpenEndMenu();
+        }
+        else
+        {
+            Debug.LogError("MenuManager instance not found!");
+        }
         if (EnemyManager.Instance != null)
         {
             EnemyManager.Instance.Stop();
