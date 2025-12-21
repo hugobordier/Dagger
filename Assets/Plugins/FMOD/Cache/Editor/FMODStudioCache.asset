@@ -156,7 +156,7 @@ MonoBehaviour:
   Path: Dagger-audio/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639019113747335245
+  lastModified: 639019143556038011
   FileSizes:
   - Name: Desktop
     Value: 1074
@@ -196,10 +196,10 @@ MonoBehaviour:
   Path: Dagger-audio/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 639019113776691617
+  lastModified: 639019143562689165
   FileSizes:
   - Name: Desktop
-    Value: 4796384
+    Value: 4995200
   Exists: 1
 --- !u!114 &-1242502775561595925
 MonoBehaviour:
@@ -270,10 +270,10 @@ MonoBehaviour:
   Path: Dagger-audio/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639019113747341278
+  lastModified: 639019143556160410
   FileSizes:
   - Name: Desktop
-    Value: 948
+    Value: 994
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -296,13 +296,14 @@ MonoBehaviour:
   - {fileID: -5184261666109093208}
   - {fileID: 6878279446875293871}
   - {fileID: -1242502775561595925}
+  - {fileID: 1795929158568284237}
   EditorParameters: []
   MasterBanks:
   - {fileID: -3656029965719021794}
   StringsBanks:
   - {fileID: -453075630297962921}
   cacheVersion: 131849
-  cacheTime: 639019113776722498
+  cacheTime: 639019143562689165
   SerializableEventsDict:
   - key: event:/Music/MusicLevel3
     index: 0
@@ -310,6 +311,8 @@ MonoBehaviour:
     index: 1
   - key: event:/Music/MusicLevel2
     index: 2
+  - key: event:/Music/MusicTest
+    index: 3
 --- !u!114 &384076062840764820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,6 +387,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &1795929158568284237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/MusicTest
+  m_EditorClassIdentifier: 
+  Path: event:/Music/MusicTest
+  Guid:
+    Data1: -1972265753
+    Data2: 1171516117
+    Data3: 1162054840
+    Data4: 399193438
+  Banks:
+  - {fileID: -1900489673664347717}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 21573
 --- !u!114 &2385557627412602063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,7 +641,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 185948
+  Length: 181500
 --- !u!114 &7923795225544005504
 MonoBehaviour:
   m_ObjectHideFlags: 0

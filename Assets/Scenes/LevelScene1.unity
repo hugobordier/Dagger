@@ -1392,17 +1392,22 @@ PrefabInstance:
     - target: {fileID: 1239134946461476871, guid: 084770570ef04c4fdb402b102b17089a,
         type: 3}
       propertyPath: playerSpeed
-      value: 60
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1239134946461476871, guid: 084770570ef04c4fdb402b102b17089a,
         type: 3}
       propertyPath: levelFileName
-      value: enemylevel1_test
+      value: enemylevel1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1239134946461476871, guid: 084770570ef04c4fdb402b102b17089a,
+        type: 3}
+      propertyPath: initialPoolSizePerType
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1239134946461476871, guid: 084770570ef04c4fdb402b102b17089a,
         type: 3}
       propertyPath: enemyPrefabs.Array.size
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1239134946461476871, guid: 084770570ef04c4fdb402b102b17089a,
         type: 3}
@@ -1432,19 +1437,19 @@ PrefabInstance:
         type: 3}
       propertyPath: 'enemyPrefabs.Array.data[4]'
       value: 
-      objectReference: {fileID: 8874056051276217801, guid: 8c60b6936e8f0da18b371c5717d8b094,
+      objectReference: {fileID: 587067285977308964, guid: d0862b14fd07e44a685ba8efba562d76,
         type: 3}
     - target: {fileID: 1239134946461476871, guid: 084770570ef04c4fdb402b102b17089a,
         type: 3}
       propertyPath: 'enemyPrefabs.Array.data[5]'
       value: 
-      objectReference: {fileID: 8874056051276217801, guid: cd562756757124f87849331257ea6f71,
+      objectReference: {fileID: 587067285977308964, guid: d0862b14fd07e44a685ba8efba562d76,
         type: 3}
     - target: {fileID: 1239134946461476871, guid: 084770570ef04c4fdb402b102b17089a,
         type: 3}
       propertyPath: 'enemyPrefabs.Array.data[6]'
       value: 
-      objectReference: {fileID: 8874056051276217801, guid: c55e4dfabdcfd292b971f001142fb756,
+      objectReference: {fileID: 8874056051276217801, guid: cd562756757124f87849331257ea6f71,
         type: 3}
     - target: {fileID: 1239134946461476871, guid: 084770570ef04c4fdb402b102b17089a,
         type: 3}
@@ -1493,12 +1498,12 @@ PrefabInstance:
     - target: {fileID: 2121768611127330412, guid: e779b0fedf9680ba89b79ee64631ed90,
         type: 3}
       propertyPath: _bpm
-      value: 120
+      value: 240
       objectReference: {fileID: 0}
     - target: {fileID: 2121768611127330412, guid: e779b0fedf9680ba89b79ee64631ed90,
         type: 3}
       propertyPath: marginMs
-      value: 100
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 7005752817840946399, guid: e779b0fedf9680ba89b79ee64631ed90,
         type: 3}
@@ -1616,7 +1621,7 @@ PrefabInstance:
     - target: {fileID: 3873656817693317533, guid: 891187dadab86456a8a66cb0a08f432a,
         type: 3}
       propertyPath: m_TranslationSpeed
-      value: 60
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6219629922382764922, guid: 891187dadab86456a8a66cb0a08f432a,
         type: 3}

@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
         {
             if (MenuManager.Instance.IsEasyMode)
             {
-                m_MaxHealth = 1000; // Mode God
+                m_MaxHealth = 1000000; // Mode God
             }
             else
             {
