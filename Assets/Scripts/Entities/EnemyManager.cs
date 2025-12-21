@@ -6,7 +6,7 @@ public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance { get; private set; }
 
-    public float bpm;
+    private float bpm;
 
     [Header("Configuration")]
     [Tooltip("Name of the file in Resources/EntityData (without extension)")]
@@ -147,11 +147,12 @@ public class EnemyManager : MonoBehaviour
     public void DestroyAllEnemies()
     {
         canSpawn = false;
-        
+
         // Destroy active enemies
         foreach (var enemy in activeEnemies)
         {
-            if (enemy != null) Destroy(enemy);
+            if (enemy != null)
+                Destroy(enemy);
         }
         activeEnemies.Clear();
 
@@ -161,7 +162,8 @@ public class EnemyManager : MonoBehaviour
             while (pool.Count > 0)
             {
                 GameObject obj = pool.Dequeue();
-                if (obj != null) Destroy(obj);
+                if (obj != null)
+                    Destroy(obj);
             }
         }
         enemyPools.Clear();
