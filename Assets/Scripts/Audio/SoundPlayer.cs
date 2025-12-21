@@ -31,6 +31,23 @@ public class SoundPlayer : MonoBehaviour
         musicInstance.start();
     }
 
+    public void PauseMusic()
+    {
+        if (musicInstance.isValid())
+        {
+            musicInstance.setPaused(true);
+        }
+    }
+
+    public void ResumeMusic()
+    {
+        if (musicInstance.isValid())
+        {
+            musicInstance.setPaused(false);
+            IsMusicPlaying = true;
+        }
+    }
+
     public void StopMusic()
     {
         IsMusicPlaying = false;

@@ -1196,6 +1196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bef7bede6bdb4969ae35a22ece7113f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ScoreText: {fileID: 1290791615}
   m_PanelMainMenu: {fileID: 480811765}
   m_PanelPauseMenu: {fileID: 1371303784}
   m_PanelGameoverMenu: {fileID: 1675338621}

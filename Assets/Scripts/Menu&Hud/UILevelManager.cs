@@ -1,9 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("UI Elements")]
+    [SerializeField] private TextMeshProUGUI m_ScoreText;
+
     [Header("Configuration Globale")]
     [SerializeField] private Player m_Player;
     
@@ -34,6 +38,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         UpdateHeartsDisplay();
+        UpdateScoreDisplay();
     }
 
     void InitializeHearts()
@@ -75,5 +80,22 @@ public class UIManager : MonoBehaviour
                 m_HeartImages[i].sprite = m_EmptyHeartSprite;
             }
         }
+    }
+
+    void UpdateScoreDisplay()
+    {
+        if (m_ScoreText != null)
+        {
+            if (ScoreManager.Instance != null)
+            {
+                float score = ScoreManager.Instance.Precision;
+                m_ScoreText.text = score.ToString("F1") + " %"; 
+            }
+            else
+            {
+                m_ScoreText.text = "-- %";
+            }
+        }
+
     }
 }

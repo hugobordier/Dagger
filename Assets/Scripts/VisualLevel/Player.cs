@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     private float m_JumpHeight = 4f; // La hauteur du saut
 
     [SerializeField]
+    private float m_HoverTimeMultiplier = 1.0f; // Multiplicateur de durée de vol
+    [SerializeField]
+    private float m_ExtensionAirTime = 0.5f; // Temps supplémentaire en l'air lors d'une attaque
     private float m_HoverTime; // La durée en secondes passée en l'air
     private bool m_IsJumping = false; // Pour savoir si on est déjà en train de sauter
 
@@ -21,7 +24,7 @@ public class Player : MonoBehaviour
     private float m_ZoneDistance = 1f; // distance devant le perso
 
     [SerializeField]
-    private float m_ZoneLifetime = 0.5f; // durée d’affichage
+    private float m_ZoneLifetime; // durée d’affichage
     Coroutine jumpCoroutine;
     private int m_MaxHealth;
     private int m_CurrentHealth;
@@ -136,7 +139,7 @@ public class Player : MonoBehaviour
         {
             m_Rb.linearVelocity = new Vector2(currentSpeedX, m_Rb.linearVelocity.y);
         }
-        m_HoverTime = 60.0f / m_TranslationSpeed; // ajuster le temps de vol en fonction de la vitesse
+        m_HoverTime = (60.0f / m_TranslationSpeed) * m_HoverTimeMultiplier; // ajuster le temps de vol en fonction de la vitesse et du multiplicateur
 
         // if (m_GroundContacts > 0)
         // {
@@ -378,14 +381,16 @@ public class Player : MonoBehaviour
     {
         m_CurrentHealth--;
         Debug.Log("Player damaged! Current health: " + m_CurrentHealth);
-        if (m_Animator)
-            m_Animator.SetTrigger("TrigDamage");
-
         if (m_CurrentHealth <= 0)
         {
             Referee.Instance.StopAudioPipeline();
             Debug.Log("Player is dead!");
-            Die();
+            Die(); 
+        }
+        else
+        {
+            if (m_Animator)
+                m_Animator.SetTrigger("TrigDamage");
         }
     }
 
@@ -411,11 +416,11 @@ public class Player : MonoBehaviour
         if (!m_IsJumping)
             return;
 
-        float halfTime = m_HoverTime / 2f;
+        float ExtendAirTime = m_HoverTime * m_ExtensionAirTime;
 
-        if (m_CurrentJumpTimer > halfTime)
+        if (m_CurrentJumpTimer > ExtendAirTime)
         {
-            m_CurrentJumpTimer = halfTime;
+            m_CurrentJumpTimer = ExtendAirTime;
             Debug.Log("Saut prolongé !");
         }
     }
