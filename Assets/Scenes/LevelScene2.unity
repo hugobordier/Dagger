@@ -1365,7 +1365,7 @@ PrefabInstance:
     - target: {fileID: 3873656817693317533, guid: 891187dadab86456a8a66cb0a08f432a,
         type: 3}
       propertyPath: m_TranslationSpeed
-      value: 60
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 6219629922382764922, guid: 891187dadab86456a8a66cb0a08f432a,
         type: 3}
@@ -1461,7 +1461,7 @@ PrefabInstance:
     - target: {fileID: 1239134946461476871, guid: 084770570ef04c4fdb402b102b17089a,
         type: 3}
       propertyPath: playerSpeed
-      value: 60
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 1239134946461476871, guid: 084770570ef04c4fdb402b102b17089a,
         type: 3}
@@ -1596,7 +1596,7 @@ PrefabInstance:
     - target: {fileID: 2121768611127330412, guid: e779b0fedf9680ba89b79ee64631ed90,
         type: 3}
       propertyPath: _bpm
-      value: 155
+      value: 272
       objectReference: {fileID: 0}
     - target: {fileID: 7005752817840946399, guid: e779b0fedf9680ba89b79ee64631ed90,
         type: 3}
