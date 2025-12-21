@@ -107,13 +107,13 @@ MonoBehaviour:
     Data4: -575030289
   Banks:
   - {fileID: -1900489673664347717}
-  IsStream: 0
+  IsStream: 1
   Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 139315
 --- !u!114 &-4169373613305262307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,10 +196,10 @@ MonoBehaviour:
   Path: Dagger-audio/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 639019143562689165
+  lastModified: 639019313620059202
   FileSizes:
   - Name: Desktop
-    Value: 4995200
+    Value: 7597728
   Exists: 1
 --- !u!114 &-1242502775561595925
 MonoBehaviour:
@@ -227,7 +227,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 140859
+  Length: 178172
 --- !u!114 &-1200965278338412488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,7 +303,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: -453075630297962921}
   cacheVersion: 131849
-  cacheTime: 639019143562689165
+  cacheTime: 639019313620059202
   SerializableEventsDict:
   - key: event:/Music/MusicLevel3
     index: 0
