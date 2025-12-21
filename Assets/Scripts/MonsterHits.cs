@@ -3,7 +3,6 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class MonsterHitLogger : MonoBehaviour
 {
-
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.CompareTag("Player"))
@@ -13,7 +12,7 @@ public class MonsterHitLogger : MonoBehaviour
             {
                 ph.TakeDamage(1);
             }
-            Debug.Log($"🐲 Player a touché le monstre {gameObject.name} via Trigger à {transform.position}");
+            // Debug.Log($"🐲 Player a touché le monstre {gameObject.name} via Trigger à {transform.position}");
         }
     }
 }

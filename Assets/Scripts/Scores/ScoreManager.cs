@@ -53,13 +53,11 @@ public class ScoreManager : MonoBehaviour
         killedEnemyNumber++;
         totalEnemeyNumber++;
         precision = killedEnemyNumber * 100f / totalEnemeyNumber;
-        Debug.Log($"Enemykilled | Current score = {this.precision}");
     }
 
     private void DecreasePrecision()
     {
         totalEnemeyNumber++;
         precision = killedEnemyNumber * 100f / totalEnemeyNumber;
-        Debug.Log($"Enemykilled | Current score = {this.precision}");
     }
 }

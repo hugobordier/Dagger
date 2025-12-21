@@ -29,8 +29,6 @@ public class Referee : MonoBehaviour
 
     private void OnMusicFinished()
     {
-        // Debug.Log("Music Finished! Triggering Level End.");
-        // 1. Launch PanelEndMenu in MainMenuScene
         if (MenuManager.Instance != null)
         {
             MenuManager.Instance.OpenEndMenu();
@@ -39,17 +37,11 @@ public class Referee : MonoBehaviour
         {
             Debug.LogError("MenuManager instance not found!");
         }
-
-        // 2. Stop AudioManager (SoundPlayer/Referee)
         StopAudioPipeline();
-
-        // 3. Stop EnemyManager
         if (EnemyManager.Instance != null)
         {
             EnemyManager.Instance.Stop();
         }
-
-        // 4. Stop Player
         Player player = FindObjectOfType<Player>();
         if (player != null)
         {
@@ -70,14 +62,12 @@ public class Referee : MonoBehaviour
         }
     }
 
-    /// Arrête la musique et le métronome
     public void StopAudioPipeline()
     {
         if (SoundPlayer.Instance != null && Metronome.Instance != null)
         {
             SoundPlayer.Instance.StopMusic();
             Metronome.Instance.StopMetronome();
-            Debug.Log("Game stopped");
         }
     }
 

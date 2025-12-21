@@ -35,18 +35,7 @@ public class GroundManager : MonoBehaviour
         // Charger les prefabs depuis la librairie
         for (int i = 0; i < groundLibrary.groundPrefabs.Length; i++)
             groundPrefabs[i] = groundLibrary.groundPrefabs[i];
-
-        // Initialiser le layout du niveau
-
-        // Hugo si tu veux travailler sur LevelScene sans te casser la tete,
-        // commente les 2 lignes en dessous
-        // string levelName = LevelData.Instance.selectedLevel;
-        // LoadLevelLayout(levelName);
-
-        // et décommente cet ligne, en ayant la scene LevelScene chargé dans unity
-        // si c'est pas bon dis le moi.
         LoadLevelLayout(levelName);
-
         // Initialiser les grounds initiaux
         SpawnNextGround(0, -1);
         for (int i = 0; i <= 2; i++)
@@ -59,7 +48,6 @@ public class GroundManager : MonoBehaviour
     public void LoadLevelLayout(string fileName)
     {
         TextAsset textAsset = Resources.Load<TextAsset>("LevelData/" + fileName);
-
         if (textAsset != null)
         {
             string[] numbers = textAsset.text.Split(';');
@@ -82,7 +70,6 @@ public class GroundManager : MonoBehaviour
         GameObject leftMost = grounds[0];
         GameObject leftMostrythm = rythmgrounds[0];
         GameObject rightMost = grounds[grounds.Count - 1];
-
         if (playerX > rightMost.transform.position.x - groundWidth)
         {
             // Spawn nouveau à droite
@@ -98,43 +85,21 @@ public class GroundManager : MonoBehaviour
             Destroy(leftMostrythm);
             rythmgrounds.RemoveAt(0);
         }
-
-        // if (playerX < leftMost.transform.position.x + groundWidth / 2)
-        // {
-        //     GameObject g = Instantiate(rythmPrefab, leftMost.transform.position - Vector3.right * groundWidth, Quaternion.identity);
-        //     grounds.Insert(0, g);
-        //
-        //     Destroy(rightMost);
-        //     grounds.RemoveAt(grounds.Count - 1);
-        // }
     }
 
     void SpawnNextGround(int layoutIndex, float positionIndex)
     {
         if (layoutIndex < 0 || layoutIndex >= levelLayout.Count)
             return;
-
         int prefabIndex = levelLayout[layoutIndex];
-
-        //        if (prefabIndex >= 5) // UP
-        //            currentHeightOffset += 1f;
-
         float yPos = baseHeight + (currentHeightOffset * heightStep);
         Vector3 position = new Vector3(positionIndex * groundWidth + groundWidth * 0.5f, yPos, 0);
-
         if (!groundPrefabs.TryGetValue(prefabIndex, out GameObject prefab))
         {
             prefab = rythmPrefab;
         }
-
         GameObject g = Instantiate(prefab, position, Quaternion.identity);
         grounds.Add(g);
-
-        // Debug.Log($"Spawn Ground index {prefabIndex} à la position {position}");
-
-        // monsterManager?.TrySpawnMonsterOnGround(g, (int)position.x / 10); // c'est pas super propre mais ça marche
-        // //monsterManager?.TrySpawnMonsterOnGround(g, layoutIndex);
-
         Scene levelScene = SceneManager.GetSceneByName(levelName);
         if (levelScene.IsValid())
         {
@@ -153,12 +118,10 @@ public class GroundManager : MonoBehaviour
                 }
             }
         }
-
         if (prefabIndex >= 6) // UP
         {
             currentHeightOffset += 1f;
         }
-
         // Spawn rythm ground, pas à garder juste pour le visuel
         float yPos2 = baseHeight + (currentHeightOffset * heightStep) - 2;
         Vector3 position2 = new Vector3(
@@ -175,7 +138,7 @@ public class GroundManager : MonoBehaviour
         }
         else
         {
-             // Fallback pour le rythme aussi
+            // Fallback pour le rythme aussi
             for (int i = 0; i < SceneManager.sceneCount; i++)
             {
                 Scene s = SceneManager.GetSceneAt(i);

@@ -2,14 +2,21 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private Transform player;
-    [SerializeField] private Transform m_camera;
-    [SerializeField] private GroundManager groundManager;
-    [SerializeField] private float heightStep = 3f;
+    [SerializeField]
+    private Transform player;
+
+    [SerializeField]
+    private Transform m_camera;
+
+    [SerializeField]
+    private GroundManager groundManager;
+
+    [SerializeField]
+    private float heightStep = 3f;
     private Player playerScript;
-    private float yFollowDelay;      // durée avant de suivre
+    private float yFollowDelay; // durée avant de suivre
     private float yFollowTimer = 0f; // compteur du timer
-    private bool canFollowY = true;  // état de la caméra
+    private bool canFollowY = true; // état de la caméra
     private float lastHeightOffset = 0f; // pour détecter les changements
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -22,10 +29,7 @@ public class CameraManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-
-    }
+    void Update() { }
 
     void LateUpdate()
     {
@@ -42,7 +46,7 @@ public class CameraManager : MonoBehaviour
             canFollowY = false;
 
             lastHeightOffset = groundManager.currentHeightOffset;
-            Debug.Log($"💡 Nouvelle hauteur détectée ! Délai de {yFollowDelay:F2}s avant suivi Y.");
+            // Debug.Log($"💡 Nouvelle hauteur détectée ! Délai de {yFollowDelay:F2}s avant suivi Y.");
         }
 
         if (!canFollowY)
@@ -51,7 +55,7 @@ public class CameraManager : MonoBehaviour
             if (yFollowTimer <= 0f)
             {
                 canFollowY = true;
-                Debug.Log("⏱️ La caméra reprend le suivi Y !");
+                // Debug.Log("⏱️ La caméra reprend le suivi Y !");
             }
         }
 

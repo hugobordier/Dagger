@@ -1,13 +1,14 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance;
 
     [Header("UI Elements")]
-    [SerializeField] private TextMeshProUGUI m_ScoreText;
+    [SerializeField]
+    private TextMeshProUGUI m_ScoreText;
 
     [Header("Panels")]
     [SerializeField]
@@ -49,7 +50,6 @@ public class MenuManager : MonoBehaviour
     // Update is called once per frame
     public void OpenMainMenu()
     {
-        Debug.Log("OpenMainMenu");
         CloseAllPanels();
         m_PanelMainMenu.SetActive(true);
         currentPanel = m_PanelMainMenu;
@@ -60,7 +60,8 @@ public class MenuManager : MonoBehaviour
         CloseAllPanels();
         m_PanelPauseMenu.SetActive(true);
         currentPanel = m_PanelPauseMenu;
-        if (Referee.Instance != null) Referee.Instance.PauseGame();
+        if (Referee.Instance != null)
+            Referee.Instance.PauseGame();
         Time.timeScale = 0f; // Pause du jeu
     }
 
@@ -68,13 +69,15 @@ public class MenuManager : MonoBehaviour
     {
         m_PanelPauseMenu.SetActive(false);
         currentPanel = null;
-        if (Referee.Instance != null) Referee.Instance.ResumeAudioPipeline();
+        if (Referee.Instance != null)
+            Referee.Instance.ResumeAudioPipeline();
         Time.timeScale = 1f; // Reprise du jeu
     }
 
     public void OpenGameoverMenu()
     {
-        if (EnemyManager.Instance != null) EnemyManager.Instance.Stop();
+        if (EnemyManager.Instance != null)
+            EnemyManager.Instance.Stop();
         m_PanelGameoverMenu.SetActive(true);
         currentPanel = m_PanelGameoverMenu;
         Time.timeScale = 0f; // Pause du jeu
@@ -82,16 +85,16 @@ public class MenuManager : MonoBehaviour
 
     public void OpenEndMenu()
     {
-        if (EnemyManager.Instance != null) EnemyManager.Instance.Stop();
+        if (EnemyManager.Instance != null)
+            EnemyManager.Instance.Stop();
         m_PanelEndMenu.SetActive(true);
         currentPanel = m_PanelEndMenu;
-
         if (m_ScoreText != null)
         {
             if (ScoreManager.Instance != null)
             {
                 float score = ScoreManager.Instance.Precision;
-                m_ScoreText.text = "SCORE DE " + score.ToString("F1") + "%"; 
+                m_ScoreText.text = "SCORE DE " + score.ToString("F1") + "%";
             }
             else
             {
@@ -128,7 +131,8 @@ public class MenuManager : MonoBehaviour
 
     public void RestartLevel()
     {
-        if (EnemyManager.Instance != null) EnemyManager.Instance.DestroyAllEnemies();
+        if (EnemyManager.Instance != null)
+            EnemyManager.Instance.DestroyAllEnemies();
         CloseAllPanels();
         SceneManager.UnloadSceneAsync(selectedLevel);
         SceneManager.LoadScene(selectedLevel, LoadSceneMode.Additive);
@@ -145,7 +149,8 @@ public class MenuManager : MonoBehaviour
 
     public void QuitToMainMenu()
     {
-        if (EnemyManager.Instance != null) EnemyManager.Instance.DestroyAllEnemies();
+        if (EnemyManager.Instance != null)
+            EnemyManager.Instance.DestroyAllEnemies();
         Time.timeScale = 1f;
         SceneManager.UnloadSceneAsync(selectedLevel);
         OpenMainMenu();
