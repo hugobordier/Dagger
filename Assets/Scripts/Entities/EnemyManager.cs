@@ -144,6 +144,29 @@ public class EnemyManager : MonoBehaviour
         activeEnemies.Clear();
     }
 
+    public void DestroyAllEnemies()
+    {
+        canSpawn = false;
+        
+        // Destroy active enemies
+        foreach (var enemy in activeEnemies)
+        {
+            if (enemy != null) Destroy(enemy);
+        }
+        activeEnemies.Clear();
+
+        // Destroy pooled enemies
+        foreach (var pool in enemyPools.Values)
+        {
+            while (pool.Count > 0)
+            {
+                GameObject obj = pool.Dequeue();
+                if (obj != null) Destroy(obj);
+            }
+        }
+        enemyPools.Clear();
+    }
+
     void OnDestroy()
     {
         if (Instance == this)

@@ -126,7 +126,7 @@ public class MenuManager : MonoBehaviour
 
     public void RestartLevel()
     {
-        if (EnemyManager.Instance != null) EnemyManager.Instance.Stop();
+        if (EnemyManager.Instance != null) EnemyManager.Instance.DestroyAllEnemies();
         CloseAllPanels();
         SceneManager.UnloadSceneAsync(selectedLevel);
         SceneManager.LoadScene(selectedLevel, LoadSceneMode.Additive);
@@ -143,7 +143,7 @@ public class MenuManager : MonoBehaviour
 
     public void QuitToMainMenu()
     {
-        if (EnemyManager.Instance != null) EnemyManager.Instance.Stop();
+        if (EnemyManager.Instance != null) EnemyManager.Instance.DestroyAllEnemies();
         Time.timeScale = 1f;
         SceneManager.UnloadSceneAsync(selectedLevel);
         OpenMainMenu();
